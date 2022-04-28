@@ -7,7 +7,7 @@ const PokeSchema = new mongoose.Schema({
         required: true,
     },
     pokedexNumber:{
-        type: Number,
+        type: String,
         unique: true,
         required: true,
     },
@@ -96,8 +96,8 @@ const PokeSchema = new mongoose.Schema({
         required: true
     },
     new:{
-      type: Boolean,
-      required: true
+        type: Boolean,
+        required: true
     },
     noteGettable:{
         type: Boolean,
