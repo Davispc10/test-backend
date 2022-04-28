@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 const Pokemon = require('../models/pokemon');
@@ -34,6 +35,7 @@ router.get('', async (req, res) => {
 
 router.post('/register', async (req, res) => {
   try{
+    console.log("REQ", req.body)
     const pokemon = await Pokemon.create(req.body);
 
     return res.status(200).json(pokemon);
@@ -52,6 +54,15 @@ router.delete('/:id', async (req, res) => {
   }catch(e){
     console.log(e)
     return res.status(400).json({error: "Failed to delete pokemon"})
+  }
+})
+
+router.put('/:id', async (req, res) => {
+  try{
+    const editPoke = await Pokemon.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec()
+    return res.status(200).json(editPoke)
+  }catch(e){
+    return res.status(400).json()
   }
 })
 
