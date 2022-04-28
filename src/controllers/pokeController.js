@@ -34,4 +34,16 @@ router.get('', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try{
+    const deletePokemon =  await Pokemon.deleteOne({
+      _id: req.params.id
+    })
+    return res.status(200).json(deletePokemon)
+  }catch(e){
+    console.log(e)
+    return res.status(400).json({error: "Failed to delete pokemon"})
+  }
+})
+
 module.exports = app => app.use('/pokemon', router);
