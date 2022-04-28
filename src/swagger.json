@@ -1,0 +1,337 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "POKE API",
+        "description": "Essa é uma API para manipulação de dados de pokemons, divirta-se",
+        "contact":{
+        "email": "bernardombsouza@gmail.com"
+        },
+    "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://322d-177-12-41-202.ngrok.io",
+            "description": "API de test"
+        }
+    ],
+    "paths":{
+        "/pokemon/register": {
+            "post": {
+                "summary": "Registro de novo pokemon",
+                "description": "Essa rota é para registro de novos pokemons",
+                "tags": ["Pokemons"],
+                "requestBody":{
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pokemon"
+                            },
+                            "examples": {
+                                "Pokemon": {
+                                    "value": {
+                                        "name": "Ivysaur", 
+                                        "pokedexNumber": "2", 
+                                        "imgName": "2", 
+                                        "generation": 1,
+                                        "evolutionStage": "2", 
+                                        "evolved": false, 
+                                        "crossGen": false, 
+                                        "type1": "grass", 
+                                        "type2": "poison", 
+                                        "weather1": "Sunny/clear", 
+                                        "weather2": "Cloudy", 
+                                        "statTotal": 422, 
+                                        "atk": 151, 
+                                        "def": 151, 
+                                        "sta": 120, 
+                                        "legendary": false, 
+                                        "aquireable": 1, 
+                                        "spawns": true, 
+                                        "regional": 0, 
+                                        "raidable": 0, 
+                                        "hatchable": 0, 
+                                        "shiny": false, 
+                                        "nest": false, 
+                                        "new": false, 
+                                        "noteGettable": false, 
+                                        "futureEvolve": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400": {
+                        "description": "Pokemon Already exists"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Pokemon"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pokemon": {
+            "get": {
+                "description": "Busca de diversos/vários pokemons",
+                "summary": "Essa rota irá buscar um ou diversos pokemons",
+                "tags": ["Pokemons"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome do pokemon que quer buscar",
+                        "required": false
+                    },
+                    {
+                        "name": "type1",
+                        "in": "query",
+                        "description": "Tipo primário do(dos) pokemons",
+                        "required": false
+                    },
+                    {
+                        "name": "type2",
+                        "in": "query",
+                        "description": "Tipo secundário do(dos) pokemons",
+                        "required": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Qual pagina acessar, lembrando que são retornados 20 pokemons por página",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "items": {
+                                    "$ref": "#/components/schemas/Pokemon"
+                                }
+                            }
+                        }
+                    } 
+                }
+            }
+        },
+        "/pokemon/{id}": {
+            "delete": {
+                "description": "Deletar um pokemon pelo id",
+                "summary": "Deleção de pokemon pelo id",
+                "tags": ["Pokemons"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Nome do pokemon pelo ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pokemon deletado com sucesso"
+                    }
+                }
+            },
+            "put": {
+                "description": "Editar um pokemon pelo id",
+                "summary": "Edição de pokemon pelo id",
+                "tags": ["Pokemons"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Nome do pokemon pelo ID",
+                        "required": true
+                    }
+                ],
+                "requestBody":{
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pokemon"
+                            },
+                            "examples": {
+                                "Pokemon": {
+                                    "value": {
+                                        "name":"Bulbasaur",
+                                        "pokedexNumber": "1",
+                                        "imgName": "1",
+                                        "generation": 1,
+                                        "evolutionStage": "1",
+                                        "evolved": false,
+                                        "familyId": 1,
+                                        "crossGen": false,
+                                        "type1": "grass",
+                                        "type2": "poison",
+                                        "weather1": "Sunny/clear",
+                                        "weather2": "Cloudy",
+                                        "statTotal": 326,
+                                        "atk": 118,
+                                        "def": 118,
+                                        "sta": 90,
+                                        "legendary": false,
+                                        "aquireable": 1,
+                                        "spawns": true,
+                                        "regional": 0,
+                                        "raidable": 0,
+                                        "hatchable": 5, 
+                                        "shiny": false,
+                                        "nest": true,
+                                        "new": false,
+                                        "noteGettable": false,
+                                        "futureEvolve": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Pokemon"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Falha ao editar pokemon"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas":{
+            "Pokemon": {
+                "type": "object",
+                "properties":{
+                    "name":{
+                        "type": "string",
+                        "required": true
+                    },
+                    "pokedexnumber":{
+                        "type": "string",
+                        "required": true
+                    },
+                    "imgName":{
+                        "type": "string",
+                        "required": true
+                    },
+                    "generation":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "evolutionStage":{
+                        "type": "string"
+                    },
+                    "evolved":{
+                        "type": "boolean",
+                        "required": true
+                    },
+                    "familyId":{
+                        "type": "number"
+                    },
+                    "crossGen":{
+                        "type": "boolean",
+                        "required": true
+                    },
+                    "type1":{
+                        "type": "string",
+                        "required": true
+                    },
+                    "type2":{
+                        "type": "string"
+                    },
+                    "weather1":{
+                        "type": "string",
+                        "required": true
+                    },
+                    "weather2":{
+                        "type": "string"
+                    },
+                    "statTotal":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "atk":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "def":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "sta":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "legendary":{
+                        "type": "boolean",
+                        "required": true 
+                    },
+                    "aquireable":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "spawns":{
+                        "type": "boolean",
+                        "required": true
+                    },
+                    "regional":{
+                        "type": "boolean",
+                        "required": true
+                    },
+                    "raidable":{
+                        "type": "number",
+                        "required": true
+                    },
+                    "hatchable":{
+                        "type": "number",
+                        "required": true                        
+                    },
+                    "shiny":{
+                        "type": "boolean",
+                        "required": true                        
+                    },
+                    "nest":{
+                        "type": "boolean",
+                        "required": true                        
+                    },
+                    "new":{
+                      "type": "boolean",
+                      "required": true                      
+                    },
+                    "noteGettable":{
+                        "type": "boolean",
+                        "required": true                        
+                    },
+                    "futureEvolve":{
+                        "type": "boolean",
+                        "required": true                        
+                    }
+                }
+            }
+        }
+    }
+}
