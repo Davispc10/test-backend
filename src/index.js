@@ -22,6 +22,8 @@ app.get('/', async (req, res) => {
     res.status(200).json({"message": "OK"})
 })
 
+require('./controllers/authController')(app)
 require('./controllers/pokeController')(app);
+require('./controllers/testController')(app)
 
 app.listen(3000);
