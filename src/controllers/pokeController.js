@@ -1,9 +1,12 @@
 const { response } = require('express');
 const express = require('express');
+const authMiddleware = require('../middleware/authenticate')
 
 const Pokemon = require('../models/pokemon');
 
 const router = express.Router();
+
+router.use(authMiddleware)
 
 router.get('', async (req, res) => {
 
@@ -41,7 +44,7 @@ router.post('/register', async (req, res) => {
     return res.status(200).json(pokemon);
   }catch(e){
     console.log(e)
-    return res.status(400).send({error: "Registration failed"});
+    return res.status(400).json({error: "Registration failed"});
   }
 })
 

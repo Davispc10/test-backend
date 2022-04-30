@@ -10,15 +10,97 @@
     },
     "servers": [
         {
-            "url": "https://322d-177-12-41-202.ngrok.io",
+            "url": "http://localhost:3000",
             "description": "API de test"
         }
     ],
     "paths":{
+        "/auth/register":{
+            "post":{
+                "summary": "Resgistro de novo usuário",
+                "description": "Essa rota é para registro de novo usuário",
+                "tags": ["Users"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples":{
+                                "User":{
+                                    "value":{
+                                        "username": "username-do-usuario",
+                                        "password": "senha123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400": {
+                        "description": "User Already exists"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }        
+        },
+        "/auth/authenticate":{
+            "post":{
+                "description": "Autenticar usuário",
+                "summary": "Rota de autenticação do usuário",
+                "tags": ["Users"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples":{
+                                "User":{
+                                    "value":{
+                                        "username": "nome-do-usuario",
+                                        "password": "123pass"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "content":{
+                            "application/json":{
+                                "type":"object",
+                                "schema":{
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description": "Invalid user"
+                    }
+                }
+            }
+        },
         "/pokemon/register": {
             "post": {
                 "summary": "Registro de novo pokemon",
                 "description": "Essa rota é para registro de novos pokemons",
+                "security":[{"bearerAuth": []}],
                 "tags": ["Pokemons"],
                 "requestBody":{
                     "content": {
@@ -85,6 +167,7 @@
             "get": {
                 "description": "Busca de diversos/vários pokemons",
                 "summary": "Essa rota irá buscar um ou diversos pokemons",
+                "security":[{"bearerAuth": []}],
                 "tags": ["Pokemons"],
                 "parameters": [
                     {
@@ -131,6 +214,7 @@
             "delete": {
                 "description": "Deletar um pokemon pelo id",
                 "summary": "Deleção de pokemon pelo id",
+                "security":[{"bearerAuth": []}],
                 "tags": ["Pokemons"],
                 "parameters": [
                     {
@@ -149,6 +233,7 @@
             "put": {
                 "description": "Editar um pokemon pelo id",
                 "summary": "Edição de pokemon pelo id",
+                "security":[{"bearerAuth": []}],
                 "tags": ["Pokemons"],
                 "parameters": [
                     {
@@ -223,6 +308,18 @@
     },
     "components": {
         "schemas":{
+            "User":{
+                "type": "object",
+                "username":{
+                    "type": "String",
+                    "unique": true,
+                    "required": true
+                },
+                "password": {
+                    "type": "String",
+                    "required": true
+                }
+            },
             "Pokemon": {
                 "type": "object",
                 "properties":{
@@ -331,6 +428,13 @@
                         "required": true                        
                     }
                 }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
