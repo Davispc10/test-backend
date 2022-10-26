@@ -1,0 +1,54 @@
+{
+  "name": "test-backend",
+  "version": "1.0.0",
+  "description": "Backend test para a empresa Dinheirow.",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "dbMigrate": "sequelize-cli db:migrate",
+    "dbMigrateUndo": "sequelize-cli db:migrate:undo",
+    "dbPopulate": "nodemon src/database/seeders/pokemonDataSeed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AguiarMM/test-backend.git"
+  },
+  "keywords": [
+    "backend",
+    "nodejs",
+    "postgresql",
+    "restapi"
+  ],
+  "author": "Mateus Aguiar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AguiarMM/test-backend/issues"
+  },
+  "homepage": "https://github.com/AguiarMM/test-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "exceljs": "^4.3.0",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "joi": "^17.6.4",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "read-excel-file": "^5.5.3",
+    "sequelize": "^6.21.4",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "sequelize-cli": "^6.4.1",
+    "sucrase": "^3.25.0"
+  }
+}
