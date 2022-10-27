@@ -7,7 +7,7 @@ const pokemonRoutes = new Router();
 
 pokemonRoutes.get('/', asyncHandler(PokemonController.getInfo));
 
-pokemonRoutes.get('/pokemons', asyncHandler(PokemonController.listAll));
+pokemonRoutes.get('/pokemons', validate.validateQuery, asyncHandler(PokemonController.listAll));
 pokemonRoutes.post('/pokemons', validate.validateCreateBody, asyncHandler(PokemonController.store));
 
 pokemonRoutes.get('/pokemons/:id', validate.validateParams, asyncHandler(PokemonController.getById));

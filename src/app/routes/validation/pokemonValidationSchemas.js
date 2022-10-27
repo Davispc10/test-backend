@@ -68,4 +68,9 @@ export default {
   paramSchema: Joi.object({
     id: Joi.number().integer().min(0).required(),
   }),
+
+  querySchema: Joi.object({
+    size: Joi.number().integer().min(1).optional(),
+    page: Joi.number().integer().min(1).optional(),
+  }),
 };

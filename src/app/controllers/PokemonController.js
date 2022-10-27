@@ -1,17 +1,31 @@
 import Pokemon from '../models/pokemon';
+import paginationHandler from '../services/paginationHandler';
 
 class PokemonController {
   async getInfo(req, res) {
     const info = [];
-    info.push({ description: 'Banco de dados com informações referentes ao jogo Pokemon Go!' });
-    info.push({ pokemonAttributes: Pokemon.getAttributes() });
-    info.push({ tableSize: await Pokemon.count() });
+    info.push({
+      description: 'Banco de dados com informações referentes ao jogo Pokemon Go!',
+      tableSize: await Pokemon.count(),
+      pokemonAttributes: await Pokemon.getAttributes(),
+    });
+
     return res.json(info);
   }
 
   async listAll(req, res) {
-    const pokemons = await Pokemon.findAll();
-    return res.json(pokemons);
+    const { limit, offset, page, totalPages } = await paginationHandler(req.query);
+    const pokemons = await Pokemon.findAndCountAll({ limit, offset });
+
+    const response = {
+      totalItens: pokemons.count,
+      paginationSize: limit,
+      totalPages,
+      currentPage: page,
+      pokemons: pokemons.rows,
+    };
+
+    return res.json(response);
   }
 
   async getById(req, res) {
