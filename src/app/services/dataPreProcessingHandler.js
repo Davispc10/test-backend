@@ -2,10 +2,8 @@ class DataProcessing {
   static preProcessing(dataArray) {
     dataArray.shift();
     const pokemons = [];
-    let uniqueId = 0;
     dataArray.forEach((row) => {
       const pokemon = {
-        id: uniqueId,
         name: row[1],
         pokedexNumber: row[2],
         imgName: row[3],
@@ -31,12 +29,11 @@ class DataProcessing {
         shiny: row[23],
         nest: row[24],
         new: row[25],
-        nowGettable: row[26],
+        notGettable: row[26],
         futureEvolve: row[27],
         fullCPAt40: row[28],
         fullCPAt39: row[29],
       };
-      uniqueId = uniqueId + 1;
       pokemons.push(pokemon);
     });
     return pokemons;

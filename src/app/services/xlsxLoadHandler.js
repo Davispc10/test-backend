@@ -1,7 +1,6 @@
 import readXlsxFile from 'read-excel-file/node';
 import path from 'path';
 import fs from 'fs';
-import DataProcessing from './dataPreProcessingHandler';
 
 class ExcelReader {
   static async loadFile(relativeDirPath) {
@@ -13,7 +12,7 @@ class ExcelReader {
 
     const dataArray = await readXlsxFile(dataPath);
 
-    return DataProcessing.preProcessing(dataArray);
+    return dataArray;
   }
 }
 

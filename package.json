@@ -28,15 +28,14 @@
   "homepage": "https://github.com/AguiarMM/test-backend#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "exceljs": "^4.3.0",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
+    "express-joi-validation": "^5.0.1",
     "joi": "^17.6.4",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "read-excel-file": "^5.5.3",
-    "sequelize": "^6.21.4",
-    "xlsx": "^0.18.5"
+    "sequelize": "^6.21.4"
   },
   "devDependencies": {
     "eslint": "^8.22.0",

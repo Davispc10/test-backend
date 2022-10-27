@@ -83,7 +83,7 @@ module.exports = {
       new: {
         type: Sequelize.STRING,
       },
-      nowGettable: {
+      notGettable: {
         type: Sequelize.STRING,
       },
       futureEvolve: {

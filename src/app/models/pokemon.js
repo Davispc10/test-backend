@@ -81,7 +81,7 @@ class Pokemon extends Model {
         new: {
           type: DataTypes.STRING,
         },
-        nowGettable: {
+        notGettable: {
           type: DataTypes.STRING,
         },
         futureEvolve: {
