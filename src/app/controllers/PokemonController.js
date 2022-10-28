@@ -4,7 +4,11 @@ import paginationHandler from '../services/paginationHandler';
 class PokemonController {
   async getInfo(req, res) {
     const info = [];
-    info.push({
+    const info = [{
+      description: 'Banco de dados com informações referentes ao jogo Pokemon Go!',
+      tableSize: await Pokemon.count(),
+      pokemonAttributes: await Pokemon.getAttributes(),
+    }]
       description: 'Banco de dados com informações referentes ao jogo Pokemon Go!',
       tableSize: await Pokemon.count(),
       pokemonAttributes: await Pokemon.getAttributes(),
