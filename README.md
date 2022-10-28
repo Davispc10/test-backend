@@ -1,33 +1,11 @@
-# Teste Dinheirow - Engenheiro de Software Pleno
+# Teste Dinheirow - Engenheiro de Software - Mateus Aguiar
 
-Olá Dev! Tudo bem?
+## Metodologia
 
-Nós estamos sempre em busca de profissionais interessantes e interessados, com boa capacidade de aprendizado, adaptação e principalmente bom senso!
+Inicialmente foi feita uma análise exploratória da base de dados fornecida.  Uma vez que existem muitos dados inconsistentes ou faltantes,
+e nenhuma informação sobre como deve ser o tratamento desse tipo de dado, essa base de dados foi importada para um banco de dados postegreSQL, no qual todos dados foram considerados 'strings', à excessão do campo 'id', que foi preenchido automaticamente com valores inteiros únicos. A aplicação foi desencolvida de maneira a possibilitar uma adequação prática caso mais informações sobre o tratamento da base de dados forem fornecidas.
+A API foi desenvolvida levando em consideração os conceitos RESTful, contando com rotas que utilizam as requisições http mais comuns (GET, POST, PUT, DELETE), aplicando validação aos dados da requisição e paginação quando necessário. Para o gerenciamento relacional da aplicação com o banco de dados, foi utilizado o framework Sequelize, aplicando os conceitos de migrations e seeders.
 
-Este teste tem como objetivo avaliar e desafiar você. Não é obrigatório realizá-lo completamente, queremos apenas reconhecer seu esforço e potencial para aprender, se adaptar e tomar decisões.
+## Como Utilizar
 
-Vamos ao teste!
-
-## Desafio Pokémon Go!
-
-Sua missão é importar os dados do Pokemon Go, que estão no excel, e criar uma API usando NodeJS para que possamos consumir estes dados de maneira prática, rápida e automatizada.
-
-Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca, paginação e filtros. Fique à vontade para decidir quais filtros são mais interessantes.
-
-## Tecnologias
-
-- Conceitos de API RESTful
-- Modelagem de dados
-- NodeJS
-- Algum banco de dados, por exemplo, MySQL, SQL Server, MongoDB, etc...
-- Git
-
-## Por onde começo?
-Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
-
-Após terminar o desafio, você pode solicitar um pull request para a branch master do nosso repositório. Vamos receber e fazer a avaliação de todos.
-
-## Só isso?
-Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário e conceitos de segurança e padrões SOLID para execução do projeto.
-
-Boa sorte! :)
+Após clonar o repositório e instalar as dependencias do projeto, é necessário inicializar o banco de dados e populá-lo com os dados presentes no arquivo .xlsx fornecido.
