@@ -5,9 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "dbMigrate": "sequelize-cli db:migrate",
-    "dbMigrateUndo": "sequelize-cli db:migrate:undo",
-    "dbPopulate": "nodemon src/database/seeders/pokemonDataSeed.js",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:migrate:undo": "sequelize-cli db:migrate:undo",
+    "db:populate": "nodemon src/database/seeders/pokemonDataSeed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

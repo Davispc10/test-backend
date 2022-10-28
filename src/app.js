@@ -22,4 +22,4 @@ class Application {
   }
 }
 
-export default new Application().server;
+export default Application;

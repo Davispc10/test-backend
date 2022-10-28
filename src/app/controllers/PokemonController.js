@@ -3,16 +3,13 @@ import paginationHandler from '../services/paginationHandler';
 
 class PokemonController {
   async getInfo(req, res) {
-    const info = [];
-    const info = [{
-      description: 'Banco de dados com informações referentes ao jogo Pokemon Go!',
-      tableSize: await Pokemon.count(),
-      pokemonAttributes: await Pokemon.getAttributes(),
-    }]
-      description: 'Banco de dados com informações referentes ao jogo Pokemon Go!',
-      tableSize: await Pokemon.count(),
-      pokemonAttributes: await Pokemon.getAttributes(),
-    });
+    const info = [
+      {
+        description: 'Banco de dados com informações referentes ao jogo Pokemon Go!',
+        tableSize: await Pokemon.count(),
+        pokemonAttributes: await Pokemon.getAttributes(),
+      },
+    ];
 
     return res.json(info);
   }
@@ -37,9 +34,8 @@ class PokemonController {
     const pokemon = await Pokemon.findByPk(id);
     if (pokemon) {
       return res.json(pokemon);
-    } else {
-      return res.status(400).json({ error: `The id ${id} does not exists in the database.` });
     }
+    return res.status(404).json({ error: `The id ${id} does not exists in the database.` });
   }
 
   async store(req, res) {
@@ -55,9 +51,8 @@ class PokemonController {
     if (pokemon) {
       await pokemon.update(req.body);
       return res.json(pokemon);
-    } else {
-      return res.status(400).json({ error: `The id ${id} does not exists in the database.` });
     }
+    return res.status(404).json({ error: `The id ${id} does not exists in the database.` });
   }
 
   async delete(req, res) {
@@ -67,9 +62,8 @@ class PokemonController {
     if (pokemon) {
       await pokemon.destroy();
       return res.json({ message: `Element with id ${id} successfully deleted.` });
-    } else {
-      return res.status(400).json({ error: `The id ${id} does not exists in the database.` });
     }
+    return res.status(404).json({ error: `The id ${id} does not exists in the database.` });
   }
 }
 
