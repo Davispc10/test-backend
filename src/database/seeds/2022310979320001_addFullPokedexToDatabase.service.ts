@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PokemonService } from 'src/pokemon/pokemon.service';
-import * as pokedex from '../../data/pokedexbase.json';
+import { PokemonService } from 'src/modules/pokemon/pokemon.service';
+import * as pokedex from 'src/data/pokedexbase.json';
 import * as bluebird from 'bluebird';
 
 @Injectable()

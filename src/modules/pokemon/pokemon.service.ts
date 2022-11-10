@@ -4,7 +4,6 @@ import { Repository, DataSource, MoreThanOrEqual, ILike } from 'typeorm';
 import { FindAllPokemonDto } from './dto/find-all-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
 import * as bluebird from 'bluebird';
-import { Op } from 'sequelize';
 
 @Injectable()
 export class PokemonService {
@@ -56,7 +55,7 @@ export class PokemonService {
 
   async find(findPokemonDto: FindAllPokemonDto) {
     try {
-      const query = { where: {}, take: 10, skip: 0 };
+      const query = { where: {}, skip: 0 };
 
       const {
         name,
@@ -82,11 +81,11 @@ export class PokemonService {
         hatchable,
         futureEvolve,
         crossGen,
-        limit,
+        // limit,
         offset,
       } = findPokemonDto;
 
-      if (limit) query.take = limit;
+      // if (limit) query.take = limit;
       if (offset) query.skip = offset;
 
       if (name) query.where['name'] = ILike(name);
@@ -114,9 +113,12 @@ export class PokemonService {
       if (futureEvolve) query.where['futureEvolve'] = futureEvolve;
       if (crossGen) query.where['crossGen'] = crossGen;
 
-      const result = await this.pokemonRepository.find(query);
+      const [pokemon, count] = await this.pokemonRepository.findAndCount(query);
 
-      return result;
+      return {
+        pokemon,
+        count,
+      };
     } catch (error) {
       return error.message;
     }
