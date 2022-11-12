@@ -81,12 +81,12 @@ export class PokemonService {
         hatchable,
         futureEvolve,
         crossGen,
-        // limit,
-        offset,
+        page,
+        limit = 10,
       } = findPokemonDto;
 
-      // if (limit) query.take = limit;
-      if (offset) query.skip = offset;
+      if (limit) query['take'] = limit;
+      if (page) query.skip = 10 * page;
 
       if (name) query.where['name'] = ILike(name);
       if (generation) query.where['generation'] = generation;
@@ -113,12 +113,9 @@ export class PokemonService {
       if (futureEvolve) query.where['futureEvolve'] = futureEvolve;
       if (crossGen) query.where['crossGen'] = crossGen;
 
-      const [pokemon, count] = await this.pokemonRepository.findAndCount(query);
+      const [pokemon] = await this.pokemonRepository.findAndCount(query);
 
-      return {
-        pokemon,
-        count,
-      };
+      return pokemon;
     } catch (error) {
       return error.message;
     }

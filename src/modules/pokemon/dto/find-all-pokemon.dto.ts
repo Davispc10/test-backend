@@ -115,16 +115,12 @@ export class FindAllPokemonDto {
   fullCp39: number;
 
   @IsOptional()
-  @ApiPropertyOptional()
-  offset: number;
-
-  @IsOptional()
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ default: 10 })
   limit: number;
 
   @IsOptional()
-  @ApiPropertyOptional()
-  order: string;
+  @ApiPropertyOptional({ default: 0 })
+  page: number;
 }
 
 export class FindAllPokemonResponseDto {
