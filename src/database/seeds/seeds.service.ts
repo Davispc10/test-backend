@@ -1,4 +1,3 @@
-import * as bluebird from 'bluebird';
 import { Injectable } from '@nestjs/common';
 import { _2022310979320001_addFullPokedexToDatabase } from './2022310979320001_addFullPokedexToDatabase.service';
 
