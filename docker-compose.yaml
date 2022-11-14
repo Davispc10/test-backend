@@ -1,10 +1,10 @@
-version: "3"
+version: "1"
 services:
   pokedex:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
-    command: yarn start
+      dockerfile: ./Dockerfile
+    command: yarn start:dev
     ports:
       - "3333:3334"
     volumes:
