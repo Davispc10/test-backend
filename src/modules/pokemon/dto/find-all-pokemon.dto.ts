@@ -4,123 +4,123 @@ import { IsOptional } from 'class-validator';
 export class FindAllPokemonDto {
   @IsOptional()
   @ApiPropertyOptional()
-  name: string;
+  name?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  number: number;
+  number?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  generation: string;
+  generation?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  evolutionStage: string;
+  evolutionStage?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  evolved: boolean;
+  evolved?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  familyId: number;
+  familyId?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  crossGen: boolean;
+  crossGen?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  primaryType: string;
+  primaryType?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  secondaryType: string;
+  secondaryType?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  primaryWeather: string;
+  primaryWeather?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  secondaryWeather: string;
+  secondaryWeather?: string;
 
   @IsOptional()
   @ApiPropertyOptional()
-  statTotal: number;
+  statTotal?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  atk: number;
+  atk?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  def: number;
+  def?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  sta: number;
+  sta?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  legendary: boolean;
+  legendary?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  aquireable: boolean;
+  aquireable?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  spawns: boolean;
+  spawns?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  regional: boolean;
+  regional?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  raidable: boolean;
+  raidable?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  hatchable: boolean;
+  hatchable?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  shiny: boolean;
+  shiny?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  nest: boolean;
+  nest?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  isNew: boolean;
+  isNew?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  nonGettable: boolean;
+  nonGettable?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  futureEvolve: boolean;
+  futureEvolve?: boolean;
 
   @IsOptional()
   @ApiPropertyOptional()
-  fullCp40: number;
+  fullCp40?: number;
 
   @IsOptional()
   @ApiPropertyOptional()
-  fullCp39: number;
+  fullCp39?: number;
 
   @IsOptional()
   @ApiPropertyOptional({ default: 10 })
-  limit: number;
+  limit?: number;
 
   @IsOptional()
   @ApiPropertyOptional({ default: 0 })
-  page: number;
+  page?: number;
 }
 
 export class FindAllPokemonResponseDto {

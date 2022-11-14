@@ -1,0 +1,24 @@
+version: "3"
+services:
+  softlab-back:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    command: yarn start
+    ports:
+      - "3333:3334"
+    volumes:
+      - ./source:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - APP_URL=http://localhost:8080
+      - NODE_ENV=deleopment
+      - DB_TYPE=postgres
+      - DB_DATABASE=cjhzfwej
+      - DB_USERNAME=cjhzfwej
+      - DB_PASSWORD=rEQwMeOyQJDjvm-7KOrypydfeVitd10F
+      - DB_HOST=peanut.db.elephantsql.com
+      - DB_PORT=5432
+      - PORT=3334
+      - SENTRY_DSN="https://a167ccfb90bc4d28acd9f8e76d947cf5@sentry.teclat.dev/6"
+    restart: always
