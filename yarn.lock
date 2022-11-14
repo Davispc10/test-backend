@@ -770,16 +770,16 @@
     path-to-regexp "3.2.0"
     swagger-ui-dist "4.15.1"
 
-"@nestjs/testing@^9.0.0":
+"@nestjs/testing@^9.2.0":
   version "9.2.0"
-  resolved "https://registry.npmjs.org/@nestjs/testing/-/testing-9.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-9.2.0.tgz#2f862e8dc70cc27b86a32a78e74fab96d159fb58"
   integrity sha512-Lj6UXmBJKcXB16bZzu0IG7GpH7hl5Cn71OcPSrVVuPrFd5kDYqFbodfE9OkAKaHjEhOvZ2ynoo/i6cyfX4yOvQ==
   dependencies:
     tslib "2.4.1"
 
 "@nestjs/typeorm@^9.0.1":
   version "9.0.1"
-  resolved "https://registry.npmjs.org/@nestjs/typeorm/-/typeorm-9.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/typeorm/-/typeorm-9.0.1.tgz#f78bfc00e71731ea860288e4a03830107daf3d9c"
   integrity sha512-A2BgLIPsMtmMI0bPKEf4bmzgFPsnvHqNBx3KkvaJ7hJrBQy0OqYOb+Rr06ifblKWDWS2tUPNrAFQbZjtk3PI+g==
   dependencies:
     uuid "8.3.2"
