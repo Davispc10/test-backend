@@ -1,6 +1,6 @@
 version: "3"
 services:
-  softlab-back:
+  pokedex:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -12,7 +12,7 @@ services:
       - /usr/src/app/node_modules
     environment:
       - APP_URL=http://localhost:8080
-      - NODE_ENV=deleopment
+      - NODE_ENV=development
       - DB_TYPE=postgres
       - DB_DATABASE=cjhzfwej
       - DB_USERNAME=cjhzfwej
@@ -20,5 +20,4 @@ services:
       - DB_HOST=peanut.db.elephantsql.com
       - DB_PORT=5432
       - PORT=3334
-      - SENTRY_DSN="https://a167ccfb90bc4d28acd9f8e76d947cf5@sentry.teclat.dev/6"
     restart: always
