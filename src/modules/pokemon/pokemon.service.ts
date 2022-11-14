@@ -53,7 +53,7 @@ export class PokemonService {
     }
   }
 
-  async find(findPokemonDto: FindAllPokemonDto) {
+  async find(findPokemonDto: Partial<FindAllPokemonDto>) {
     try {
       const query = { where: {}, skip: 0 };
 

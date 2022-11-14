@@ -103,4 +103,34 @@ export class Pokemon {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+
+  constructor(pokemon?: Partial<Pokemon>) {
+    this.name = pokemon?.name;
+    this.number = pokemon?.number;
+    this.generation = pokemon?.generation;
+    this.image = pokemon?.image;
+    this.legendary = pokemon?.legendary;
+    this.evolved = pokemon?.evolved;
+    this.familyId = pokemon?.familyId;
+    this.evolutionStage = pokemon?.evolutionStage;
+    this.crossGen = pokemon?.crossGen;
+    this.primaryType = pokemon?.primaryType;
+    this.secondaryType = pokemon?.secondaryType;
+    this.primaryWeather = pokemon?.primaryWeather;
+    this.secondaryWeather = pokemon?.secondaryWeather;
+    this.statTotal = pokemon?.statTotal;
+    this.atk = pokemon?.atk;
+    this.def = pokemon?.def;
+    this.sta = pokemon?.sta;
+    this.aquireable = pokemon?.aquireable;
+    this.futureEvolve = pokemon?.futureEvolve;
+    this.hatchable = pokemon?.hatchable;
+    this.nest = pokemon?.nest;
+    this.nonGettable = pokemon?.nonGettable;
+    this.shiny = pokemon?.shiny;
+    this.isNew = pokemon?.isNew;
+    this.spawns = pokemon?.spawns;
+    this.fullCp39 = pokemon?.fullCp39;
+    this.fullCp40 = pokemon?.fullCp40;
+  }
 }
