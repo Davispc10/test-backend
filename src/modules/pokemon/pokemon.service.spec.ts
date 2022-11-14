@@ -1,18 +1,28 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { PokemonService } from './pokemon.service';
+import { testingModule } from '../testmodule/test.module';
 
 describe('PokemonService', () => {
-  let service: PokemonService;
+  let pokemonService: PokemonService;
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
+    const module = await Test.createTestingModule({
+      imports: [...testingModule()],
       providers: [PokemonService],
     }).compile();
 
-    service = module.get<PokemonService>(PokemonService);
+    pokemonService = module.get<PokemonService>(PokemonService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('pokemonService should be defined', async () => {
+    expect(pokemonService).toBeDefined();
+  });
+
+  describe('find', () => {
+    it('should return an array of 10 legendary pokemon', async () => {
+      const result = await pokemonService.find({ legendary: true });
+
+      expect(result).toHaveLength(10);
+    });
   });
 });
