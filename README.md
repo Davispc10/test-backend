@@ -4,6 +4,7 @@
 
 ## Como rodar ?
  - Para facilitar sua vida na correção iremos utilizar o docker!
+ - renomeie o .env.example para .env
  - Apenas rode um ```docker-compose up -d```, que automaticamente subirá um container com a api e o banco de dados postgres :D
  - Antes de tudo, vá para dentro do container da api gerada
     ```bash
