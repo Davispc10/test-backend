@@ -11,9 +11,11 @@ export class DbGetUserByTokenUseCase implements IGetUserByTokenUseCase {
   ) {}
 
   async execute(token: string): Promise<Omit<IUser, 'password'>> {
-    const payload = (await this.jwtService.verify(token)) as { id: number };
+    const payload = await this.jwtService.verify(token);
 
-    const user = await this.userRepository.findUserById(payload.id as number);
+    const user = await this.userRepository.findUserById(
+      Number(payload) as number // id
+    );
 
     if (!user) {
       throw new BusinessError('Invalid token provided', 401);

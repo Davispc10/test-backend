@@ -31,7 +31,9 @@ describe('# Usecase - Get user by token', () => {
   });
 
   it('Should throw if repository throws', async () => {
-    const { usecase, repository } = makeSut();
+    const { usecase, repository, jwt } = makeSut();
+
+    jest.spyOn(jwt, 'verify').mockReturnValueOnce(1 as never);
 
     const findUserByIdSpy = jest
       .spyOn(repository, 'findUserById')
@@ -44,7 +46,9 @@ describe('# Usecase - Get user by token', () => {
   });
 
   it('Should throw business error if user not found', async () => {
-    const { usecase, repository } = makeSut();
+    const { usecase, repository, jwt } = makeSut();
+
+    jest.spyOn(jwt, 'verify').mockReturnValueOnce(1 as never);
 
     const findUserSpy = jest
       .spyOn(repository, 'findUserById')
