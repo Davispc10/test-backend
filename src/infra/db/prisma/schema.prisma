@@ -23,7 +23,6 @@ model Pokemon {
   type                     Type[]
   weather                  Weather[]
   User                     User[]
-  userId                   Int?
 }
 
 model User {
