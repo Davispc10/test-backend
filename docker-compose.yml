@@ -1,0 +1,54 @@
+services:
+#  app:
+#    build: .
+#    entrypoint: .docker/entrypoint.sh
+#    container_name: pokemon-app
+#    ports:
+#      - "3001:3001"
+#    volumes:
+#      - .:/home/node/app
+#    depends_on:
+#      - db
+
+  db:
+    build: .docker/postgres
+    container_name: pokemon-db
+    restart: always
+    tty: true
+    ports:
+      - "5432:5432"
+    volumes:
+      - .docker/dbdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+
+  # dbtest:
+  #   build: .docker/postgres
+  #   container_name: pokemon-test-db
+  #   restart: always
+  #   tty: true
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - .docker/dbdatatest:/var/lib/postgresql/data
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pokemon-pgadmin
+    tty: true
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
