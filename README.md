@@ -1,4 +1,4 @@
-# Teste Dinheirow - Engenheiro de Software Pleno
+# Teste Dinheirow - Engenheiro de Software
 
 Olá Dev! Tudo bem?
 
