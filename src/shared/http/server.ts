@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import AppError from '../../shared/errors/appError';
+import AppError from '@/shared/errors/appError';
 
 const routes = require('./routes');
 

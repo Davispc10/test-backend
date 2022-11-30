@@ -1,8 +1,6 @@
 import { DataSource } from 'typeorm';
-import { User } from '../../modules/users/typeorm/entities/User';
-import { Pokemon } from '../../modules/pokemons/typeorm/entities/Pokemon';
-import { default1669850986007 } from './migrations/1669850986007-default';
-
+import { User } from '@/modules/users/typeorm/entities/User';
+import { Pokemon } from '@/modules/pokemons/typeorm/entities/Pokemon';
 
 require('dotenv').config();
 
@@ -18,7 +16,7 @@ export const databaseProviders = [
         password: process.env.POSTGRES_PASSWORD,
         database: process.env.POSTGRES_DB,
         entities: [User, Pokemon],
-        migrations: [default1669850986007],
+        migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
         synchronize: false,
       });
 
@@ -35,6 +33,6 @@ export const dataSource = new DataSource({
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   entities: [User, Pokemon],
-  migrations: [default1669850986007],
+  migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
   synchronize: false,
 });
