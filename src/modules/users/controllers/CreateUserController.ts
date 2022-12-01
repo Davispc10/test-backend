@@ -1,19 +1,20 @@
+import "reflect-metadata"
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { CreateUserService } from '@/modules/users/services/CreateUserService';
+import { CreateUserUseCase } from '../useCases/CreateUser.use-case';
 
 export class CreateUserController {
   async handle(request: Request, response: Response) {
     const { username, email, password } = request.body;
 
-    const createUserService = container.resolve(CreateUserService);
+    const createUserService = container.resolve(CreateUserUseCase);
 
     const user = await createUserService.execute({
       username,
       email,
-      password
+      password,
     });
 
-    return response.status(201).json(user)
+    return response.status(201).json(user);
   }
 }

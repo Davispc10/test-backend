@@ -3,89 +3,89 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 @Entity('Pokemon')
 export class Pokemon {
   @Column()
-  name: string
+  name: string;
 
   @PrimaryColumn()
-  pokedexNumber: number
+  pokedexNumber: number;
 
   @Column({ nullable: true })
-  imgName: string
+  imgName: string;
 
   @Column()
-  generation: number
+  generation: number;
 
   @Column({ nullable: true })
-  evolutionStage: number
+  evolutionStage: number;
 
   @Column()
-  evolved: boolean
+  evolved: boolean;
 
   @Column({ nullable: true })
-  familyId: number
+  familyId: number;
 
   @Column()
-  crossGen: boolean
+  crossGen: boolean;
 
   @Column()
-  type1: string
+  type1: string;
 
   @Column({ nullable: true })
-  type2: string
+  type2: string;
 
   @Column()
-  weather1: string
+  weather1: string;
 
   @Column({ nullable: true })
-  weather2: string
+  weather2: string;
 
   @Column()
-  statTotal: number
+  statTotal: number;
 
   @Column()
-  atk: number
+  atk: number;
 
   @Column()
-  def: number
+  def: number;
 
   @Column()
-  sta: number
+  sta: number;
 
   @Column()
-  legendary: number
+  legendary: number;
 
   @Column()
-  acquirable: number
+  acquirable: number;
 
   @Column()
-  spawns: boolean
+  spawns: boolean;
 
   @Column()
-  regional: boolean
+  regional: boolean;
 
   @Column()
-  raidable: number
+  raidable: number;
 
   @Column()
-  hatchable: number
+  hatchable: number;
 
   @Column()
-  shiny: boolean
+  shiny: boolean;
 
   @Column()
-  nest: boolean
+  nest: boolean;
 
   @Column()
-  new: boolean
+  new: boolean;
 
   @Column()
-  notGettable: boolean
+  notGettable: boolean;
 
   @Column()
-  futureEvolve: boolean
+  futureEvolve: boolean;
 
   @Column()
-  cp100e40: number
+  cp100e40: number;
 
   @Column()
-  cp100e39: number
+  cp100e39: number;
 }

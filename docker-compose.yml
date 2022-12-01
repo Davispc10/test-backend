@@ -1,14 +1,14 @@
 services:
-  app:
-    build: .
-    entrypoint: .docker/entrypoint.sh
-    container_name: pokemon-app
-    ports:
-      - "3001:3001"
-    volumes:
-      - .:/home/node/app
-    depends_on:
-      - db
+#  app:
+#    build: .
+#    entrypoint: .docker/entrypoint.sh
+#    container_name: pokemon-app
+#    ports:
+#      - "3001:3001"
+#    volumes:
+#      - .:/home/node/app
+#    depends_on:
+#      - db
 
   db:
     build: .docker/postgres
