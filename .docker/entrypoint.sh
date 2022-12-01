@@ -1,5 +1,5 @@
 #!/bin/bash
 
-npm run install
-npm run typeorm migration:run
+npm install
+npm run migration:run
 npm run dev
