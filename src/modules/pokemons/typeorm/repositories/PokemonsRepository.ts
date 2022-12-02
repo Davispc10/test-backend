@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { dataSource } from '../../../../shared/typeorm';
 import { Pokemon } from '../entities/Pokemon';
 import { IPokemonsRepository, SearchParams } from '../../IPokemonsRepository';
-import { IFilters, IPaginatePokemons } from '../../useCases/FindPokemons.use-case';
+import { IFilters } from '../../useCases/FindPokemons.use-case';
 
 export class PokemonsRepository implements IPokemonsRepository {
   private pokemonRepository: Repository<Pokemon>;
@@ -22,27 +22,24 @@ export class PokemonsRepository implements IPokemonsRepository {
     } catch (e) {}
   }
 
-  async findPokemons({page, skip, take}: SearchParams, data: IFilters | null): Promise<IPaginatePokemons> {
+  async findPokemons({page, skip, take}: SearchParams, data: IFilters | null): Promise<Pokemon[] | null> {
+    const {name, pokedexNumber, generation, legendary, type1, weather1} = {...data}
 
-    const [pokemons, count] = await this.pokemonRepository.createQueryBuilder().skip(skip).take(take).getManyAndCount();
 
-    const result = {
-        per_page: take,
-        total: count,
-        current_page: page,
-        data: pokemons,
-    }
-    return result
+    return await this.pokemonRepository.find({
+      where: {
+        name,
+        pokedexNumber,
+        generation,
+        legendary,
+        type1,
+        weather1
+      },
+      skip: skip, take: take
+    })
   }
 
-    //     name: data?.name,
-    //     pokedexNumber: data?.pokedexNumber,
-    //     generation: data?.generation,
-    //     legendary: data?.legendary
-
-  async findByPokedexNumber(
-    pokedexNumber: number,
-  ): Promise<Pokemon | undefined | null> {
+  async findByPokedexNumber(pokedexNumber: number): Promise<Pokemon | undefined | null> {
     return await this.pokemonRepository.findOne({
       where: {
         pokedexNumber,
