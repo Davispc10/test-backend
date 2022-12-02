@@ -1,4 +1,8 @@
 import { Pokemon } from './src/modules/pokemons/typeorm/entities/Pokemon';
+import { PokemonsRepository } from './src/modules/pokemons/typeorm/repositories/PokemonsRepository';
+import { inject, injectable } from 'tsyringe';
+import { IPokemonsRepository } from './src/modules/pokemons/IPokemonsRepository';
+
 const xlsx = require('xlsx');
 
 const columns = {
@@ -22,7 +26,12 @@ const pokemonsAttributes = {
   29: "cp100e39",
 }
 
+
+@injectable()
 export class ExcelExtractorTs {
+  @inject('PokemonsRepository')
+  private pokemonsRepository: IPokemonsRepository = new PokemonsRepository()
+
   private pokemons: Pokemon[] = []
   private pokemon: Pokemon | null
   private readonly path
@@ -38,7 +47,7 @@ export class ExcelExtractorTs {
   async create() {
     const data = xlsx.utils.sheet_to_json(this.worksheet, {
       header: "A",
-      range: 30
+      range: 1
     });
 
     data.map(row => {
@@ -53,5 +62,11 @@ export class ExcelExtractorTs {
       }
     })
     return this.pokemons
+  }
+
+  async populateDatabase() {
+    for (let pokemon: Pokemon of this.pokemons) {
+      await this.pokemonsRepository.create(pokemon)
+    }
   }
 }

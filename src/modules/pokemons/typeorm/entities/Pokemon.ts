@@ -15,16 +15,16 @@ export class Pokemon {
   generation: number;
 
   @Column({ nullable: true })
-  evolutionStage: number;
+  evolutionStage: string;
 
   @Column()
-  evolved: boolean;
+  evolved: number;
 
   @Column({ nullable: true })
   familyId: number;
 
   @Column()
-  crossGen: boolean;
+  crossGen: number;
 
   @Column()
   type1: string;
@@ -57,10 +57,10 @@ export class Pokemon {
   acquirable: number;
 
   @Column()
-  spawns: boolean;
+  spawns: number;
 
   @Column()
-  regional: boolean;
+  regional: number;
 
   @Column()
   raidable: number;
@@ -69,19 +69,19 @@ export class Pokemon {
   hatchable: number;
 
   @Column()
-  shiny: boolean;
+  shiny: number;
 
   @Column()
-  nest: boolean;
+  nest: number;
 
   @Column()
-  new: boolean;
+  new: number;
 
   @Column()
-  notGettable: boolean;
+  notGettable: number;
 
   @Column()
-  futureEvolve: boolean;
+  futureEvolve: number;
 
   @Column()
   cp100e40: number;
