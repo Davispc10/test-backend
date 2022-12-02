@@ -7,9 +7,9 @@ export class CreateUserController {
   async handle(request: Request, response: Response) {
     const { username, email, password } = request.body;
 
-    const createUserService = container.resolve(CreateUserUseCase);
+    const createUserUseCase = container.resolve(CreateUserUseCase);
 
-    const user = await createUserService.execute({
+    const user = await createUserUseCase.execute({
       username,
       email,
       password,

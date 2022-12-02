@@ -3,6 +3,13 @@ import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
 import { IPokemonsRepository } from '../IPokemonsRepository';
 
+export interface IFilters {
+  name: string,
+  pokedexNumber: number,
+  generation: number,
+  legendary: number,
+}
+
 @injectable()
 export class FindPokemonsUseCase {
   constructor(
@@ -10,7 +17,7 @@ export class FindPokemonsUseCase {
     private pokemonsRepository: IPokemonsRepository,
   ) {}
 
-  async execute() {
-    return await this.pokemonsRepository.findPokemons(null);
+  async execute(data: IFilters | null) {
+    return await this.pokemonsRepository.findPokemons(data);
   }
 }

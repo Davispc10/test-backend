@@ -2,6 +2,7 @@ import { Repository } from 'typeorm';
 import { dataSource } from '../../../../shared/typeorm';
 import { Pokemon } from '../entities/Pokemon';
 import { IPokemonsRepository } from '../../IPokemonsRepository';
+import { IFilters } from '../../useCases/FindPokemons.use-case';
 
 export class PokemonsRepository implements IPokemonsRepository {
   private pokemonRepository: Repository<Pokemon>;
@@ -21,8 +22,17 @@ export class PokemonsRepository implements IPokemonsRepository {
     } catch (e) {}
   }
 
-  async findPokemons(data: object | null): Promise<Pokemon[] | null> {
-    return await this.pokemonRepository.find();
+  async findPokemons(data: IFilters | null): Promise<Pokemon[] | null> {
+    const name = data.name
+
+    return await this.pokemonRepository.find({
+      where: {
+        name: data?.name,
+        pokedexNumber: data?.pokedexNumber,
+        generation: data?.generation,
+        legendary: data?.legendary
+      }
+    });
   }
 
   async findByPokedexNumber(

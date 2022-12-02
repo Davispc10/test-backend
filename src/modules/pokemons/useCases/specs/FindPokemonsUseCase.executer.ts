@@ -21,7 +21,7 @@ export class FindPokemonsUseCaseExecuter {
   }
 
   async findManyPokemons() {
-    this.response = await this.findPokemons.execute();
+    this.response = await this.findPokemons.execute(null);
   }
 
   assertResponseIsManyPokemons() {

@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { usersRoutes } from '../../../shared/http/routes/users.routes';
+import { usersRoutes } from './users.routes';
+import { pokemonsRoutes } from './pokemons.routes';
 
 export const routes = Router();
 
@@ -8,5 +9,6 @@ routes.get('/', (req, res) => {
 });
 
 routes.use('/users', usersRoutes);
+routes.use('/pokemons', pokemonsRoutes)
 
 module.exports = routes;
