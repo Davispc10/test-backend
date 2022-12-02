@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import 'reflect-metadata';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateUserUseCase } from '../useCases/CreateUser.use-case';

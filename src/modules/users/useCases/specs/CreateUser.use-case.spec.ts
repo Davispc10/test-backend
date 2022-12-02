@@ -1,41 +1,40 @@
 import { CreateUserUseCase } from '../CreateUser.use-case';
-import { InMemoryUsersRepository } from '../../inMemory/InMemoryUsersRepository';
+import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
 import { IUsersRepository } from '../../IUsersRepository';
 import { CreateUserExecuter } from './CreateUserUseCase.executer';
-
 
 let inMemoryUserRepository: IUsersRepository = new InMemoryUsersRepository();
 let createUser = new CreateUserUseCase(inMemoryUserRepository);
 
 describe('Create User', () => {
-  let createUserExecuter = new CreateUserExecuter()
+  const createUserExecuter = new CreateUserExecuter();
 
   beforeEach(() => {
-    createUserExecuter.resetDataCache()
+    createUserExecuter.resetDataCache();
     inMemoryUserRepository = new InMemoryUsersRepository();
     createUser = new CreateUserUseCase(inMemoryUserRepository);
   });
 
-  it ('should be able to create a new user', async () => {
+  it('should be able to create a new user', async () => {
     // Arrange
-    await createUserExecuter.generateUser()
+    await createUserExecuter.generateUser();
 
     // Act
-    await createUserExecuter.createNewUser()
+    await createUserExecuter.createNewUser();
 
     // Assert
-    await createUserExecuter.assertResponseIsNewUser()
+    await createUserExecuter.assertResponseIsNewUser();
   });
 
   it('should throw an error when user tries to create an account with an existing email', async () => {
     // Arrange
-    await createUserExecuter.generateUser()
-    await createUserExecuter.createNewUser()
+    await createUserExecuter.generateUser();
+    await createUserExecuter.createNewUser();
 
     // Act
-    await createUserExecuter.createNewUser()
+    await createUserExecuter.createNewUser();
 
     // Assert
-    await createUserExecuter.assertResponseConflict()
+    await createUserExecuter.assertResponseConflict();
   });
-})
+});

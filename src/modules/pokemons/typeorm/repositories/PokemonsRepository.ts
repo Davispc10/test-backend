@@ -3,7 +3,6 @@ import { dataSource } from '../../../../shared/typeorm';
 import { Pokemon } from '../entities/Pokemon';
 import { IPokemonsRepository } from '../../IPokemonsRepository';
 
-
 export class PokemonsRepository implements IPokemonsRepository {
   private pokemonRepository: Repository<Pokemon>;
 
@@ -12,27 +11,27 @@ export class PokemonsRepository implements IPokemonsRepository {
   }
 
   async create(pokemon: Pokemon): Promise<Pokemon | undefined> {
-    const hasPokemon = await this.findByPokedexNumber(pokemon.pokedexNumber)
+    const hasPokemon = await this.findByPokedexNumber(pokemon.pokedexNumber);
 
     if (hasPokemon) {
-      return
+      return;
     }
     try {
       return await this.pokemonRepository.save(pokemon);
-    }
-    catch (e) {
-      console.log(e)
-      throw Error()
-    }
-
-
+    } catch (e) {}
   }
 
-  async findByPokedexNumber(pokedexNumber: number): Promise<Pokemon | null> {
+  async findPokemons(data: object | null): Promise<Pokemon[] | null> {
+    return await this.pokemonRepository.find();
+  }
+
+  async findByPokedexNumber(
+    pokedexNumber: number,
+  ): Promise<Pokemon | undefined | null> {
     return await this.pokemonRepository.findOne({
       where: {
-        pokedexNumber
-      }
-    })
+        pokedexNumber,
+      },
+    });
   }
 }

@@ -1,4 +1,4 @@
-import 'reflect-metadata'
+import 'reflect-metadata';
 import { UsersRepository } from '../typeorm/repositories/UsersRepository';
 import { ICreateUserDto } from '../dtos/ICreateUserDto';
 import { IUsersRepository } from '../IUsersRepository';

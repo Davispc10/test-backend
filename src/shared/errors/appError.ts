@@ -16,8 +16,8 @@ class AppError extends Error {
   public toJSON(): AppErrorInput {
     return {
       message: this.message,
-      statusCode: this.statusCode
-    }
+      statusCode: this.statusCode,
+    };
   }
 }
 

@@ -1,4 +1,4 @@
-import "reflect-metadata"
+import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { IUsersRepository } from '../../modules/users/IUsersRepository';
 import { UsersRepository } from '../../modules/users/typeorm/repositories/UsersRepository';
