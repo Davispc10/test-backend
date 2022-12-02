@@ -7,6 +7,8 @@ export class FindPokemonsUseCaseExecuter {
   private findPokemons: FindPokemonsUseCase;
   private pokemon: any;
   private response: any;
+  private page = 1;
+  private limit = 15;
 
   constructor() {
     this.inMemoryPokemonsRepository = new InMemoryPokemonsRepository();
@@ -21,7 +23,11 @@ export class FindPokemonsUseCaseExecuter {
   }
 
   async findManyPokemons() {
-    this.response = await this.findPokemons.execute(null);
+
+    this.response = await this.findPokemons.execute({
+      page: this.page,
+      limit: this.limit
+    }, null);
   }
 
   assertResponseIsManyPokemons() {
