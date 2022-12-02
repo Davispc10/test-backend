@@ -21,8 +21,10 @@ jobs:
           if [ "$DOCKERHUB_USERNAME" === 'henricker']
           then
             echo "It's me"
+            echo "It's $DOCKERHUB_USERNAME"
           else
             echo "It's not me"
+            echo "It's $DOCKERHUB_USERNAME"
           fi
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v2
