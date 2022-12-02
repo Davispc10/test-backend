@@ -55,6 +55,7 @@
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.7.0",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "xlsx": "^0.18.5"
   }
 }
