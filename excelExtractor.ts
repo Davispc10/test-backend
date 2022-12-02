@@ -11,6 +11,17 @@ const columns = {
   25: 'Y',    26: 'Z',    27: 'AA',    28: 'AB',
   29: 'AC',    30: 'AD'}
 
+const pokemonsAttributes = {
+  1: "name", 2: "pokedexNumber",  3: "imgName",  4: "generation",
+  5: "evolutionStage",  6: "evolved",  7: "familyId",  8: "crossGen",
+  9: "type1",  10: "type2",  11: "weather1",  12: "weather2",
+  13: "statTotal",  14: "atk",  15: "def",  16: "sta",
+  17: "legendary",  18: "acquirable",  19: "spawns",  20: "regional",
+  21: "raidable",  22: "hatchable",  23: "shiny",  24: "nest",
+  25: "new",  26: "notGettable",  27: "futureEvolve",  28: "cp100e40",
+  29: "cp100e39",
+}
+
 export class ExcelExtractorTs {
   private pokemons: Pokemon[] = []
   private pokemon: Pokemon | null
@@ -30,161 +41,17 @@ export class ExcelExtractorTs {
       range: 30
     });
 
-
-
-    this.pokemon = new Pokemon()
-
     data.map(row => {
-      for (let cell in row) {
-        if (cell === 'B') {
-          if (this.pokemon) {
-            this.pokemon.name = row['B'];
-          }
-        }
-        if (cell === 'C') {
-          if (this.pokemon) {
-            this.pokemon.pokedexNumber = row['C'];
-          }
-        }
-        if (cell === 'D') {
-          if (this.pokemon) {
-            this.pokemon.imgName = row['D'];
-          }
-        }
-        if (cell === 'E') {
-          if (this.pokemon) {
-            this.pokemon.generation = row['E'];
-          }
-        }
-        if (cell === 'F') {
-          if (this.pokemon) {
-            this.pokemon.evolutionStage = row['F'];
-          }
-        }
-        if (cell === 'G') {
-          if (this.pokemon) {
-            this.pokemon.evolved = row['G'];
-          }
-        }
-        if (cell === 'H') {
-          if (this.pokemon) {
-            this.pokemon.familyId = row['H'];
-          }
-        }
-        if (cell === 'I') {
-          if (this.pokemon) {
-            this.pokemon.crossGen = row['I'];
-          }
-        }
-        if (cell === 'J') {
-          if (this.pokemon) {
-            this.pokemon.type1 = row['J'];
-          }
-        }
-        if (cell === 'K') {
-          if (this.pokemon) {
-            this.pokemon.type2 = row['K\''];
-          }
-        }
-        if (cell === 'L') {
-          if (this.pokemon) {
-            this.pokemon.weather1 = row['L'];
-          }
-        }
-        if (cell === 'M') {
-          if (this.pokemon) {
-            this.pokemon.weather2 = row['M'];
-          }
-        }
-        if (cell === 'N') {
-          if (this.pokemon) {
-            this.pokemon.statTotal = row['N'];
-          }
-        }
-        if (cell === 'O') {
-          if (this.pokemon) {
-            this.pokemon.atk = row['O'];
-          }
-        }
-        if (cell === 'P') {
-          if (this.pokemon) {
-            this.pokemon.def = row['P'];
-          }
-        }
-        if (cell === 'Q') {
-          if (this.pokemon) {
-            this.pokemon.sta = row['Q'];
-          }
-        }
-        if (cell === 'R') {
-          if (this.pokemon) {
-            this.pokemon.legendary = row['R'];
-          }
-        }
-        if (cell === 'S') {
-          if (this.pokemon) {
-            this.pokemon.acquirable = row['S'];
-          }
-        }
-        if (cell === 'T') {
-          if (this.pokemon) {
-            this.pokemon.spawns = row['T'];
-          }
-        }
-        if (cell === 'U') {
-          if (this.pokemon) {
-            this.pokemon.regional = row['U'];
-          }
-        }
-        if (cell === 'V') {
-          if (this.pokemon) {
-            this.pokemon.raidable = row['V'];
-          }
-        }
-        if (cell === 'W') {
-          if (this.pokemon) {
-            this.pokemon.hatchable = row['W'];
-          }
-        }
-        if (cell === 'X') {
-          if (this.pokemon) {
-            this.pokemon.shiny = row['X'];
-          }
-        }
-        if (cell === 'Y') {
-          if (this.pokemon) {
-            this.pokemon.nest = row['Y'];
-          }
-        }
-        if (cell === 'Z') {
-          if (this.pokemon) {
-            this.pokemon.new = row['Z'];
-          }
-        }
-        if (cell === 'AA') {
-          if (this.pokemon) {
-            this.pokemon.notGettable = row['AA'];
-          }
-        }
-        if (cell === 'AB') {
-          if (this.pokemon) {
-            this.pokemon.futureEvolve = row['AB'];
-          }
-        }
-        if (cell === 'AC') {
-          if (this.pokemon) {
-            this.pokemon.cp100e40 = row['AC'];
-          }
-        }
-        if (cell === 'AD') {
-          if (this.pokemon) {
-            this.pokemon.cp100e39 = row['AD'];
-            this.pokemons.push(this.pokemon)
-            this.pokemon = new Pokemon()
-          }
+      this.pokemon = new Pokemon()
+      for (let i = 1; i <= 29; i++) {
+        this.pokemon[pokemonsAttributes[i]] = row[columns[i+1]]
+
+        if (i === 29) {
+          this.pokemons.push(this.pokemon)
+          this.pokemon = new Pokemon()
         }
       }
-    });
+    })
     return this.pokemons
   }
 }
