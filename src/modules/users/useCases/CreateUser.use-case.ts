@@ -4,6 +4,7 @@ import { ICreateUserDto } from '../dtos/ICreateUserDto';
 import { IUsersRepository } from '../IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
+import * as bcrypt from 'bcrypt';
 
 @injectable()
 export class CreateUserUseCase {
@@ -27,10 +28,12 @@ export class CreateUserUseCase {
       }).toJSON();
     }
 
+    const saltedHash = bcrypt.hashSync(password, 10)
+
     return await this.usersRepository.create({
       username,
       email,
-      password,
+      password: saltedHash,
     });
   }
 }
