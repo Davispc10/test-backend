@@ -5,12 +5,14 @@ import { IUsersRepository } from '../../IUsersRepository';
 export class UserUseCasesSpecExecuter {
   private readonly inMemoryUserRepository: IUsersRepository;
   private createUser: CreateUserUseCase;
+  private findUser: FindUserByUsernameUseCase;
   private user: any;
   private response: any;
 
   constructor() {
     this.inMemoryUserRepository = new InMemoryUsersRepository();
     this.createUser = new CreateUserUseCase(this.inMemoryUserRepository);
+    this.findUser = new FindUserByUsernameUseCase(this.inMemoryUserRepository);
   }
 
   resetDataCache() {
@@ -30,12 +32,15 @@ export class UserUseCasesSpecExecuter {
     this.response = await this.createUser.execute(this.user);
   }
 
-  async assertResponseIsNewUser() {
+  async findUserByUsername() {
+    this.response = await this.findUser.execute(this.user.username)
+  }
+  async assertResponseIsUser() {
     expect(this.response.username).toEqual(this.user.username);
     expect(this.response.id).toBeTruthy();
   }
 
-  async assertResponseConflict() {
+  async assertResponseIsConflict() {
     expect(this.response).toHaveProperty('message');
     expect(this.response.statusCode).toEqual(409);
   }

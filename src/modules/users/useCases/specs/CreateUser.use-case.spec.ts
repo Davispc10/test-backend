@@ -23,7 +23,7 @@ describe('Create User', () => {
     await createUserExecuter.createNewUser();
 
     // Assert
-    await createUserExecuter.assertResponseIsNewUser();
+    await createUserExecuter.assertResponseIsUser();
   });
 
   it('should throw an error when user tries to create an account with an existing email', async () => {
@@ -35,6 +35,6 @@ describe('Create User', () => {
     await createUserExecuter.createNewUser();
 
     // Assert
-    await createUserExecuter.assertResponseConflict();
+    await createUserExecuter.assertResponseIsConflict();
   });
 });
