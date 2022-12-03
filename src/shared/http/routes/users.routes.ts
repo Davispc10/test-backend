@@ -3,6 +3,7 @@ import { CreateUserController } from '../../../modules/users/controllers/CreateU
 import { FindUserByUsernameController } from '../../../modules/users/controllers/FindUserByUsername.controller';
 import { FindUserByEmailController } from '../../../modules/users/controllers/FindUserByEmail.controller';
 import { celebrate, Joi, Segments } from 'celebrate'
+import isAuthenticated from '../../../modules/users/middlewares/isAuthenticated';
 
 const usersRoutes = Router();
 
@@ -21,8 +22,9 @@ usersRoutes.post(
   }),
   createUserController.handle);
 
-usersRoutes.get('/:username', findUserByUsernameController.handle);
+usersRoutes.get('/email/:email', isAuthenticated, findUserByEmailController.handle);
 
-usersRoutes.get('/email/:email', findUserByEmailController.handle);
+usersRoutes.get('/username/:username', isAuthenticated, findUserByUsernameController.handle);
+
 
 export { usersRoutes };

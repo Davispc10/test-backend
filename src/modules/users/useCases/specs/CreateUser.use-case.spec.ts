@@ -29,10 +29,7 @@ describe('Create User', () => {
     await createUserExecuter.generateUser();
     await createUserExecuter.createNewUser();
 
-    // Act
-    await createUserExecuter.createNewUser();
-
-    // Assert
+    // Act & Assert
     await createUserExecuter.assertResponseIsConflict();
   });
 });

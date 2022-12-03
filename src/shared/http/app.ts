@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import { errors } from 'celebrate';
 import '../../shared/container';
-import AppError from '../../shared/errors/appError';
+import AppError from '../errors/appError';
 
 
 const routes = require('./routes');

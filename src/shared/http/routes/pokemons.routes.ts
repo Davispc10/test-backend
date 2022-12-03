@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { FindPokemonsController } from '../../../modules/pokemons/controllers/FindPokemons-controller';
+import { FindPokemonsController } from '../../../modules/pokemons/controllers/FindPokemons.controller';
 import { celebrate, Joi, Segments } from 'celebrate';
-import { usersRoutes } from './users.routes';
+import isAuthenticated from '../../../modules/users/middlewares/isAuthenticated';
 
 const pokemonsRoutes = Router();
 
 const findPokemonsController = new FindPokemonsController();
 
 pokemonsRoutes.get(
-  '/',
+  '/', isAuthenticated,
   celebrate({
     [Segments.QUERY]: {
       name: Joi.string(),

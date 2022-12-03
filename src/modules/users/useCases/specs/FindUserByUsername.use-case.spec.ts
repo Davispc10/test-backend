@@ -25,11 +25,10 @@ describe('Find User By Username', () => {
   });
 
   it('should throw a not found error when user from username does not exist', async () => {
-    // Arrange & Act
+    // Arrange
     await findUserExecuter.generateUser();
-    await findUserExecuter.findUserByUsername();
 
-    // Assert
-    await findUserExecuter.assertResponseIsUserNotFound();
+    // Act & Assert
+    await findUserExecuter.assertResponseIsUsernameNotFound();
   });
 });

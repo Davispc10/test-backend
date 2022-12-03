@@ -15,12 +15,13 @@ export class FindUserByEmailUseCase {
     const user = await this.usersRepository.findUserByEmail(email);
 
     if (!user) {
-      return new AppError({
-        message: `User from "${email}" does not exist.`,
+      throw new AppError({
+        message: `Email "${email}" not found.`,
         statusCode: 404,
-      }).toJSON();
+      })
     }
 
     return user;
   }
 }
+

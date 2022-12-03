@@ -3,6 +3,7 @@ import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
 import { IUsersRepository } from '../../IUsersRepository';
 import { FindUserByUsernameUseCase } from '../FindUserByUsername.use-case';
 import { FindUserByEmailUseCase } from '../FindUserByEmail.use-case';
+import AppError from '../../../../shared/errors/appError';
 
 export class UserUseCasesSpecExecuter {
   private readonly inMemoryUserRepository: IUsersRepository;
@@ -53,12 +54,30 @@ export class UserUseCasesSpecExecuter {
   }
 
   async assertResponseIsConflict() {
-    expect(this.response).toHaveProperty('message');
-    expect(this.response.statusCode).toEqual(409);
+    try {
+      await this.createUser.execute(this.user);
+    } catch (e) {
+      expect(e).toBeInstanceOf(AppError);
+    }
   }
 
-  async assertResponseIsUserNotFound() {
-    expect(this.response).toHaveProperty('message');
-    expect(this.response.statusCode).toEqual(404);
+  async assertResponseIsUsernameNotFound() {
+    try {
+      await this.findUsername.execute(this.user.username);
+    } catch (e) {
+      if (e instanceof AppError) {
+        expect(e.message).toBe(`Username "${this.user.username}" not found.`);
+      }
+    }
+  }
+
+  async assertResponseIsEmailNotFound() {
+    try {
+      await this.findEmail.execute(this.user.email);
+    } catch (e) {
+      if (e instanceof AppError) {
+        expect(e.message).toBe(`Email "${this.user.email}" not found.`);
+      }
+    }
   }
 }

@@ -5,6 +5,7 @@ import { IUsersRepository } from '../IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
 import * as bcrypt from 'bcrypt';
+import { User } from '../typeorm/entities/User';
 
 @injectable()
 export class CreateUserUseCase {
@@ -13,7 +14,7 @@ export class CreateUserUseCase {
     private usersRepository: Omit<IUsersRepository, 'resetDataCache'>,
   ) {}
 
-  async execute({ username, email, password }: ICreateUserDto) {
+  async execute({ username, email, password }: ICreateUserDto): Promise<User | undefined> {
     const userAlreadyExists = await this.usersRepository.findUserByUsername(
       username,
     );
@@ -22,10 +23,10 @@ export class CreateUserUseCase {
     );
 
     if (userAlreadyExists || emailAlreadyExists) {
-      return new AppError({
+      throw new AppError({
         message: `The username "${username}" or email "${email}" is already registered.`,
         statusCode: 409,
-      }).toJSON();
+      })
     }
 
     const saltedHash = bcrypt.hashSync(password, 10)

@@ -25,11 +25,10 @@ describe('Find User By Email', () => {
   });
 
   it('should throw a not found error when user from email does not exist', async () => {
-    // Arrange & Act
+    // Arrange
     await findUserExecuter.generateUser();
-    await findUserExecuter.findUserByEmail();
 
-    // Assert
-    await findUserExecuter.assertResponseIsUserNotFound();
+    // Act & Assert
+    await findUserExecuter.assertResponseIsEmailNotFound();
   });
 });

@@ -3,22 +3,14 @@ export interface AppErrorInput {
   statusCode: number;
 }
 
-class AppError extends Error {
+
+export default class AppError extends Error {
   public readonly message: string;
-  public readonly statusCode: number = 400;
+  public readonly statusCode: number;
 
   constructor(appErrorInput: AppErrorInput) {
-    super();
+    super(appErrorInput.message);
     this.message = appErrorInput.message;
     this.statusCode = appErrorInput.statusCode;
   }
-
-  public toJSON(): AppErrorInput {
-    return {
-      message: this.message,
-      statusCode: this.statusCode,
-    };
-  }
 }
-
-export default AppError;

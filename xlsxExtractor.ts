@@ -70,7 +70,7 @@ const pokemonsAttributes = {
   29: 'cp100e39',
 };
 
-export class ExcelExtractorTs {
+export class XlsxExtractor {
   private pokemonsRepository: IPokemonsRepository = new PokemonsRepository();
 
   private pokemons: Pokemon[] = [];
@@ -85,7 +85,7 @@ export class ExcelExtractorTs {
     this.worksheet = this.workbook.Sheets[this.workbook.SheetNames[0]];
   }
 
-  async create() {
+  async convertXlsxToJSON() {
     const data = xlsx.utils.sheet_to_json(this.worksheet, {
       header: 'A',
       range: 1,
