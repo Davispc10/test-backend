@@ -2,7 +2,7 @@ import { CreateUserUseCase } from '../CreateUser.use-case';
 import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
 import { IUsersRepository } from '../../IUsersRepository';
 
-export class CreateUserExecuter {
+export class UserUseCasesSpecExecuter {
   private readonly inMemoryUserRepository: IUsersRepository;
   private createUser: CreateUserUseCase;
   private user: any;

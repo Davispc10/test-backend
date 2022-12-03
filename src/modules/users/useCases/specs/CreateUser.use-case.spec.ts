@@ -1,13 +1,13 @@
 import { CreateUserUseCase } from '../CreateUser.use-case';
 import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
 import { IUsersRepository } from '../../IUsersRepository';
-import { CreateUserExecuter } from './CreateUserUseCase.executer';
+import { UserUseCasesSpecExecuter } from './UserUseCases-spec.executer';
 
 let inMemoryUserRepository: IUsersRepository = new InMemoryUsersRepository();
 let createUser = new CreateUserUseCase(inMemoryUserRepository);
 
 describe('Create User', () => {
-  const createUserExecuter = new CreateUserExecuter();
+  const createUserExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
     createUserExecuter.resetDataCache();

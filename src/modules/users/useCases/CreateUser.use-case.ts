@@ -13,7 +13,7 @@ export class CreateUserUseCase {
   ) {}
 
   async execute({ username, email, password }: ICreateUserDto) {
-    const userAlreadyExists = await this.usersRepository.findByUsername(
+    const userAlreadyExists = await this.usersRepository.findUserByUsername(
       username,
     );
 

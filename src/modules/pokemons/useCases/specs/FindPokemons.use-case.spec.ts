@@ -1,5 +1,4 @@
 import { FindPokemonsUseCaseExecuter } from './FindPokemonsUseCase.executer';
-import { IPokemonsRepository } from '../../IPokemonsRepository';
 import { InMemoryPokemonsRepository } from './inMemory/InMemoryPokemonsRepository';
 
 let inMemoryPokemonsRepository: InMemoryPokemonsRepository =

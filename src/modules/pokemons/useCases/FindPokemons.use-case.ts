@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { IPokemonsRepository } from '../IPokemonsRepository';
 import { Pokemon } from '../typeorm/entities/Pokemon';
+import IPokemonPaginate from '../IPokemonPaginate';
 
 export interface IFilters {
   name: string | undefined,
@@ -11,6 +12,7 @@ export interface IFilters {
   type1: string,
   weather1: string,
 }
+
 
 interface SearchParams {
   page: number;
@@ -24,7 +26,7 @@ export class FindPokemonsUseCase {
     private pokemonsRepository: IPokemonsRepository,
   ) {}
 
-  async execute({page, limit}: SearchParams, data: IFilters | null): Promise<Pokemon[]  | null> {
+  async execute({page, limit}: SearchParams, data: IFilters | null): Promise<Pokemon[] | IPokemonPaginate | null> {
     const take = limit;
     const skip = (Number(page) - 1) * take;
     return await this.pokemonsRepository.findPokemons({ page, skip, take }, data)

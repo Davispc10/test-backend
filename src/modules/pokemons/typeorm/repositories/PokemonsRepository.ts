@@ -3,6 +3,7 @@ import { dataSource } from '../../../../shared/typeorm';
 import { Pokemon } from '../entities/Pokemon';
 import { IPokemonsRepository, SearchParams } from '../../IPokemonsRepository';
 import { IFilters } from '../../useCases/FindPokemons.use-case';
+import IPokemonPaginate from '../../IPokemonPaginate';
 
 export class PokemonsRepository implements IPokemonsRepository {
   private pokemonRepository: Repository<Pokemon>;
@@ -22,11 +23,11 @@ export class PokemonsRepository implements IPokemonsRepository {
     } catch (e) {}
   }
 
-  async findPokemons({page, skip, take}: SearchParams, data: IFilters | null): Promise<Pokemon[] | null> {
+  async findPokemons({page, skip, take}: SearchParams, data: IFilters | null): Promise<Pokemon[] | IPokemonPaginate | null> {
     const {name, pokedexNumber, generation, legendary, type1, weather1} = {...data}
 
 
-    return await this.pokemonRepository.find({
+    const [pokemons, ammount] = await this.pokemonRepository.findAndCount({
       where: {
         name,
         pokedexNumber,
@@ -37,6 +38,15 @@ export class PokemonsRepository implements IPokemonsRepository {
       },
       skip: skip, take: take
     })
+
+    const result: IPokemonPaginate = {
+      total: ammount,
+      current_page: page,
+      per_page: take,
+      data: pokemons
+    }
+
+    return result
   }
 
   async findByPokedexNumber(pokedexNumber: number): Promise<Pokemon | undefined | null> {

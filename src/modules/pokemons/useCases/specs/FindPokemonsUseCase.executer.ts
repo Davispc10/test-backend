@@ -31,6 +31,6 @@ export class FindPokemonsUseCaseExecuter {
   }
 
   assertResponseIsManyPokemons() {
-    expect(this.response[1]).toHaveProperty('pokedexNumber');
+    expect(this.response.data[1]).toHaveProperty('pokedexNumber');
   }
 }
