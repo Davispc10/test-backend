@@ -5,7 +5,7 @@ export interface AppErrorInput {
 
 class AppError extends Error {
   public readonly message: string;
-  public readonly statusCode: number;
+  public readonly statusCode: number = 400;
 
   constructor(appErrorInput: AppErrorInput) {
     super();
