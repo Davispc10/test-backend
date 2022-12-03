@@ -4,7 +4,7 @@ import { UserUseCasesSpecExecuter } from './UserUseCases-spec.executer';
 
 let inMemoryUserRepository: IUsersRepository;
 
-describe('Find User By Username', () => {
+describe('Find User By Email', () => {
   const findUserExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
@@ -12,22 +12,22 @@ describe('Find User By Username', () => {
     inMemoryUserRepository = new InMemoryUsersRepository();
   });
 
-  it('should be able to find an user by his username', async () => {
+  it('should be able to find an user by his email', async () => {
     // Arrange
     await findUserExecuter.generateUser();
     await findUserExecuter.createNewUser();
 
     // Act
-    await findUserExecuter.findUserByUsername();
+    await findUserExecuter.findUserByEmail();
 
     // Assert
     await findUserExecuter.assertResponseIsUser();
   });
 
-  it('should throw a not found error when user from username does not exist', async () => {
+  it('should throw a not found error when user from email does not exist', async () => {
     // Arrange & Act
     await findUserExecuter.generateUser();
-    await findUserExecuter.findUserByUsername();
+    await findUserExecuter.findUserByEmail();
 
     // Assert
     await findUserExecuter.assertResponseIsUserNotFound();

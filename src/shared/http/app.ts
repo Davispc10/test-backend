@@ -3,7 +3,6 @@ import cors from 'cors';
 import '../../shared/container';
 import AppError from '../../shared/errors/appError';
 
-
 const routes = require('./routes');
 const app = express();
 

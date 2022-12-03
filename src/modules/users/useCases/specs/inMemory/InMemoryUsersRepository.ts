@@ -18,7 +18,14 @@ export class InMemoryUsersRepository implements IUsersRepository {
   }
 
   async findUserByUsername(username: string): Promise<User | undefined> {
-    const user = this.users.find(user => user.username === username);
-    return user;
+    return this.users.find(user => user.username === username);
+  }
+
+  async resetDataCache() {
+    this.users = [];
+  }
+
+  async findUserByEmail(email: string): Promise<User | undefined> {
+    return this.users.find(user => user.email === email);
   }
 }

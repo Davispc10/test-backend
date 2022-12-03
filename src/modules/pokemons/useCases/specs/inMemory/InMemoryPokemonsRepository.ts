@@ -1,8 +1,10 @@
-import { IPokemonsRepository, SearchParams } from '../../../IPokemonsRepository';
+import {
+  IPokemonsRepository,
+  SearchParams,
+} from '../../../IPokemonsRepository';
 import { Pokemon } from '../../../typeorm/entities/Pokemon';
 import { ExcelExtractorTs } from '../../../../../../excelExtractor';
 import IPokemonPaginate from '../../../IPokemonPaginate';
-
 
 export class InMemoryPokemonsRepository implements IPokemonsRepository {
   private extractor;
@@ -25,13 +27,16 @@ export class InMemoryPokemonsRepository implements IPokemonsRepository {
     );
   }
 
-  async findPokemons({page, skip, take}: SearchParams, data: object | null): Promise<IPokemonPaginate | null | Pokemon[]> {
+  async findPokemons(
+    { page, skip, take }: SearchParams,
+    data: object | null,
+  ): Promise<IPokemonPaginate | null | Pokemon[]> {
     const result: IPokemonPaginate = {
       total: 15,
       current_page: page,
       per_page: take,
-      data: this.pokemons
-    }
+      data: this.pokemons,
+    };
     return result;
   }
 

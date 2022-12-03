@@ -3,8 +3,7 @@ import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
 import { IUsersRepository } from '../../IUsersRepository';
 import { UserUseCasesSpecExecuter } from './UserUseCases-spec.executer';
 
-let inMemoryUserRepository: IUsersRepository = new InMemoryUsersRepository();
-let createUser = new CreateUserUseCase(inMemoryUserRepository);
+let inMemoryUserRepository: IUsersRepository;
 
 describe('Create User', () => {
   const createUserExecuter = new UserUseCasesSpecExecuter();
@@ -12,7 +11,6 @@ describe('Create User', () => {
   beforeEach(() => {
     createUserExecuter.resetDataCache();
     inMemoryUserRepository = new InMemoryUsersRepository();
-    createUser = new CreateUserUseCase(inMemoryUserRepository);
   });
 
   it('should be able to create a new user', async () => {

@@ -23,9 +23,13 @@ export class PokemonsRepository implements IPokemonsRepository {
     } catch (e) {}
   }
 
-  async findPokemons({page, skip, take}: SearchParams, data: IFilters | null): Promise<Pokemon[] | IPokemonPaginate | null> {
-    const {name, pokedexNumber, generation, legendary, type1, weather1} = {...data}
-
+  async findPokemons(
+    { page, skip, take }: SearchParams,
+    data: IFilters | null,
+  ): Promise<Pokemon[] | IPokemonPaginate | null> {
+    const { name, pokedexNumber, generation, legendary, type1, weather1 } = {
+      ...data,
+    };
 
     const [pokemons, ammount] = await this.pokemonRepository.findAndCount({
       where: {
@@ -34,22 +38,25 @@ export class PokemonsRepository implements IPokemonsRepository {
         generation,
         legendary,
         type1,
-        weather1
+        weather1,
       },
-      skip: skip, take: take
-    })
+      skip: skip,
+      take: take,
+    });
 
     const result: IPokemonPaginate = {
       total: ammount,
       current_page: page,
       per_page: take,
-      data: pokemons
-    }
+      data: pokemons,
+    };
 
-    return result
+    return result;
   }
 
-  async findByPokedexNumber(pokedexNumber: number): Promise<Pokemon | undefined | null> {
+  async findByPokedexNumber(
+    pokedexNumber: number,
+  ): Promise<Pokemon | undefined | null> {
     return await this.pokemonRepository.findOne({
       where: {
         pokedexNumber,

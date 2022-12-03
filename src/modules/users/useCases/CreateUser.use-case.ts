@@ -9,27 +9,28 @@ import { inject, injectable } from 'tsyringe';
 export class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    private usersRepository: Omit<IUsersRepository, 'resetDataCache'>,
   ) {}
 
   async execute({ username, email, password }: ICreateUserDto) {
     const userAlreadyExists = await this.usersRepository.findUserByUsername(
       username,
     );
+    const emailAlreadyExists = await this.usersRepository.findUserByEmail(
+      email,
+    );
 
-    if (userAlreadyExists) {
+    if (userAlreadyExists || emailAlreadyExists) {
       return new AppError({
-        message: `The username ${username} is already registered`,
+        message: `The username "${username}" or email "${email}" is already registered.`,
         statusCode: 409,
       }).toJSON();
     }
 
-    const user = await this.usersRepository.create({
+    return await this.usersRepository.create({
       username,
       email,
       password,
     });
-
-    return user;
   }
 }

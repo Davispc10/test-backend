@@ -4,7 +4,9 @@ import { dataSource } from '../../../../shared/typeorm';
 import { ICreateUserDto } from '../../dtos/ICreateUserDto';
 import { IUsersRepository } from '../../IUsersRepository';
 
-export class UsersRepository implements IUsersRepository {
+export class UsersRepository
+  implements Omit<IUsersRepository, 'resetDataCache'>
+{
   private usersRepository: Repository<User>;
 
   constructor() {
@@ -24,6 +26,12 @@ export class UsersRepository implements IUsersRepository {
   async findUserByUsername(username: string): Promise<User> {
     return (await this.usersRepository.findOne({
       where: { username },
+    })) as User;
+  }
+
+  async findUserByEmail(email: string): Promise<User | undefined> {
+    return (await this.usersRepository.findOne({
+      where: { email },
     })) as User;
   }
 }

@@ -9,6 +9,6 @@ routes.get('/', (req, res) => {
 });
 
 routes.use('/users', usersRoutes);
-routes.use('/pokemons', pokemonsRoutes)
+routes.use('/pokemons', pokemonsRoutes);
 
 module.exports = routes;

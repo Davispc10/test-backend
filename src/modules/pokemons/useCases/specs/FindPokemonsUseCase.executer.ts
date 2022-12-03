@@ -23,11 +23,13 @@ export class FindPokemonsUseCaseExecuter {
   }
 
   async findManyPokemons() {
-
-    this.response = await this.findPokemons.execute({
-      page: this.page,
-      limit: this.limit
-    }, null);
+    this.response = await this.findPokemons.execute(
+      {
+        page: this.page,
+        limit: this.limit,
+      },
+      null,
+    );
   }
 
   assertResponseIsManyPokemons() {
