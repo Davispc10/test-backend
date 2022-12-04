@@ -22,7 +22,6 @@ export class FindUserByUsernameUseCase {
         statusCode: 404,
       });
     }
-    const { id, saltedHash, ...result } = user;
-    return result;
+    return user
   }
 }

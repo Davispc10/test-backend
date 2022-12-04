@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { FindUserByEmailUseCase } from '../useCases/FindUserByEmail.use-case';
 import CatchErrors from '../../decorators/CatchErrors.decorator';
+import { instanceToPlain } from 'class-transformer';
 
 export class FindUserByEmailController {
   @CatchErrors
@@ -13,6 +14,6 @@ export class FindUserByEmailController {
 
     const user = await findUserByEmailUseCase.execute(email);
 
-    return response.status(200).json(user);
+    return response.status(200).json(instanceToPlain(user));
   }
 }

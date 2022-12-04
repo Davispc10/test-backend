@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateUserUseCase } from '../useCases/CreateUser.use-case';
 import CatchErrors from '../../decorators/CatchErrors.decorator';
+import { instanceToPlain } from 'class-transformer';
+
 
 export class CreateUserController {
   @CatchErrors
@@ -16,6 +18,6 @@ export class CreateUserController {
       password,
     });
 
-    return response.status(201).json(user);
+    return response.status(201).json(instanceToPlain(user));
   }
 }

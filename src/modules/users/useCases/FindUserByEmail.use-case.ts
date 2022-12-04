@@ -20,8 +20,6 @@ export class FindUserByEmailUseCase {
         statusCode: 404,
       });
     }
-
-    const { id, saltedHash, ...result } = user;
-    return result;
+    return user
   }
 }

@@ -7,6 +7,7 @@ import { inject, injectable } from 'tsyringe';
 import * as bcrypt from 'bcrypt';
 import { IUser } from '../dtos/IUser';
 
+
 @injectable()
 export class CreateUserUseCase {
   constructor(
@@ -36,13 +37,10 @@ export class CreateUserUseCase {
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
-    const user = await this.usersRepository.create({
+    return await this.usersRepository.create({
       username,
       email,
       password: hashedPassword,
     });
-
-    const { id, saltedHash, ...result } = user;
-    return result;
   }
 }
