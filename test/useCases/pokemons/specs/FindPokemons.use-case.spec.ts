@@ -1,6 +1,6 @@
-import { FindPokemonsUseCaseExecuter } from './FindPokemonsUseCase.executer';
-import { InMemoryPokemonsRepository } from './inMemory/InMemoryPokemonsRepository';
-import { XlsxExtractor } from '../../../../shared/utils/xlsxExtractor';
+import { FindPokemonsUseCaseExecuter } from '../executers/FindPokemonsUseCase.executer';
+import { InMemoryPokemonsRepository } from '../inMemory/InMemoryPokemonsRepository';
+import { XlsxExtractor } from '../../../../src/shared/utils/xlsxExtractor';
 
 const inMemoryPokemonsRepository: InMemoryPokemonsRepository =
   new InMemoryPokemonsRepository();

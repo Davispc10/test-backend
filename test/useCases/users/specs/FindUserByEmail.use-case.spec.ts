@@ -1,6 +1,6 @@
-import { IUsersRepository } from '../../domain/repositories/IUsersRepository';
-import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
-import { UserUseCasesSpecExecuter } from './UserUseCases-spec.executer';
+import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
+import { InMemoryUsersRepository } from '../inMemory/InMemoryUsersRepository';
+import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
 let inMemoryUserRepository: IUsersRepository;
 

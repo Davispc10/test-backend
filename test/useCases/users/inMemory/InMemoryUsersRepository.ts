@@ -1,6 +1,6 @@
-import { User } from '../../../infra/typeorm/entities/User';
-import { ICreateUser } from '../../../domain/models/ICreateUser';
-import { IUsersRepository } from '../../../domain/repositories/IUsersRepository';
+import { User } from '../../../../src/modules/users/infra/typeorm/entities/User';
+import { ICreateUser } from '../../../../src/modules/users/domain/models/ICreateUser';
+import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 
 export class InMemoryUsersRepository implements IUsersRepository {
   private users: User[] = [];

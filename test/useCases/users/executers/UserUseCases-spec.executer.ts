@@ -1,11 +1,11 @@
-import { CreateUserUseCase } from '../CreateUser.use-case';
-import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
-import { IUsersRepository } from '../../domain/repositories/IUsersRepository';
-import { FindUserByUsernameUseCase } from '../FindUserByUsername.use-case';
-import { FindUserByEmailUseCase } from '../FindUserByEmail.use-case';
-import AppError from '../../../../shared/errors/appError';
-import { CreateSessionUseCase } from '../CreateSession.use-case';
-import BcryptHashProvider from '../../providers/HashProvider/implementations/BcryptHashProvider';
+import { CreateUserUseCase } from '../../../../src/modules/users/useCases/CreateUser.use-case';
+import { InMemoryUsersRepository } from '../inMemory/InMemoryUsersRepository';
+import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
+import { FindUserByUsernameUseCase } from '../../../../src/modules/users/useCases/FindUserByUsername.use-case';
+import { FindUserByEmailUseCase } from '../../../../src/modules/users/useCases/FindUserByEmail.use-case';
+import AppError from '../../../../src/shared/errors/appError';
+import { CreateSessionUseCase } from '../../../../src/modules/users/useCases/CreateSession.use-case';
+import BcryptHashProvider from '../../../../src/modules/users/providers/HashProvider/implementations/BcryptHashProvider';
 
 export class UserUseCasesSpecExecuter {
   private readonly inMemoryUserRepository: IUsersRepository;

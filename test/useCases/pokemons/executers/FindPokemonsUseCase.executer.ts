@@ -1,6 +1,6 @@
-import { IPokemonsRepository } from '../../domain/repositories/IPokemonsRepository';
-import { InMemoryPokemonsRepository } from './inMemory/InMemoryPokemonsRepository';
-import { FindPokemonsUseCase } from '../FindPokemons.use-case';
+import { IPokemonsRepository } from '../../../../src/modules/pokemons/domain/repositories/IPokemonsRepository';
+import { InMemoryPokemonsRepository } from '../inMemory/InMemoryPokemonsRepository';
+import { FindPokemonsUseCase } from '../../../../src/modules/pokemons/useCases/FindPokemons.use-case';
 
 export class FindPokemonsUseCaseExecuter {
   private readonly inMemoryPokemonsRepository: IPokemonsRepository;
