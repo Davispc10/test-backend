@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { FindPokemonsController } from '../controllers/FindPokemons.controller';
 import { celebrate, Joi, Segments } from 'celebrate';
-import isAuthenticated from '../../../../users/middlewares/isAuthenticated';
+import isAuthenticated from '../../../../../shared/middlewares/isAuthenticated';
 
 const pokemonsRoutes = Router();
 

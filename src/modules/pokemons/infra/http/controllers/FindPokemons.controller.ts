@@ -4,7 +4,7 @@ import {
   FindPokemonsUseCase,
   IFilters,
 } from '../../../useCases/FindPokemons.use-case';
-import CatchErrors from '../../../../decorators/CatchErrors.decorator';
+import CatchErrors from '../../../../../shared/decorators/CatchErrors.decorator';
 
 export class FindPokemonsController {
   @CatchErrors

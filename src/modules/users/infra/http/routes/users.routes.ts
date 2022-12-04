@@ -3,7 +3,7 @@ import { CreateUserController } from '../controllers/CreateUser.controller';
 import { FindUserByUsernameController } from '../controllers/FindUserByUsername.controller';
 import { FindUserByEmailController } from '../controllers/FindUserByEmail.controller';
 import { celebrate, Joi, Segments } from 'celebrate';
-import isAuthenticated from '../../../middlewares/isAuthenticated';
+import isAuthenticated from '../../../../../shared/middlewares/isAuthenticated';
 
 const usersRoutes = Router();
 

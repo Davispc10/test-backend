@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { CreateSessionUseCase } from '../../../useCases/CreateSession.use-case';
 import { container } from 'tsyringe';
-import CatchErrors from '../../../../decorators/CatchErrors.decorator';
+import CatchErrors from '../../../../../shared/decorators/CatchErrors.decorator';
 
 export class SessionsController {
   @CatchErrors

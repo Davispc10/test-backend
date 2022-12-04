@@ -1,4 +1,4 @@
-export interface ILoginDto {
+export interface ISignIn {
   username: string;
   password: string;
 }

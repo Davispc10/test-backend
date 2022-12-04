@@ -3,7 +3,7 @@ import { UsersRepository } from '../infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '../domain/repositories/IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
-import { ILoginDto } from '../../auth/dtos/ILoginDto';
+import { ISignIn } from '../domain/models/ISignIn';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
 import { IUser } from '../domain/models/IUser';
@@ -23,7 +23,7 @@ export class CreateSessionUseCase {
     private hashProvider: IHashProvider,
   ) {}
 
-  async execute({ username, password }: ILoginDto): Promise<IResponse> {
+  async execute({ username, password }: ISignIn): Promise<IResponse> {
     const user = await this.usersRepository.findUserByUsername(username);
 
     if (!user) {

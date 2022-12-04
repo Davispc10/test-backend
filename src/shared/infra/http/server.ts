@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import 'dotenv/config';
 import { app } from './app';
 import { dataSource } from '../typeorm';
-import { XlsxExtractor } from '../../../../xlsxExtractor';
+import { XlsxExtractor } from '../../utils/xlsxExtractor';
 import { container } from 'tsyringe';
 
 dataSource.initialize().then(() => {

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { FindUserByUsernameUseCase } from '../../../useCases/FindUserByUsername.use-case';
-import CatchErrors from '../../../../decorators/CatchErrors.decorator';
+import CatchErrors from '../../../../../shared/decorators/CatchErrors.decorator';
 import { instanceToPlain } from 'class-transformer';
 
 export class FindUserByUsernameController {
