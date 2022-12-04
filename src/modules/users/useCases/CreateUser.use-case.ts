@@ -18,10 +18,11 @@ export class CreateUserUseCase {
     username,
     email,
     password,
-  }: ICreateUserDto): Promise<IUser | undefined> {
+  }: ICreateUserDto): Promise<IUser | unknown> {
     const userAlreadyExists = await this.usersRepository.findUserByUsername(
       username,
     );
+
     const emailAlreadyExists = await this.usersRepository.findUserByEmail(
       email,
     );
@@ -33,12 +34,15 @@ export class CreateUserUseCase {
       });
     }
 
-    const saltedHash = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, 10);
 
-    return await this.usersRepository.create({
+    const user = await this.usersRepository.create({
       username,
       email,
-      password: saltedHash,
+      password: hashedPassword,
     });
+
+    const { id, saltedHash, ...result } = user;
+    return result;
   }
 }

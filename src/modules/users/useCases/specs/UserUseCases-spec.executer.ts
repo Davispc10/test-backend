@@ -32,7 +32,7 @@ export class UserUseCasesSpecExecuter {
     this.user = {
       username: 'username123',
       email: 'email123',
-      password: 'Password123',
+      saltedHash: 'Password123',
     };
   }
 

@@ -21,6 +21,7 @@ export class FindUserByEmailUseCase {
       });
     }
 
-    return user;
+    const { id, saltedHash, ...result } = user;
+    return result;
   }
 }

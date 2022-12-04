@@ -22,7 +22,7 @@ export class FindUserByUsernameUseCase {
         statusCode: 404,
       });
     }
-
-    return user;
+    const { id, saltedHash, ...result } = user;
+    return result;
   }
 }

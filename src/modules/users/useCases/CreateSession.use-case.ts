@@ -8,9 +8,10 @@ import { ILoginDto } from '../../auth/dtos/ILoginDto';
 import { sign } from 'jsonwebtoken';
 import { User } from '../typeorm/entities/User';
 import authConfig from '../../../config/auth';
+import { IUser } from '../dtos/IUser';
 
 interface IResponse {
-  user: User;
+  user: IUser;
   access_token: string;
 }
 
@@ -31,7 +32,7 @@ export class CreateSessionUseCase {
       });
     }
 
-    const passwordsMatches = bcrypt.compareSync(password, user.password);
+    const passwordsMatches = bcrypt.compareSync(password, user.saltedHash);
 
     if (!passwordsMatches) {
       throw new AppError({
@@ -45,8 +46,9 @@ export class CreateSessionUseCase {
       expiresIn: authConfig.jwt.expiresIn,
     });
 
+    const { id, saltedHash, ...iUser } = user;
     return {
-      user,
+      user: iUser,
       access_token,
     };
   }
