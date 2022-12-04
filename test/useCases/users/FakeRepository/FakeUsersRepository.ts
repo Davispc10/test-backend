@@ -2,7 +2,7 @@ import { User } from '../../../../src/modules/users/infra/typeorm/entities/User'
 import { ICreateUser } from '../../../../src/modules/users/domain/models/ICreateUser';
 import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 
-export class InMemoryUsersRepository implements IUsersRepository {
+export class FakeUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
   async create({ username, email, password }: ICreateUser): Promise<User> {

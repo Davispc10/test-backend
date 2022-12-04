@@ -1,92 +1,41 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { IPokemon } from '../../../domain/models/IPokemon';
+import { JoinColumn } from 'typeorm';
+import { Information } from './Information';
+import { TypeWeather } from './TypeWeather';
+import { FightingAttributes } from './FightingAttributes';
+import { AdditionalInformation } from './AdditionalInformation';
 
 @Entity('Pokemon')
-export class Pokemon implements IPokemon{
-  @Column()
-  name: string;
+export class Pokemon implements IPokemon {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-  @PrimaryColumn()
-  pokedexNumber: number;
+  @OneToOne(() => Information, (information) => information.pokedexNumber)
+  @JoinColumn()
+  information: Information
 
-  @Column({ nullable: true })
-  imgName: string;
+  @OneToOne(() => TypeWeather, (type_weather) => type_weather.pokedexNumber)
+  @JoinColumn()
+  type_weather: TypeWeather
 
-  @Column()
-  generation: number;
+  @OneToOne(() => FightingAttributes, (fighting_attributes) => fighting_attributes.pokedexNumber)
+  @JoinColumn()
+  fighting_attributes: FightingAttributes
 
-  @Column({ nullable: true })
-  evolutionStage: string;
+  @OneToOne(() => AdditionalInformation, (additional_information) => additional_information.pokedexNumber)
+  @JoinColumn()
+  additional_information: AdditionalInformation
 
-  @Column()
-  evolved: number;
 
-  @Column({ nullable: true })
-  familyId: number;
 
-  @Column()
-  crossGen: number;
 
-  @Column()
-  type1: string;
 
-  @Column({ nullable: true })
-  type2: string;
 
-  @Column()
-  weather1: string;
 
-  @Column({ nullable: true })
-  weather2: string;
 
-  @Column()
-  statTotal: number;
 
-  @Column()
-  atk: number;
 
-  @Column()
-  def: number;
 
-  @Column()
-  sta: number;
 
-  @Column()
-  legendary: number;
-
-  @Column()
-  acquirable: number;
-
-  @Column()
-  spawns: number;
-
-  @Column()
-  regional: number;
-
-  @Column()
-  raidable: number;
-
-  @Column()
-  hatchable: number;
-
-  @Column()
-  shiny: number;
-
-  @Column()
-  nest: number;
-
-  @Column()
-  new: number;
-
-  @Column()
-  notGettable: number;
-
-  @Column()
-  futureEvolve: number;
-
-  @Column()
-  cp100e40: number;
-
-  @Column()
-  cp100e39: number;
 }

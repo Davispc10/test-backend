@@ -2,6 +2,10 @@ import { Pokemon } from '../../modules/pokemons/infra/typeorm/entities/Pokemon';
 import { PokemonsRepository } from '../../modules/pokemons/infra/typeorm/repositories/PokemonsRepository';
 import { inject, injectable } from 'tsyringe';
 import { IPokemonsRepository } from '../../modules/pokemons/domain/repositories/IPokemonsRepository';
+import { Information } from '../../modules/pokemons/infra/typeorm/entities/Information';
+import { TypeWeather } from '../../modules/pokemons/infra/typeorm/entities/TypeWeather';
+import { FightingAttributes } from '../../modules/pokemons/infra/typeorm/entities/FightingAttributes';
+import { AdditionalInformation } from '../../modules/pokemons/infra/typeorm/entities/AdditionalInformation';
 require('dotenv').config();
 
 
@@ -79,6 +83,10 @@ export class XlsxExtractor {
   private pokemons: Pokemon[] = [];
   private pokemon: Pokemon | null;
   private workbook;
+  private information: Information;
+  private type_weather: TypeWeather;
+  private fighting_attributes: FightingAttributes;
+  private additional_information: AdditionalInformation;
 
   constructor(
     @inject('PokemonsRepository')
@@ -97,12 +105,51 @@ export class XlsxExtractor {
 
     //@ts-ignore
     data.map(row => {
+      this.information = new Information()
+      this.type_weather = new TypeWeather()
+      this.fighting_attributes = new FightingAttributes()
+      this.additional_information = new AdditionalInformation()
+
       this.pokemon = new Pokemon();
+      this.pokemon.information = this.information
+      this.pokemon.type_weather = this.type_weather
+      this.pokemon.fighting_attributes = this.fighting_attributes
+      this.pokemon.additional_information = this.additional_information
+
       for (let i = 1; i <= 29; i++) {
-        //@ts-ignore
-        this.pokemon[pokemonsAttributes[i]] = row[columns[i + 1]];
+        if (i <= 8) {
+          //@ts-ignore
+          this.information[pokemonsAttributes[i]] = row[columns[i + 1]];
+        } else {
+          if (i <= 12) {
+            //@ts-ignore
+            this.type_weather[pokemonsAttributes[i]] = row[columns[i + 1]];
+          } else {
+            if (i <= 16 || (i >= 28 && i <= 29) ) {
+              //@ts-ignore
+              this.fighting_attributes[pokemonsAttributes[i]] = row[columns[i + 1]];
+            } else {
+              if (i <= 27) {
+                //@ts-ignore
+                this.additional_information[pokemonsAttributes[i]] = row[columns[i + 1]];
+              }
+            }
+          }
+        }
 
         if (i === 29) {
+          const pokedexNumber = this.pokemon.information.pokedexNumber
+          this.pokemon.information = this.information
+
+          this.pokemon.type_weather = this.type_weather
+          this.pokemon.type_weather.pokedexNumber = pokedexNumber
+
+          this.pokemon.fighting_attributes = this.fighting_attributes
+          this.pokemon.fighting_attributes.pokedexNumber = pokedexNumber
+
+          this.pokemon.additional_information = this.additional_information
+          this.pokemon.additional_information.pokedexNumber = pokedexNumber
+
           this.pokemons.push(this.pokemon);
           this.pokemon = new Pokemon();
         }

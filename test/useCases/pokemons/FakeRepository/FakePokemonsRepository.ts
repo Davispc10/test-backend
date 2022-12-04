@@ -5,7 +5,7 @@ import {
 import { Pokemon } from '../../../../src/modules/pokemons/infra/typeorm/entities/Pokemon';
 import IPokemonPaginate from '../../../../src/modules/pokemons/domain/models/IPokemonPaginate';
 
-export class InMemoryPokemonsRepository implements IPokemonsRepository {
+export class FakePokemonsRepository implements IPokemonsRepository {
   public pokemons: any[] = [];
 
   async populate(pokemons: any[]) {

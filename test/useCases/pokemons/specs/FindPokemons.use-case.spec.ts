@@ -1,9 +1,9 @@
 import { FindPokemonsUseCaseExecuter } from '../executers/FindPokemonsUseCase.executer';
-import { InMemoryPokemonsRepository } from '../inMemory/InMemoryPokemonsRepository';
+import { FakePokemonsRepository } from '../FakeRepository/FakePokemonsRepository';
 import { XlsxExtractor } from '../../../../src/shared/utils/xlsxExtractor';
 
-const inMemoryPokemonsRepository: InMemoryPokemonsRepository =
-  new InMemoryPokemonsRepository();
+const inMemoryPokemonsRepository: FakePokemonsRepository =
+  new FakePokemonsRepository();
 
 describe('Get Pokemons', () => {
   const findPokemonsExecuter = new FindPokemonsUseCaseExecuter(

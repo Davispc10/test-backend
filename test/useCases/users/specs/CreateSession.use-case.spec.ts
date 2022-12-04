@@ -1,4 +1,4 @@
-import { InMemoryUsersRepository } from '../inMemory/InMemoryUsersRepository';
+import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
 import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
@@ -9,7 +9,7 @@ describe('Create User', () => {
 
   beforeEach(() => {
     createSessionExecuter.resetDataCache();
-    inMemoryUserRepository = new InMemoryUsersRepository();
+    inMemoryUserRepository = new FakeUsersRepository();
   });
 
   it('should return access token when input is correct credentials', async () => {

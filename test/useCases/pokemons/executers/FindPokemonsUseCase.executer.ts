@@ -1,19 +1,19 @@
 import { IPokemonsRepository } from '../../../../src/modules/pokemons/domain/repositories/IPokemonsRepository';
-import { InMemoryPokemonsRepository } from '../inMemory/InMemoryPokemonsRepository';
+import { FakePokemonsRepository } from '../FakeRepository/FakePokemonsRepository';
 import { FindPokemonsUseCase } from '../../../../src/modules/pokemons/useCases/FindPokemons.use-case';
 
 export class FindPokemonsUseCaseExecuter {
-  private readonly inMemoryPokemonsRepository: IPokemonsRepository;
+  private readonly fakePokemonsRepository: IPokemonsRepository;
   private findPokemons: FindPokemonsUseCase;
   private pokemon: any;
   private response: any;
   private page = 1;
   private limit = 15;
 
-  constructor(inMemoryPokemonsRepository: InMemoryPokemonsRepository) {
-    this.inMemoryPokemonsRepository = inMemoryPokemonsRepository;
+  constructor(fakePokemonsRepository: FakePokemonsRepository) {
+    this.fakePokemonsRepository = fakePokemonsRepository;
     this.findPokemons = new FindPokemonsUseCase(
-      this.inMemoryPokemonsRepository,
+      this.fakePokemonsRepository,
     );
   }
 
@@ -33,6 +33,6 @@ export class FindPokemonsUseCaseExecuter {
   }
 
   assertResponseIsManyPokemons() {
-    expect(this.response.data[1]).toHaveProperty('pokedexNumber');
+    expect(this.response.data[1].information).toHaveProperty('pokedexNumber');
   }
 }

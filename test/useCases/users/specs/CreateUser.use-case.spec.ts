@@ -1,5 +1,5 @@
 import { CreateUserUseCase } from '../../../../src/modules/users/useCases/CreateUser.use-case';
-import { InMemoryUsersRepository } from '../inMemory/InMemoryUsersRepository';
+import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
 import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
@@ -10,7 +10,7 @@ describe('Create User', () => {
 
   beforeEach(() => {
     createUserExecuter.resetDataCache();
-    inMemoryUserRepository = new InMemoryUsersRepository();
+    inMemoryUserRepository = new FakeUsersRepository();
   });
 
   it('should be able to create a new user', async () => {
