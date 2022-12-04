@@ -70,17 +70,18 @@ const pokemonsAttributes = {
   29: 'cp100e39',
 };
 
+@injectable()
 export class XlsxExtractor {
-  private pokemonsRepository: IPokemonsRepository = new PokemonsRepository();
-
+  private readonly path;
+  private readonly worksheet;
   private pokemons: Pokemon[] = [];
   private pokemon: Pokemon | null;
-  private readonly path;
   private workbook;
-  private worksheet;
 
-  constructor(path: string) {
-    this.path = path;
+  constructor(
+    @inject('PokemonsRepository')
+    private pokemonsRepository: IPokemonsRepository) {
+    this.path = process.env.XLSX_PATH;
     this.workbook = xlsx.readFile(this.path);
     this.worksheet = this.workbook.Sheets[this.workbook.SheetNames[0]];
   }
