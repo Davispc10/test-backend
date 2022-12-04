@@ -1,9 +1,9 @@
 import {
   IPokemonsRepository,
   SearchParams,
-} from '../../../IPokemonsRepository';
-import { Pokemon } from '../../../typeorm/entities/Pokemon';
-import IPokemonPaginate from '../../../IPokemonPaginate';
+} from '../../../domain/repositories/IPokemonsRepository';
+import { Pokemon } from '../../../infra/typeorm/entities/Pokemon';
+import IPokemonPaginate from '../../../domain/models/IPokemonPaginate';
 
 export class InMemoryPokemonsRepository implements IPokemonsRepository {
   public pokemons: any[] = [];

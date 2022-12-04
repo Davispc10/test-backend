@@ -1,6 +1,6 @@
 import { CreateUserUseCase } from '../CreateUser.use-case';
 import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
-import { IUsersRepository } from '../../IUsersRepository';
+import { IUsersRepository } from '../../domain/repositories/IUsersRepository';
 import { UserUseCasesSpecExecuter } from './UserUseCases-spec.executer';
 
 let inMemoryUserRepository: IUsersRepository;

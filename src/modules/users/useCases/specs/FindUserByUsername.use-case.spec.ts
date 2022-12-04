@@ -1,4 +1,4 @@
-import { IUsersRepository } from '../../IUsersRepository';
+import { IUsersRepository } from '../../domain/repositories/IUsersRepository';
 import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
 import { UserUseCasesSpecExecuter } from './UserUseCases-spec.executer';
 

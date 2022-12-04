@@ -1,8 +1,8 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
-import { IPokemonsRepository } from '../IPokemonsRepository';
-import { Pokemon } from '../typeorm/entities/Pokemon';
-import IPokemonPaginate from '../IPokemonPaginate';
+import { IPokemonsRepository } from '../domain/repositories/IPokemonsRepository';
+import { Pokemon } from '../infra/typeorm/entities/Pokemon';
+import IPokemonPaginate from '../domain/models/IPokemonPaginate';
 
 export interface IFilters {
   name: string | undefined;

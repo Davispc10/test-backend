@@ -1,6 +1,6 @@
 import { CreateUserUseCase } from '../CreateUser.use-case';
 import { InMemoryUsersRepository } from './inMemory/InMemoryUsersRepository';
-import { IUsersRepository } from '../../IUsersRepository';
+import { IUsersRepository } from '../../domain/repositories/IUsersRepository';
 import { FindUserByUsernameUseCase } from '../FindUserByUsername.use-case';
 import { FindUserByEmailUseCase } from '../FindUserByEmail.use-case';
 import AppError from '../../../../shared/errors/appError';

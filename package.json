@@ -9,12 +9,12 @@
   "scripts": {
     "test": "jest",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "migration:generate": "typeorm-ts-node-commonjs -d ./src/shared/typeorm/index.ts migration:generate ./src/shared/typeorm/migrations/default",
-    "migration:run": "typeorm-ts-node-commonjs -d ./src/shared/typeorm/index.ts migration:run"
+    "migration:generate": "typeorm-ts-node-commonjs -d src/shared/infra/typeorm/index.ts migration:generate ./src/shared/infra/typeorm/migrations/default",
+    "migration:run": "typeorm-ts-node-commonjs -d src/shared/infra/typeorm/index.ts migration:run"
   },
   "repository": {
     "type": "git",

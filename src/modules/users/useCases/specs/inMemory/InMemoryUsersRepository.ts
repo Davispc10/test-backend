@@ -1,11 +1,11 @@
-import { User } from '../../../typeorm/entities/User';
-import { ICreateUserDto } from '../../../dtos/ICreateUserDto';
-import { IUsersRepository } from '../../../IUsersRepository';
+import { User } from '../../../infra/typeorm/entities/User';
+import { ICreateUser } from '../../../domain/models/ICreateUser';
+import { IUsersRepository } from '../../../domain/repositories/IUsersRepository';
 
 export class InMemoryUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
-  async create({ username, email, password }: ICreateUserDto): Promise<User> {
+  async create({ username, email, password }: ICreateUser): Promise<User> {
     const user = new User();
     user.id = 1;
     user.username = username;

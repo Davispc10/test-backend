@@ -1,7 +1,7 @@
-import { Pokemon } from './src/modules/pokemons/typeorm/entities/Pokemon';
-import { PokemonsRepository } from './src/modules/pokemons/typeorm/repositories/PokemonsRepository';
+import { Pokemon } from './src/modules/pokemons/infra/typeorm/entities/Pokemon';
+import { PokemonsRepository } from './src/modules/pokemons/infra/typeorm/repositories/PokemonsRepository';
 import { inject, injectable } from 'tsyringe';
-import { IPokemonsRepository } from './src/modules/pokemons/IPokemonsRepository';
+import { IPokemonsRepository } from './src/modules/pokemons/domain/repositories/IPokemonsRepository';
 require('dotenv').config();
 
 const xlsx = require('xlsx');

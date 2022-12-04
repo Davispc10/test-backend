@@ -1,4 +1,4 @@
-import { IPokemonsRepository } from '../../IPokemonsRepository';
+import { IPokemonsRepository } from '../../domain/repositories/IPokemonsRepository';
 import { InMemoryPokemonsRepository } from './inMemory/InMemoryPokemonsRepository';
 import { FindPokemonsUseCase } from '../FindPokemons.use-case';
 

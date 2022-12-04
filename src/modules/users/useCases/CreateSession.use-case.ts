@@ -1,12 +1,12 @@
 import 'reflect-metadata';
-import { UsersRepository } from '../typeorm/repositories/UsersRepository';
-import { IUsersRepository } from '../IUsersRepository';
+import { UsersRepository } from '../infra/typeorm/repositories/UsersRepository';
+import { IUsersRepository } from '../domain/repositories/IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
 import { ILoginDto } from '../../auth/dtos/ILoginDto';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
-import { IUser } from '../dtos/IUser';
+import { IUser } from '../domain/models/IUser';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
 interface IResponse {

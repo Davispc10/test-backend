@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { UsersRepository } from '../typeorm/repositories/UsersRepository';
-import { ICreateUserDto } from '../dtos/ICreateUserDto';
-import { IUsersRepository } from '../IUsersRepository';
+import { UsersRepository } from '../infra/typeorm/repositories/UsersRepository';
+import { ICreateUser } from '../domain/models/ICreateUser';
+import { IUsersRepository } from '../domain/repositories/IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
-import { IUser } from '../dtos/IUser';
+import { IUser } from '../domain/models/IUser';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
 
@@ -21,7 +21,7 @@ export class CreateUserUseCase {
     username,
     email,
     password,
-  }: ICreateUserDto): Promise<IUser | unknown> {
+  }: ICreateUser): Promise<IUser | unknown> {
     const userAlreadyExists = await this.usersRepository.findUserByUsername(
       username,
     );
