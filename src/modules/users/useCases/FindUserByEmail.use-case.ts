@@ -18,10 +18,9 @@ export class FindUserByEmailUseCase {
       throw new AppError({
         message: `Email "${email}" not found.`,
         statusCode: 404,
-      })
+      });
     }
 
     return user;
   }
 }
-

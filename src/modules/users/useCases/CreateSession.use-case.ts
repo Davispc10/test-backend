@@ -7,8 +7,7 @@ import * as bcrypt from 'bcrypt';
 import { ILoginDto } from '../../auth/dtos/ILoginDto';
 import { sign } from 'jsonwebtoken';
 import { User } from '../typeorm/entities/User';
-import authConfig from '../../../config/auth'
-
+import authConfig from '../../../config/auth';
 
 interface IResponse {
   user: User;
@@ -26,23 +25,29 @@ export class CreateSessionUseCase {
     const user = await this.usersRepository.findUserByUsername(username);
 
     if (!user) {
-      throw new AppError({statusCode: 401, message: 'Username/password is incorrect.'})
+      throw new AppError({
+        statusCode: 401,
+        message: 'Username/password is incorrect.',
+      });
     }
 
     const passwordsMatches = bcrypt.compareSync(password, user.password);
 
     if (!passwordsMatches) {
-      throw new AppError({statusCode: 401, message: 'Username/password is incorrect.'});
+      throw new AppError({
+        statusCode: 401,
+        message: 'Username/password is incorrect.',
+      });
     }
 
     const access_token = sign({}, authConfig.jwt.secret, {
       subject: String(user.id),
-      expiresIn: authConfig.jwt.expiresIn
+      expiresIn: authConfig.jwt.expiresIn,
     });
 
     return {
       user,
-      access_token
-    }
-  };
+      access_token,
+    };
+  }
 }

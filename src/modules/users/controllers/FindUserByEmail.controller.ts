@@ -4,11 +4,9 @@ import { container } from 'tsyringe';
 import { FindUserByEmailUseCase } from '../useCases/FindUserByEmail.use-case';
 import CatchErrors from '../../decorators/CatchErrors.decorator';
 
-
 export class FindUserByEmailController {
   @CatchErrors
   async handle(request: Request, response: Response): Promise<Response> {
-
     const { email } = request.params;
 
     const findUserByEmailUseCase = container.resolve(FindUserByEmailUseCase);

@@ -10,8 +10,8 @@ export class FindPokemonsUseCaseExecuter {
   private page = 1;
   private limit = 15;
 
-  constructor() {
-    this.inMemoryPokemonsRepository = new InMemoryPokemonsRepository();
+  constructor(inMemoryPokemonsRepository: InMemoryPokemonsRepository) {
+    this.inMemoryPokemonsRepository = inMemoryPokemonsRepository;
     this.findPokemons = new FindPokemonsUseCase(
       this.inMemoryPokemonsRepository,
     );

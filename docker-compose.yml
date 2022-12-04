@@ -1,14 +1,15 @@
 services:
-#  app:
-#    build: .
-#    entrypoint: .docker/entrypoint.sh
-#    container_name: pokemon-app
-#    ports:
-#      - "3001:3001"
-#    volumes:
-#      - .:/home/node/app
-#    depends_on:
-#      - db
+  app:
+    build: .
+    entrypoint: .docker/entrypoint.sh
+    container_name: pokemon-app
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/home/node/app
+    depends_on:
+      - db
+      - redis
 
   db:
     build: .docker/postgres
@@ -25,6 +26,14 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: pokemon-redis
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
   # dbtest:
   #   build: .docker/postgres

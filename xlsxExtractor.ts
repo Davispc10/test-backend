@@ -2,6 +2,7 @@ import { Pokemon } from './src/modules/pokemons/typeorm/entities/Pokemon';
 import { PokemonsRepository } from './src/modules/pokemons/typeorm/repositories/PokemonsRepository';
 import { inject, injectable } from 'tsyringe';
 import { IPokemonsRepository } from './src/modules/pokemons/IPokemonsRepository';
+require('dotenv').config();
 
 const xlsx = require('xlsx');
 
@@ -80,8 +81,9 @@ export class XlsxExtractor {
 
   constructor(
     @inject('PokemonsRepository')
-    private pokemonsRepository: IPokemonsRepository) {
-    this.path = process.env.XLSX_PATH;
+    private pokemonsRepository: IPokemonsRepository,
+  ) {
+    this.path = String(process.env.XLSX_PATH);
     this.workbook = xlsx.readFile(this.path);
     this.worksheet = this.workbook.Sheets[this.workbook.SheetNames[0]];
   }

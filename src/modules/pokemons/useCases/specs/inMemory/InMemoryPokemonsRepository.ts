@@ -3,20 +3,13 @@ import {
   SearchParams,
 } from '../../../IPokemonsRepository';
 import { Pokemon } from '../../../typeorm/entities/Pokemon';
-import { XlsxExtractor } from '../../../../../../xlsxExtractor';
 import IPokemonPaginate from '../../../IPokemonPaginate';
 
 export class InMemoryPokemonsRepository implements IPokemonsRepository {
-  private extractor;
-  private pokemons: any[] = [];
+  public pokemons: any[] = [];
 
-  constructor() {
-    this.extractor = new XlsxExtractor('Pokemon Go.xlsx');
-    this.populate().then();
-  }
-
-  async populate() {
-    this.pokemons = await this.extractor.convertXlsxToJSON();
+  async populate(pokemons: any[]) {
+    this.pokemons = pokemons;
   }
 
   async findByPokedexNumber(
@@ -31,13 +24,12 @@ export class InMemoryPokemonsRepository implements IPokemonsRepository {
     { page, skip, take }: SearchParams,
     data: object | null,
   ): Promise<IPokemonPaginate | null | Pokemon[]> {
-    const result: IPokemonPaginate = {
+    return {
       total: 15,
       current_page: page,
       per_page: take,
       data: this.pokemons,
     };
-    return result;
   }
 
   async create(pokemon: Pokemon): Promise<Pokemon | undefined> {

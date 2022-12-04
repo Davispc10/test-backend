@@ -3,7 +3,6 @@ export interface AppErrorInput {
   statusCode: number;
 }
 
-
 export default class AppError extends Error {
   public readonly message: string;
   public readonly statusCode: number;
@@ -17,7 +16,7 @@ export default class AppError extends Error {
   public toJSON(): AppErrorInput {
     return {
       message: this.message,
-      statusCode: this.statusCode
-    }
+      statusCode: this.statusCode,
+    };
   }
 }

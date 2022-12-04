@@ -8,7 +8,8 @@ const pokemonsRoutes = Router();
 const findPokemonsController = new FindPokemonsController();
 
 pokemonsRoutes.get(
-  '/', isAuthenticated,
+  '/',
+  isAuthenticated,
   celebrate({
     [Segments.QUERY]: {
       name: Joi.string(),
@@ -19,8 +20,9 @@ pokemonsRoutes.get(
       weather: Joi.string(),
       page: Joi.number(),
       limit: Joi.number(),
-    }
+    },
   }),
-  findPokemonsController.handle);
+  findPokemonsController.handle,
+);
 
 export { pokemonsRoutes };

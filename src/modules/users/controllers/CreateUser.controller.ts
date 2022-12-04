@@ -5,7 +5,6 @@ import { CreateUserUseCase } from '../useCases/CreateUser.use-case';
 import CatchErrors from '../../decorators/CatchErrors.decorator';
 
 export class CreateUserController {
-
   @CatchErrors
   async handle(request: Request, response: Response): Promise<Response> {
     const { username, email, password } = request.body;

@@ -8,7 +8,7 @@ import { container } from 'tsyringe';
 dataSource.initialize().then(() => {
   const server = app.listen(process.env.APP_PORT || 3001, () => {
     console.log(`Server started on port ${process.env.APP_PORT}`);
-    const extractor = container.resolve(XlsxExtractor)
+    const extractor = container.resolve(XlsxExtractor);
     extractor.convertXlsxToJSON();
     extractor.populateDatabase();
   });

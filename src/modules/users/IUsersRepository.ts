@@ -1,8 +1,8 @@
-import { User } from './typeorm/entities/User';
+import { IUser } from './dtos/IUser';
 
 export interface IUsersRepository {
-  create({ username, email, password }): Promise<User | undefined>;
-  findUserByUsername(username: string): Promise<User | undefined>;
-  findUserByEmail(email: string): Promise<User | undefined>;
+  create({ username, email, password }): Promise<IUser | undefined>;
+  findUserByUsername(username: string): Promise<IUser | undefined>;
+  findUserByEmail(email: string): Promise<IUser | undefined>;
   resetDataCache(): void;
 }

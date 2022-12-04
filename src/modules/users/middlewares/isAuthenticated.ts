@@ -1,17 +1,20 @@
 import { NextFunction, Request, Response } from 'express';
 import AppError from '../../../shared/errors/appError';
-import authConfig from '../../../config/auth'
+import authConfig from '../../../config/auth';
 import { verify } from 'jsonwebtoken';
 
-
-export default function isAuthenticated(request: Request, response: Response, next: NextFunction): void  {
+export default function isAuthenticated(
+  request: Request,
+  response: Response,
+  next: NextFunction,
+): void {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
     throw new AppError({
       message: 'Empty header.',
       statusCode: 401,
-    })
+    });
   }
 
   const [, access_token] = authHeader.split(' ');
@@ -23,7 +26,7 @@ export default function isAuthenticated(request: Request, response: Response, ne
   } catch {
     throw new AppError({
       message: 'Invalid token.',
-      statusCode: 401
-    })
+      statusCode: 401,
+    });
   }
 }
