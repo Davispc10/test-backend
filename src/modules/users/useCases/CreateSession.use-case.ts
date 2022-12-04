@@ -6,7 +6,6 @@ import { inject, injectable } from 'tsyringe';
 import * as bcrypt from 'bcrypt';
 import { ILoginDto } from '../../auth/dtos/ILoginDto';
 import { sign } from 'jsonwebtoken';
-import { User } from '../typeorm/entities/User';
 import authConfig from '../../../config/auth';
 import { IUser } from '../dtos/IUser';
 
@@ -41,7 +40,7 @@ export class CreateSessionUseCase {
       });
     }
 
-    const access_token = sign({}, authConfig.jwt.secret, {
+    const access_token = sign({}, authConfig.jwt.secret as string, {
       subject: String(user.id),
       expiresIn: authConfig.jwt.expiresIn,
     });

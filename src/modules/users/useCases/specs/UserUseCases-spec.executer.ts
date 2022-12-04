@@ -4,22 +4,24 @@ import { IUsersRepository } from '../../IUsersRepository';
 import { FindUserByUsernameUseCase } from '../FindUserByUsername.use-case';
 import { FindUserByEmailUseCase } from '../FindUserByEmail.use-case';
 import AppError from '../../../../shared/errors/appError';
+import { CreateSessionUseCase } from '../CreateSession.use-case';
 
 export class UserUseCasesSpecExecuter {
   private readonly inMemoryUserRepository: IUsersRepository;
+  private createSession: CreateSessionUseCase;
   private createUser: CreateUserUseCase;
   private findUsername: FindUserByUsernameUseCase;
   private findEmail: FindUserByEmailUseCase;
   private user: any;
   private response: any;
+  private credentials: any
 
   constructor() {
     this.inMemoryUserRepository = new InMemoryUsersRepository();
     this.createUser = new CreateUserUseCase(this.inMemoryUserRepository);
-    this.findUsername = new FindUserByUsernameUseCase(
-      this.inMemoryUserRepository,
-    );
+    this.findUsername = new FindUserByUsernameUseCase(this.inMemoryUserRepository);
     this.findEmail = new FindUserByEmailUseCase(this.inMemoryUserRepository);
+    this.createSession = new CreateSessionUseCase(this.inMemoryUserRepository);
   }
 
   resetDataCache() {
@@ -32,8 +34,33 @@ export class UserUseCasesSpecExecuter {
     this.user = {
       username: 'username123',
       email: 'email123',
-      saltedHash: 'Password123',
+      password: 'Password123',
     };
+  }
+
+  setCorrectCredentials() {
+    this.credentials = {
+      username: this.user.username,
+      password: this.user.password
+    }
+  }
+
+  setWrongUsername() {
+    this.credentials = {
+      username: 'wrong username',
+      password: this.user.password
+    }
+  }
+
+  setWrongPassword() {
+    this.credentials = {
+      username: this.user.username,
+      password: 'wrong password'
+    }
+  }
+
+  async signIn() {
+    this.response = await this.createSession.execute(this.credentials)
   }
 
   async createNewUser() {
@@ -50,7 +77,18 @@ export class UserUseCasesSpecExecuter {
 
   async assertResponseIsUser() {
     expect(this.response.username).toEqual(this.user.username);
-    expect(this.response.id).toBeTruthy();
+  }
+
+  async assertResponseIsAccessToken() {
+    expect(this.response).toHaveProperty('access_token')
+  }
+
+  async assertResponseIsUnauthorized() {
+    try {
+      await this.createSession.execute(this.credentials);
+    } catch (e) {
+      expect(e).toBeInstanceOf(AppError)
+    }
   }
 
   async assertResponseIsConflict() {
