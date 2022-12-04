@@ -4,15 +4,24 @@ import { container } from 'tsyringe';
 import { FindUserByUsernameUseCase } from '../useCases/FindUserByUsername.use-case';
 
 export class FindUserByUsernameController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { username } = request.params;
 
     const findUserByUsernameUseCase = container.resolve(
       FindUserByUsernameUseCase,
     );
 
-    const user = await findUserByUsernameUseCase.execute(username);
+    try {
 
-    return response.status(200).json(user);
+      const user = await findUserByUsernameUseCase.execute(username);
+      return response.status(200).json(user);
+
+    } catch (error) {
+
+      response.status(error.statusCode).json({
+        message: error.message,
+        statusCode: error.statusCode
+      })
+    }
   }
 }

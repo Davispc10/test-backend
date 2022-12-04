@@ -8,12 +8,22 @@ export class SessionsController {
 
     const createSession = container.resolve(CreateSessionUseCase);
 
-    const user = await createSession.execute({
-      username,
-      password
-    });
 
-    return response.json(user);
+    try {
+      const user = await createSession.execute({
+        username,
+        password
+      });
+
+      return response.json(user);
+    } catch (error) {
+
+      response.status(error.statusCode).json({
+        message: error.message,
+        statusCode: error.statusCode
+      })
+    }
+
 
   }
 }

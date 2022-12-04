@@ -6,7 +6,7 @@ import {
 } from '../useCases/FindPokemons.use-case';
 
 export class FindPokemonsController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const page = request.query.page ? Number(request.query.page) : 1;
     const limit = request.query.limit ? Number(request.query.limit) : 15;
 
@@ -28,9 +28,16 @@ export class FindPokemonsController {
       type1: type1,
       weather1: weather,
     };
+    try {
+      const pokemons = await findPokemonsUseCase.execute({ page, limit }, data);
 
-    const pokemons = await findPokemonsUseCase.execute({ page, limit }, data);
+      return response.status(200).json(pokemons);
+    } catch (error) {
 
-    return response.status(200).json(pokemons);
+      response.status(error.statusCode).json({
+        message: error.message,
+        statusCode: error.statusCode
+      })
+    }
   }
 }

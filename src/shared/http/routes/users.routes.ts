@@ -4,6 +4,7 @@ import { FindUserByUsernameController } from '../../../modules/users/controllers
 import { FindUserByEmailController } from '../../../modules/users/controllers/FindUserByEmail.controller';
 import { celebrate, Joi, Segments } from 'celebrate'
 import isAuthenticated from '../../../modules/users/middlewares/isAuthenticated';
+import errorHandler from '../../../modules/users/middlewares/error.handler';
 
 const usersRoutes = Router();
 

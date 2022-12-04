@@ -13,4 +13,11 @@ export default class AppError extends Error {
     this.message = appErrorInput.message;
     this.statusCode = appErrorInput.statusCode;
   }
+
+  public toJSON(): AppErrorInput {
+    return {
+      message: this.message,
+      statusCode: this.statusCode
+    }
+  }
 }
