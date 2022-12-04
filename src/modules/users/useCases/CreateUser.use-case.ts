@@ -4,8 +4,8 @@ import { ICreateUserDto } from '../dtos/ICreateUserDto';
 import { IUsersRepository } from '../IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
-import * as bcrypt from 'bcrypt';
 import { IUser } from '../dtos/IUser';
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
 
 @injectable()
@@ -13,6 +13,8 @@ export class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: Omit<IUsersRepository, 'resetDataCache'>,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   async execute({
@@ -35,7 +37,7 @@ export class CreateUserUseCase {
       });
     }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = await this.hashProvider.generateHash(password);
 
     return await this.usersRepository.create({
       username,

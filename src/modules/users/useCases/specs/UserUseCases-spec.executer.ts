@@ -5,9 +5,11 @@ import { FindUserByUsernameUseCase } from '../FindUserByUsername.use-case';
 import { FindUserByEmailUseCase } from '../FindUserByEmail.use-case';
 import AppError from '../../../../shared/errors/appError';
 import { CreateSessionUseCase } from '../CreateSession.use-case';
+import BcryptHashProvider from '../../providers/HashProvider/implementations/BcryptHashProvider';
 
 export class UserUseCasesSpecExecuter {
   private readonly inMemoryUserRepository: IUsersRepository;
+  private readonly HashProvider: BcryptHashProvider;
   private createSession: CreateSessionUseCase;
   private createUser: CreateUserUseCase;
   private findUsername: FindUserByUsernameUseCase;
@@ -16,12 +18,14 @@ export class UserUseCasesSpecExecuter {
   private response: any;
   private credentials: any
 
+
   constructor() {
     this.inMemoryUserRepository = new InMemoryUsersRepository();
-    this.createUser = new CreateUserUseCase(this.inMemoryUserRepository);
+    this.HashProvider = new BcryptHashProvider()
+    this.createUser = new CreateUserUseCase(this.inMemoryUserRepository, this.HashProvider);
     this.findUsername = new FindUserByUsernameUseCase(this.inMemoryUserRepository);
     this.findEmail = new FindUserByEmailUseCase(this.inMemoryUserRepository);
-    this.createSession = new CreateSessionUseCase(this.inMemoryUserRepository);
+    this.createSession = new CreateSessionUseCase(this.inMemoryUserRepository, this.HashProvider);
   }
 
   resetDataCache() {

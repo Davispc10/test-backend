@@ -3,11 +3,11 @@ import { UsersRepository } from '../typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '../IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
-import * as bcrypt from 'bcrypt';
 import { ILoginDto } from '../../auth/dtos/ILoginDto';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
 import { IUser } from '../dtos/IUser';
+import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
 interface IResponse {
   user: IUser;
@@ -19,6 +19,8 @@ export class CreateSessionUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: Omit<IUsersRepository, 'resetDataCache'>,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   async execute({ username, password }: ILoginDto): Promise<IResponse> {
@@ -31,7 +33,7 @@ export class CreateSessionUseCase {
       });
     }
 
-    const passwordsMatches = bcrypt.compareSync(password, user.saltedHash);
+    const passwordsMatches = await this.hashProvider.compareHash(password, user.saltedHash)
 
     if (!passwordsMatches) {
       throw new AppError({
