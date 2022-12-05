@@ -1,33 +1,43 @@
 # Teste Dinheirow - Engenheiro de Software
+- - -
+## Implementação
 
-Olá Dev! Tudo bem?
+- Para a criação da API foi utilizado o framework Express.js;
+- Para facilitar a comunicação com o banco de dados foi utilizado o TypeORM;
+- Banco de Dados: PostgreSQL;
+- Para assegurar a segurança da API, todas as rotas de informações requerem authenticação por JWT;
+- Para regular a quantidade de acessos, foi utilizado um Rate Limiter para 100 requisições por IP a cada 15 minutos;
+- A Aplicação, o Banco de Dados e o PgAdmin4 rodam dentro de containares Docker;
+- Para ver rotas e schemas, utilize o swagger em "localhost:3001/docs".
+- - -
+## Design
 
-Nós estamos sempre em busca de profissionais interessantes e interessados, com boa capacidade de aprendizado, adaptação e principalmente bom senso!
+A aplicação foi projetada em uma estrutura que evita o acoplamento com as tecnologias utilizadas,
+sendo essa estrutura de pastas feita da seguinte forma:
 
-Este teste tem como objetivo avaliar e desafiar você. Não é obrigatório realizá-lo completamente, queremos apenas reconhecer seu esforço e potencial para aprender, se adaptar e tomar decisões.
+- *config*: Configurações de bibliotecas externas, neste caso o JWT;
+- *modules*: Envolve os componentes macroscópicos da aplicação, Pokemon e Users;
+- *shared*: Código de uso geral, compartilhado com mais de um módulo da aplicação;
+- *domain*: Camada onde estão todas as regras de negócio e os protocolos que definem a estrutura necessária para seguir
+o que foi definido pelo cliente;
+- *infra*: Camada que guarda tudo aquilo que é relacionado à infraestrutura;
+- *useCases*: Ficam dentro de cada módulo, abrangendo os casos de uso da aplicação;
 
-Vamos ao teste!
+Os testes da aplicação abrangem todos os useCases e foram implementados utilizando o Jest e foram projetados na
+seguinte estrutura:
 
-## Desafio Pokémon Go!
+- *specs*: Guardam os *scenarios* da aplicação, onde os testes são definidos de maneira abstrata se aproximando ao
+máximo da linguagem do domínio;
+- *executers*: Traduzem a linguagem abstrata dos *specs* e executa os testes utilizando um repositório fake;
+- *FakeRepository*: um repositório fake que simula um repositório real, permitindo que os testes de useCases sejam
+testados de forma mais isolada;
+- --
 
-Sua missão é importar os dados do Pokemon Go, que estão no excel, e criar uma API usando NodeJS para que possamos consumir estes dados de maneira prática, rápida e automatizada.
+## Entity Relation Diagram
+![entity-relational-diagram](docs/ERD.png)
+- - -
+## Rodando a aplicação
 
-Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca, paginação e filtros. Fique à vontade para decidir quais filtros são mais interessantes.
+Como a aplicação está no docker-compose, basta configurar as variáveis de ambiente
+seguindo o modelo do arquivo ".env.example" e rodar o docker compose.
 
-## Tecnologias
-
-- Conceitos de API RESTful
-- Modelagem de dados
-- NodeJS
-- Algum banco de dados, por exemplo, MySQL, SQL Server, MongoDB, etc...
-- Git
-
-## Por onde começo?
-Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
-
-Após terminar o desafio, você pode solicitar um pull request para a branch master do nosso repositório. Vamos receber e fazer a avaliação de todos.
-
-## Só isso?
-Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário e conceitos de segurança e padrões SOLID para execução do projeto.
-
-Boa sorte! :)
