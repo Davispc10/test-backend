@@ -26,29 +26,6 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
 
-#  redis:
-#    image: 'bitnami/redis:latest'
-#    container_name: pokemon-redis
-#    ports:
-#      - "6379:6379"
-#    environment:
-#      - ALLOW_EMPTY_PASSWORD=yes
-
-  # dbtest:
-  #   build: .docker/postgres
-  #   container_name: pokemon-test-db
-  #   restart: always
-  #   tty: true
-  #   ports:
-  #     - "5433:5432"
-  #   volumes:
-  #     - .docker/dbdatatest:/var/lib/postgresql/data
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - POSTGRES_USER=${POSTGRES_USER}
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-
   pgadmin:
     image: dpage/pgadmin4
     container_name: pokemon-pgadmin

@@ -1,10 +1,12 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "a",
-    "description": "a",
+    "title": "Pokemon Go",
+    "description": "Essa aplicação foi feita por **Arthur Gabriel**.",
     "contact": {
-      "email": "a"
+      "name": "Arthur Gabriel",
+      "email": "**arthurgabriel73@gmail.com**",
+      "url": "https://www.linkedin.com/in/arthurgabriel73/"
     },
     "version": "1.0.0"
   },
@@ -229,6 +231,38 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "CreateUser": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": " New username"
+          },
+          "email": {
+            "type": "string",
+            "description": "New email"
+          },
+          "password": {
+            "type": "string",
+            "description": "New password"
+          }
+        }
+      },
+      "SignIn": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Your username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Your password"
+          }
+        }
       }
     }
   }
