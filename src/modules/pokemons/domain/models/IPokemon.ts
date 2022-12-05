@@ -1,5 +1,4 @@
 export interface IPokemon {
-
   information: {
     name: string;
     pokedexNumber: number;
@@ -9,7 +8,7 @@ export interface IPokemon {
     evolved: number;
     familyId: number;
     crossGen: number;
-  }
+  };
 
   type_weather: {
     pokedexNumber: number;
@@ -17,7 +16,7 @@ export interface IPokemon {
     type2: string;
     weather1: string;
     weather2: string;
-  }
+  };
 
   fighting_attributes: {
     pokedexNumber: number;
@@ -27,7 +26,7 @@ export interface IPokemon {
     sta: number;
     cp100e40: number;
     cp100e39: number;
-  }
+  };
 
   additional_information: {
     pokedexNumber: number;
@@ -42,5 +41,5 @@ export interface IPokemon {
     new: number;
     notGettable: number;
     futureEvolve: number;
-  }
+  };
 }

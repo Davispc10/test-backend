@@ -6,13 +6,9 @@ import { inject, injectable } from 'tsyringe';
 import { ISignIn } from '../domain/models/ISignIn';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../../config/auth';
-import { IUser } from '../domain/models/IUser';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
+import { IUserWithToken } from '../domain/models/IUserWithToken';
 
-interface IResponse {
-  user: IUser;
-  access_token: string;
-}
 
 @injectable()
 export class CreateSessionUseCase {
@@ -23,7 +19,7 @@ export class CreateSessionUseCase {
     private hashProvider: IHashProvider,
   ) {}
 
-  async execute({ username, password }: ISignIn): Promise<IResponse> {
+  async execute({ username, password }: ISignIn): Promise<IUserWithToken> {
     const user = await this.usersRepository.findUserByUsername(username);
 
     if (!user) {
@@ -33,7 +29,10 @@ export class CreateSessionUseCase {
       });
     }
 
-    const passwordsMatches = await this.hashProvider.compareHash(password, user.saltedHash)
+    const passwordsMatches = await this.hashProvider.compareHash(
+      password,
+      user.saltedHash,
+    );
 
     if (!passwordsMatches) {
       throw new AppError({

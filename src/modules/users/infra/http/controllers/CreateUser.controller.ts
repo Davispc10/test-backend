@@ -5,7 +5,6 @@ import { CreateUserUseCase } from '../../../useCases/CreateUser.use-case';
 import CatchErrors from '../../../../../shared/decorators/CatchErrors.decorator';
 import { instanceToPlain } from 'class-transformer';
 
-
 export class CreateUserController {
   @CatchErrors
   async handle(request: Request, response: Response): Promise<Response> {

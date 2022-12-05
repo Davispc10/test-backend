@@ -8,7 +8,6 @@ import { FightingAttributes } from '../../modules/pokemons/infra/typeorm/entitie
 import { AdditionalInformation } from '../../modules/pokemons/infra/typeorm/entities/AdditionalInformation';
 require('dotenv').config();
 
-
 const xlsx = require('xlsx');
 
 const columns = {
@@ -105,16 +104,16 @@ export class XlsxExtractor {
 
     //@ts-ignore
     data.map(row => {
-      this.information = new Information()
-      this.type_weather = new TypeWeather()
-      this.fighting_attributes = new FightingAttributes()
-      this.additional_information = new AdditionalInformation()
+      this.information = new Information();
+      this.type_weather = new TypeWeather();
+      this.fighting_attributes = new FightingAttributes();
+      this.additional_information = new AdditionalInformation();
 
       this.pokemon = new Pokemon();
-      this.pokemon.information = this.information
-      this.pokemon.type_weather = this.type_weather
-      this.pokemon.fighting_attributes = this.fighting_attributes
-      this.pokemon.additional_information = this.additional_information
+      this.pokemon.information = this.information;
+      this.pokemon.type_weather = this.type_weather;
+      this.pokemon.fighting_attributes = this.fighting_attributes;
+      this.pokemon.additional_information = this.additional_information;
 
       for (let i = 1; i <= 29; i++) {
         if (i <= 8) {
@@ -125,7 +124,7 @@ export class XlsxExtractor {
             //@ts-ignore
             this.type_weather[pokemonsAttributes[i]] = row[columns[i + 1]];
           } else {
-            if (i <= 16 || (i >= 28 && i <= 29) ) {
+            if (i <= 16 || (i >= 28 && i <= 29)) {
               //@ts-ignore
               this.fighting_attributes[pokemonsAttributes[i]] = row[columns[i + 1]];
             } else {
@@ -138,17 +137,17 @@ export class XlsxExtractor {
         }
 
         if (i === 29) {
-          const pokedexNumber = this.pokemon.information.pokedexNumber
-          this.pokemon.information = this.information
+          const pokedexNumber = this.pokemon.information.pokedexNumber;
+          this.pokemon.information = this.information;
 
-          this.pokemon.type_weather = this.type_weather
-          this.pokemon.type_weather.pokedexNumber = pokedexNumber
+          this.pokemon.type_weather = this.type_weather;
+          this.pokemon.type_weather.pokedexNumber = pokedexNumber;
 
-          this.pokemon.fighting_attributes = this.fighting_attributes
-          this.pokemon.fighting_attributes.pokedexNumber = pokedexNumber
+          this.pokemon.fighting_attributes = this.fighting_attributes;
+          this.pokemon.fighting_attributes.pokedexNumber = pokedexNumber;
 
-          this.pokemon.additional_information = this.additional_information
-          this.pokemon.additional_information.pokedexNumber = pokedexNumber
+          this.pokemon.additional_information = this.additional_information;
+          this.pokemon.additional_information.pokedexNumber = pokedexNumber;
 
           this.pokemons.push(this.pokemon);
           this.pokemon = new Pokemon();

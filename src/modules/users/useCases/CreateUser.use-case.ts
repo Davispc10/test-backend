@@ -7,7 +7,6 @@ import { inject, injectable } from 'tsyringe';
 import { IUser } from '../domain/models/IUser';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 
-
 @injectable()
 export class CreateUserUseCase {
   constructor(
@@ -17,11 +16,7 @@ export class CreateUserUseCase {
     private hashProvider: IHashProvider,
   ) {}
 
-  async execute({
-    username,
-    email,
-    password,
-  }: ICreateUser): Promise<IUser | unknown> {
+  async execute({ username, email, password }: ICreateUser): Promise<IUser> {
     const userAlreadyExists = await this.usersRepository.findUserByUsername(
       username,
     );

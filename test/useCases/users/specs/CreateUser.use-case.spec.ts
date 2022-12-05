@@ -1,16 +1,15 @@
-import { CreateUserUseCase } from '../../../../src/modules/users/useCases/CreateUser.use-case';
 import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
 import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-let inMemoryUserRepository: IUsersRepository;
+let fakeUserRepository: IUsersRepository;
 
 describe('Create User', () => {
   const createUserExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
     createUserExecuter.resetDataCache();
-    inMemoryUserRepository = new FakeUsersRepository();
+    fakeUserRepository = new FakeUsersRepository();
   });
 
   it('should be able to create a new user', async () => {

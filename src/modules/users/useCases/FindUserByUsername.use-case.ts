@@ -3,7 +3,6 @@ import { UsersRepository } from '../infra/typeorm/repositories/UsersRepository';
 import { IUsersRepository } from '../domain/repositories/IUsersRepository';
 import AppError from '../../../shared/errors/appError';
 import { inject, injectable } from 'tsyringe';
-import { User } from '../infra/typeorm/entities/User';
 import { IUser } from '../domain/models/IUser';
 
 @injectable()
@@ -22,6 +21,6 @@ export class FindUserByUsernameUseCase {
         statusCode: 404,
       });
     }
-    return user
+    return user;
   }
 }

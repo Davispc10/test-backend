@@ -17,7 +17,4 @@ container.registerSingleton<IPokemonsRepository>(
   PokemonsRepository,
 );
 
-container.registerSingleton<IHashProvider>(
-  'HashProvider',
-  BcryptHashProvider
-);
+container.registerSingleton<IHashProvider>('HashProvider', BcryptHashProvider);

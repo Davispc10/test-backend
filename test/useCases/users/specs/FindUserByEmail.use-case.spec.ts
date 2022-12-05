@@ -2,14 +2,14 @@ import { IUsersRepository } from '../../../../src/modules/users/domain/repositor
 import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-let inMemoryUserRepository: IUsersRepository;
+let fakeUsersRepository: IUsersRepository;
 
 describe('Find User By Email', () => {
   const findUserExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
     findUserExecuter.resetDataCache();
-    inMemoryUserRepository = new FakeUsersRepository();
+    fakeUsersRepository = new FakeUsersRepository();
   });
 
   it('should be able to find an user by his email', async () => {

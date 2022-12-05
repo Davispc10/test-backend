@@ -16,16 +16,21 @@ export class UserUseCasesSpecExecuter {
   private findEmail: FindUserByEmailUseCase;
   private user: any;
   private response: any;
-  private credentials: any
-
+  private credentials: any;
 
   constructor() {
     this.fakeUserRepository = new FakeUsersRepository();
-    this.HashProvider = new BcryptHashProvider()
-    this.createUser = new CreateUserUseCase(this.fakeUserRepository, this.HashProvider);
+    this.HashProvider = new BcryptHashProvider();
+    this.createUser = new CreateUserUseCase(
+      this.fakeUserRepository,
+      this.HashProvider,
+    );
     this.findUsername = new FindUserByUsernameUseCase(this.fakeUserRepository);
     this.findEmail = new FindUserByEmailUseCase(this.fakeUserRepository);
-    this.createSession = new CreateSessionUseCase(this.fakeUserRepository, this.HashProvider);
+    this.createSession = new CreateSessionUseCase(
+      this.fakeUserRepository,
+      this.HashProvider,
+    );
   }
 
   resetDataCache() {
@@ -45,26 +50,26 @@ export class UserUseCasesSpecExecuter {
   setCorrectCredentials() {
     this.credentials = {
       username: this.user.username,
-      password: this.user.password
-    }
+      password: this.user.password,
+    };
   }
 
   setWrongUsername() {
     this.credentials = {
       username: 'wrong username',
-      password: this.user.password
-    }
+      password: this.user.password,
+    };
   }
 
   setWrongPassword() {
     this.credentials = {
       username: this.user.username,
-      password: 'wrong password'
-    }
+      password: 'wrong password',
+    };
   }
 
   async signIn() {
-    this.response = await this.createSession.execute(this.credentials)
+    this.response = await this.createSession.execute(this.credentials);
   }
 
   async createNewUser() {
@@ -84,14 +89,14 @@ export class UserUseCasesSpecExecuter {
   }
 
   async assertResponseIsAccessToken() {
-    expect(this.response).toHaveProperty('access_token')
+    expect(this.response).toHaveProperty('access_token');
   }
 
   async assertResponseIsUnauthorized() {
     try {
       await this.createSession.execute(this.credentials);
     } catch (e) {
-      expect(e).toBeInstanceOf(AppError)
+      expect(e).toBeInstanceOf(AppError);
     }
   }
 

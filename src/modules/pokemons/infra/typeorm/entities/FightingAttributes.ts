@@ -1,6 +1,5 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-
 @Entity('FightingAttributes')
 export class FightingAttributes {
   @PrimaryColumn()

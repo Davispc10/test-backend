@@ -1,8 +1,8 @@
-import { Pokemon } from '../../infra/typeorm/entities/Pokemon';
+import { IPokemon } from './IPokemon';
 
 export default interface IPokemonPaginate {
   per_page: number;
   total: number;
   current_page: number;
-  data: Pokemon[];
+  data: IPokemon[] | null;
 }

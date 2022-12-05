@@ -2,14 +2,14 @@ import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
 import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-let inMemoryUserRepository: IUsersRepository;
+let fakeUserRepository: IUsersRepository;
 
 describe('Create User', () => {
   const createSessionExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
     createSessionExecuter.resetDataCache();
-    inMemoryUserRepository = new FakeUsersRepository();
+    fakeUserRepository = new FakeUsersRepository();
   });
 
   it('should return access token when input is correct credentials', async () => {
@@ -19,7 +19,7 @@ describe('Create User', () => {
     await createSessionExecuter.setCorrectCredentials();
 
     // Act
-    await createSessionExecuter.signIn()
+    await createSessionExecuter.signIn();
 
     // Assert
     await createSessionExecuter.assertResponseIsAccessToken();

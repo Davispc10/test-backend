@@ -12,9 +12,7 @@ export class FindPokemonsUseCaseExecuter {
 
   constructor(fakePokemonsRepository: FakePokemonsRepository) {
     this.fakePokemonsRepository = fakePokemonsRepository;
-    this.findPokemons = new FindPokemonsUseCase(
-      this.fakePokemonsRepository,
-    );
+    this.findPokemons = new FindPokemonsUseCase(this.fakePokemonsRepository);
   }
 
   resetDataCache() {

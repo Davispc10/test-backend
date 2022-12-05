@@ -1,6 +1,7 @@
 import { Pokemon } from '../../infra/typeorm/entities/Pokemon';
 import IPokemonPaginate from '../models/IPokemonPaginate';
 import { IFilters } from '../../useCases/FindPokemons.use-case';
+import { IPokemon } from '../models/IPokemon';
 
 export type SearchParams = {
   page: number;
@@ -9,12 +10,10 @@ export type SearchParams = {
 };
 
 export interface IPokemonsRepository {
-  create(pokemon: Pokemon): Promise<Pokemon | undefined>;
+  create(pokemon: Pokemon): Promise<IPokemon>;
   findPokemons(
     { page, skip, take }: SearchParams,
     data: IFilters | null,
-  ): Promise<Pokemon[] | IPokemonPaginate | null>;
-  findByPokedexNumber(
-    pokedexNumber: number,
-  ): Promise<Pokemon | undefined | null>;
+  ): Promise<IPokemonPaginate>;
+  findByPokedexNumber(pokedexNumber: number): Promise<IPokemon | null>;
 }
