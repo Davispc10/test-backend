@@ -1,15 +1,11 @@
-import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
-import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-let fakeUsersRepository: IUsersRepository;
 
 describe('Find User By Username', () => {
   const findUserExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
     findUserExecuter.resetDataCache();
-    fakeUsersRepository = new FakeUsersRepository();
   });
 
   it('should be able to find an user by his username', async () => {

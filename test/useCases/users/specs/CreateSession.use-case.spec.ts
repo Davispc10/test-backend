@@ -1,15 +1,11 @@
-import { FakeUsersRepository } from '../FakeRepository/FakeUsersRepository';
-import { IUsersRepository } from '../../../../src/modules/users/domain/repositories/IUsersRepository';
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-let fakeUserRepository: IUsersRepository;
 
 describe('Create User', () => {
   const createSessionExecuter = new UserUseCasesSpecExecuter();
 
   beforeEach(() => {
     createSessionExecuter.resetDataCache();
-    fakeUserRepository = new FakeUsersRepository();
   });
 
   it('should return access token when input is correct credentials', async () => {
