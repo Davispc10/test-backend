@@ -11,9 +11,6 @@ export type SearchParams = {
 
 export interface IPokemonsRepository {
   create(pokemon: Pokemon): Promise<IPokemon>;
-  findPokemons(
-    { page, skip, take }: SearchParams,
-    data: IFilters | null,
-  ): Promise<IPokemonPaginate>;
+  findPokemons({ page, skip, take }: SearchParams, data: IFilters | null): Promise<IPokemonPaginate>;
   findByPokedexNumber(pokedexNumber: number): Promise<IPokemon | null>;
 }

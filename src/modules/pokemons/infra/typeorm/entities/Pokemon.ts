@@ -19,17 +19,11 @@ export class Pokemon implements IPokemon {
   @JoinColumn()
   type_weather: TypeWeather;
 
-  @OneToOne(
-    () => FightingAttributes,
-    fighting_attributes => fighting_attributes.pokedexNumber,
-  )
+  @OneToOne(() => FightingAttributes, fighting_attributes => fighting_attributes.pokedexNumber)
   @JoinColumn()
   fighting_attributes: FightingAttributes;
 
-  @OneToOne(
-    () => AdditionalInformation,
-    additional_information => additional_information.pokedexNumber,
-  )
+  @OneToOne(() => AdditionalInformation, additional_information => additional_information.pokedexNumber)
   @JoinColumn()
   additional_information: AdditionalInformation;
 }

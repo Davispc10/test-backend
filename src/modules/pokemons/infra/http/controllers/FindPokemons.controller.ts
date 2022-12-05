@@ -1,9 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import {
-  FindPokemonsUseCase,
-  IFilters,
-} from '../../../useCases/FindPokemons.use-case';
+import { FindPokemonsUseCase, IFilters } from '../../../useCases/FindPokemons.use-case';
 import CatchErrors from '../../../../../shared/decorators/CatchErrors.decorator';
 
 export class FindPokemonsController {
@@ -12,14 +9,7 @@ export class FindPokemonsController {
     const page = request.query.page ? Number(request.query.page) : 1;
     const limit = request.query.limit ? Number(request.query.limit) : 15;
 
-    const {
-      name,
-      pokedexNumber,
-      generation,
-      legendary,
-      type1,
-      weather,
-    }: IFilters = request.query;
+    const { name, pokedexNumber, generation, legendary, type1, weather }: IFilters = request.query;
     const findPokemonsUseCase = container.resolve(FindPokemonsUseCase);
 
     const data: IFilters = {

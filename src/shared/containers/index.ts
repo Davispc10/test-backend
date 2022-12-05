@@ -7,14 +7,8 @@ import { PokemonsRepository } from '../../modules/pokemons/infra/typeorm/reposit
 import { IHashProvider } from '../../modules/users/providers/HashProvider/models/IHashProvider';
 import BcryptHashProvider from '../../modules/users/providers/HashProvider/implementations/BcryptHashProvider';
 
-container.registerSingleton<IUsersRepository>(
-  'UsersRepository',
-  UsersRepository,
-);
+container.registerSingleton<IUsersRepository>('UsersRepository', UsersRepository);
 
-container.registerSingleton<IPokemonsRepository>(
-  'PokemonsRepository',
-  PokemonsRepository,
-);
+container.registerSingleton<IPokemonsRepository>('PokemonsRepository', PokemonsRepository);
 
 container.registerSingleton<IHashProvider>('HashProvider', BcryptHashProvider);

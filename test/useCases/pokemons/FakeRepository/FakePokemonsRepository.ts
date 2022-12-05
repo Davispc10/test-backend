@@ -14,15 +14,10 @@ export class FakePokemonsRepository implements IPokemonsRepository {
   }
 
   async findByPokedexNumber(pokedexNumber: number): Promise<IPokemon> {
-    return this.pokemons.find(
-      pokemon => pokemon.pokedexNumber === pokedexNumber,
-    );
+    return this.pokemons.find(pokemon => pokemon.pokedexNumber === pokedexNumber);
   }
 
-  async findPokemons(
-    { page, skip, take }: SearchParams,
-    data: object | null,
-  ): Promise<IPokemonPaginate> {
+  async findPokemons({ page, skip, take }: SearchParams, data: object | null): Promise<IPokemonPaginate> {
     return {
       total: 15,
       current_page: page,

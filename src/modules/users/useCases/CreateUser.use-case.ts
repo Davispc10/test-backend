@@ -17,13 +17,9 @@ export class CreateUserUseCase {
   ) {}
 
   async execute({ username, email, password }: ICreateUser): Promise<IUser> {
-    const userAlreadyExists = await this.usersRepository.findUserByUsername(
-      username,
-    );
+    const userAlreadyExists = await this.usersRepository.findUserByUsername(username);
 
-    const emailAlreadyExists = await this.usersRepository.findUserByEmail(
-      email,
-    );
+    const emailAlreadyExists = await this.usersRepository.findUserByEmail(email);
 
     if (userAlreadyExists || emailAlreadyExists) {
       throw new AppError({

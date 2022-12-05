@@ -3,11 +3,7 @@ import AppError from '../errors/appError';
 import authConfig from '../../config/auth';
 import { verify } from 'jsonwebtoken';
 
-export default function isAuthenticated(
-  request: Request,
-  response: Response,
-  next: NextFunction,
-): void {
+export default function isAuthenticated(request: Request, response: Response, next: NextFunction): void {
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {

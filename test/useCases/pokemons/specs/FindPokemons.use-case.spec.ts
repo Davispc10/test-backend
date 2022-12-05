@@ -2,13 +2,10 @@ import { FindPokemonsUseCaseExecuter } from '../executers/FindPokemonsUseCase.ex
 import { FakePokemonsRepository } from '../FakeRepository/FakePokemonsRepository';
 import { XlsxExtractor } from '../../../../src/shared/utils/xlsxExtractor';
 
-const fakePokemonsRepository: FakePokemonsRepository =
-  new FakePokemonsRepository();
+const fakePokemonsRepository: FakePokemonsRepository = new FakePokemonsRepository();
 
 describe('Get Pokemons', () => {
-  const findPokemonsExecuter = new FindPokemonsUseCaseExecuter(
-    fakePokemonsRepository,
-  );
+  const findPokemonsExecuter = new FindPokemonsUseCaseExecuter(fakePokemonsRepository);
   let xlsxExtractor;
 
   beforeAll(async () => {

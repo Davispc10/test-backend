@@ -9,7 +9,6 @@ import authConfig from '../../../config/auth';
 import { IHashProvider } from '../providers/HashProvider/models/IHashProvider';
 import { IUserWithToken } from '../domain/models/IUserWithToken';
 
-
 @injectable()
 export class CreateSessionUseCase {
   constructor(
@@ -29,10 +28,7 @@ export class CreateSessionUseCase {
       });
     }
 
-    const passwordsMatches = await this.hashProvider.compareHash(
-      password,
-      user.saltedHash,
-    );
+    const passwordsMatches = await this.hashProvider.compareHash(password, user.saltedHash);
 
     if (!passwordsMatches) {
       throw new AppError({

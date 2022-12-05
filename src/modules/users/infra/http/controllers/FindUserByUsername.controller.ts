@@ -10,9 +10,7 @@ export class FindUserByUsernameController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { username } = request.params;
 
-    const findUserByUsernameUseCase = container.resolve(
-      FindUserByUsernameUseCase,
-    );
+    const findUserByUsernameUseCase = container.resolve(FindUserByUsernameUseCase);
 
     const user = await findUserByUsernameUseCase.execute(username);
 

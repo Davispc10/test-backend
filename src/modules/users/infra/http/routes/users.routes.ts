@@ -23,16 +23,8 @@ usersRoutes.post(
   createUserController.handle,
 );
 
-usersRoutes.get(
-  '/email/:email',
-  isAuthenticated,
-  findUserByEmailController.handle,
-);
+usersRoutes.get('/email/:email', isAuthenticated, findUserByEmailController.handle);
 
-usersRoutes.get(
-  '/username/:username',
-  isAuthenticated,
-  findUserByUsernameController.handle,
-);
+usersRoutes.get('/username/:username', isAuthenticated, findUserByUsernameController.handle);
 
 export { usersRoutes };

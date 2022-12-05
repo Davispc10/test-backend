@@ -21,16 +21,10 @@ export class UserUseCasesSpecExecuter {
   constructor() {
     this.fakeUserRepository = new FakeUsersRepository();
     this.HashProvider = new BcryptHashProvider();
-    this.createUser = new CreateUserUseCase(
-      this.fakeUserRepository,
-      this.HashProvider,
-    );
+    this.createUser = new CreateUserUseCase(this.fakeUserRepository, this.HashProvider);
     this.findUsername = new FindUserByUsernameUseCase(this.fakeUserRepository);
     this.findEmail = new FindUserByEmailUseCase(this.fakeUserRepository);
-    this.createSession = new CreateSessionUseCase(
-      this.fakeUserRepository,
-      this.HashProvider,
-    );
+    this.createSession = new CreateSessionUseCase(this.fakeUserRepository, this.HashProvider);
   }
 
   resetDataCache() {

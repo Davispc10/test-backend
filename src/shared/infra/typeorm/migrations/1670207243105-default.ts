@@ -37,18 +37,10 @@ export class default1670207243105 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_6e2afe985c723ca7deefd2f11e4"`,
-    );
-    await queryRunner.query(
-      `ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_95291e9c778ff92c251a881e2da"`,
-    );
-    await queryRunner.query(
-      `ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_2658e0989bf08ba9a6a0ea30660"`,
-    );
-    await queryRunner.query(
-      `ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_699ad6168c197d89a901e3e6d05"`,
-    );
+    await queryRunner.query(`ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_6e2afe985c723ca7deefd2f11e4"`);
+    await queryRunner.query(`ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_95291e9c778ff92c251a881e2da"`);
+    await queryRunner.query(`ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_2658e0989bf08ba9a6a0ea30660"`);
+    await queryRunner.query(`ALTER TABLE "Pokemon" DROP CONSTRAINT "FK_699ad6168c197d89a901e3e6d05"`);
     await queryRunner.query(`DROP TABLE "User"`);
     await queryRunner.query(`DROP TABLE "Pokemon"`);
     await queryRunner.query(`DROP TABLE "TypeWeather"`);

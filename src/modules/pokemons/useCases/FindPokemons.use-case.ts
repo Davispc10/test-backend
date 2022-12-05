@@ -25,15 +25,9 @@ export class FindPokemonsUseCase {
     private pokemonsRepository: IPokemonsRepository,
   ) {}
 
-  async execute(
-    { page, limit }: SearchParams,
-    data: IFilters | null,
-  ): Promise<Pokemon[] | IPokemonPaginate | null> {
+  async execute({ page, limit }: SearchParams, data: IFilters | null): Promise<Pokemon[] | IPokemonPaginate | null> {
     const take = limit;
     const skip = (Number(page) - 1) * take;
-    return await this.pokemonsRepository.findPokemons(
-      { page, skip, take },
-      data,
-    );
+    return await this.pokemonsRepository.findPokemons({ page, skip, take }, data);
   }
 }

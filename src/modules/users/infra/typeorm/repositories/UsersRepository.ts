@@ -5,9 +5,7 @@ import { ICreateUser } from '../../../domain/models/ICreateUser';
 import { IUsersRepository } from '../../../domain/repositories/IUsersRepository';
 import { IUser } from '../../../domain/models/IUser';
 
-export class UsersRepository
-  implements Omit<IUsersRepository, 'resetDataCache'>
-{
+export class UsersRepository implements Omit<IUsersRepository, 'resetDataCache'> {
   private usersRepository: Repository<User>;
 
   constructor() {

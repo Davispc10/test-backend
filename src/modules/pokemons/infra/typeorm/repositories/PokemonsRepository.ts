@@ -1,10 +1,7 @@
 import { Repository } from 'typeorm';
 import { dataSource } from '../../../../../shared/infra/typeorm';
 import { Pokemon } from '../entities/Pokemon';
-import {
-  IPokemonsRepository,
-  SearchParams,
-} from '../../../domain/repositories/IPokemonsRepository';
+import { IPokemonsRepository, SearchParams } from '../../../domain/repositories/IPokemonsRepository';
 import { IFilters } from '../../../useCases/FindPokemons.use-case';
 import IPokemonPaginate from '../../../domain/models/IPokemonPaginate';
 import { AdditionalInformation } from '../entities/AdditionalInformation';
@@ -24,17 +21,12 @@ export class PokemonsRepository implements IPokemonsRepository {
     this.pokemonRepository = dataSource.getRepository(Pokemon);
     this.informationRepository = dataSource.getRepository(Information);
     this.typeWeatherRepository = dataSource.getRepository(TypeWeather);
-    this.fightingAttributesRepository =
-      dataSource.getRepository(FightingAttributes);
-    this.additionalInformationRepository = dataSource.getRepository(
-      AdditionalInformation,
-    );
+    this.fightingAttributesRepository = dataSource.getRepository(FightingAttributes);
+    this.additionalInformationRepository = dataSource.getRepository(AdditionalInformation);
   }
 
   async create(pokemon: Pokemon): Promise<IPokemon> {
-    const hasPokemon = await this.findByPokedexNumber(
-      pokemon.information.pokedexNumber,
-    );
+    const hasPokemon = await this.findByPokedexNumber(pokemon.information.pokedexNumber);
 
     if (hasPokemon) {
       return;
@@ -43,17 +35,12 @@ export class PokemonsRepository implements IPokemonsRepository {
       await this.informationRepository.save(pokemon.information);
       await this.typeWeatherRepository.save(pokemon.type_weather);
       await this.fightingAttributesRepository.save(pokemon.fighting_attributes);
-      await this.additionalInformationRepository.save(
-        pokemon.additional_information,
-      );
+      await this.additionalInformationRepository.save(pokemon.additional_information);
       return await this.pokemonRepository.save(pokemon);
     } catch (e) {}
   }
 
-  async findPokemons(
-    { page, skip, take }: SearchParams,
-    data: IFilters | null,
-  ): Promise<IPokemonPaginate> {
+  async findPokemons({ page, skip, take }: SearchParams, data: IFilters | null): Promise<IPokemonPaginate> {
     const { name, pokedexNumber, generation, legendary, type1, weather1 } = {
       ...data,
     };
@@ -68,7 +55,7 @@ export class PokemonsRepository implements IPokemonsRepository {
       where: {
         information: {
           name: name,
-          pokemonNumber: pokedexNumber,
+          pokedexNumber: pokedexNumber,
           generation: generation,
         },
         type_weather: {
