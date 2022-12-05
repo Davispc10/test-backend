@@ -7,7 +7,7 @@
 - Banco de Dados: PostgreSQL;
 - Para assegurar a segurança da API, todas as rotas de informações requerem authenticação por JWT;
 - Para regular a quantidade de acessos, foi utilizado um Rate Limiter para 100 requisições por IP a cada 15 minutos;
-- A Aplicação, o Banco de Dados e o PgAdmin4 rodam dentro de containares Docker;
+- A Aplicação, o Banco de Dados e o PgAdmin4 rodam dentro de containers Docker;
 - Para ver rotas e schemas, utilize o swagger em "localhost:3001/docs".
 - - -
 ## Design
@@ -38,6 +38,6 @@ testados de forma mais isolada;
 - - -
 ## Rodando a aplicação
 
-Como a aplicação está no docker-compose, basta configurar as variáveis de ambiente
-seguindo o modelo do arquivo ".env.example" e rodar o docker compose.
+Como a aplicação está integralmente no docker-compose.yml, basta configurar as variáveis de ambiente
+seguindo o modelo do arquivo ".env.example" e rodar o docker compose para subir os containers.
 
