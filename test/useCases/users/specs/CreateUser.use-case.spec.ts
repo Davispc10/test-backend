@@ -1,6 +1,5 @@
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-
 describe('Create User', () => {
   const createUserExecuter = new UserUseCasesSpecExecuter();
 

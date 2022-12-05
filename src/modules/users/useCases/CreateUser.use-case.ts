@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import { UsersRepository } from '../infra/typeorm/repositories/UsersRepository';
 import { ICreateUser } from '../domain/models/ICreateUser';
 import { IUsersRepository } from '../domain/repositories/IUsersRepository';
 import AppError from '../../../shared/errors/appError';

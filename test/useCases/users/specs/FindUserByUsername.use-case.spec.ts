@@ -1,6 +1,5 @@
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-
 describe('Find User By Username', () => {
   const findUserExecuter = new UserUseCasesSpecExecuter();
 

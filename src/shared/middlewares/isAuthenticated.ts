@@ -16,7 +16,7 @@ export default function isAuthenticated(request: Request, response: Response, ne
   const [, access_token] = authHeader.split(' ');
 
   try {
-    const decodeToken = verify(access_token, authConfig.jwt.secret);
+    verify(access_token, authConfig.jwt.secret);
 
     return next();
   } catch {

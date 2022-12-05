@@ -1,6 +1,5 @@
 import { UserUseCasesSpecExecuter } from '../executers/UserUseCases-spec.executer';
 
-
 describe('Find User By Email', () => {
   const findUserExecuter = new UserUseCasesSpecExecuter();
 
