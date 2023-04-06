@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import CreateBattleService from "../service/CreateBattleService";
 import GetPokemonService from "../service/GetPokemonService";
+import AppError from "../errors/AppError";
 
 class CreateBattleHandler {
   constructor(
@@ -10,6 +11,10 @@ class CreateBattleHandler {
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { pokemon1, pokemon2 } = req.body;
+
+    if (!pokemon1 || !pokemon2) {
+      throw new AppError("Both Pokémon are required for battles.", 400);
+    }
 
     const pokemon1Data = await this.getPokemon.execute(pokemon1);
     const pokemon2Data = await this.getPokemon.execute(pokemon2);
