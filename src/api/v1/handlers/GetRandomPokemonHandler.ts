@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import GetPokemonService from "../service/GetPokemonService";
 import ListPokemonService from "../service/ListPokemonService";
+import IHandler from "./IHandler";
 
-class GetRandomPokemonHandler {
+class GetRandomPokemonHandler implements IHandler {
   constructor(
     private getPokemon: GetPokemonService,
     private listPokemon: ListPokemonService

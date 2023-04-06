@@ -1,13 +1,14 @@
 import { PokemonFilter } from "../domain";
 import Pokemon from "../entity/Pokemon";
 import IPokemonRepository from "../repository/IPokemonRepository";
+import IService from "./IService";
 
 export interface PokemonData {
   count: number;
   data: Pokemon[];
 }
 
-class ListPokemonService {
+class ListPokemonService implements IService {
   private pokemonRepository: IPokemonRepository;
 
   constructor(pokemonRepository: IPokemonRepository) {

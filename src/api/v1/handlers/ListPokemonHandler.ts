@@ -3,6 +3,7 @@ import ListPokemonService, { PokemonData } from "../service/ListPokemonService";
 import { PokemonFilter } from "../domain";
 import Pokemon from "../entity/Pokemon";
 import AppError from "../errors/AppError";
+import IHandler from "./IHandler";
 
 interface ListResponse {
   count: number;
@@ -14,10 +15,10 @@ interface ListResponse {
   data: Pokemon[];
 }
 
-class ListPokemonHandler {
+class ListPokemonHandler implements IHandler {
   constructor(private listPokemon: ListPokemonService) {}
 
-  public async handle(req: Request, res: Response) {
+  public async handle(req: Request, res: Response): Promise<Response> {
     const { page, limit } = req.query;
     const limitNumber = limit ? parseInt(limit as string) : 20;
     const pageNumber = page ? parseInt(page as string) : 1;
@@ -40,7 +41,7 @@ class ListPokemonHandler {
       throw new AppError("No pokemon found with the given parameters", 404);
     }
 
-    res.json(response);
+    return res.json(response);
   }
 
   private getPokemonFilters(query: any): PokemonFilter {

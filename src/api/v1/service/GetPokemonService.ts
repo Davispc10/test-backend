@@ -1,8 +1,9 @@
 import Pokemon from "../entity/Pokemon";
 import AppError from "../errors/AppError";
 import PokemonRepository from "../repository/typeorm/PokemonRepository";
+import IService from "./IService";
 
-class GetPokemonService {
+class GetPokemonService implements IService {
   constructor(private pokemonRepository: PokemonRepository) {}
 
   async execute(idOrName: string): Promise<Pokemon> {

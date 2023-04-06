@@ -1,7 +1,8 @@
 import { Battle } from "../domain";
 import Pokemon from "../entity/Pokemon";
+import IService from "./IService";
 
-class CreateBattleService {
+class CreateBattleService implements IService {
   constructor() {}
 
   execute(pokemon1: Pokemon, pokemon2: Pokemon): string {

@@ -6,11 +6,7 @@ import AppError from "../../errors/AppError";
 import { PokemonFilter } from "../../domain";
 
 class PokemonRepository implements IPokemonRepository {
-  private ormRepository: Repository<Pokemon>;
-
-  constructor() {
-    this.ormRepository = AppDataSource.getRepository(Pokemon);
-  }
+  constructor(private ormRepository: Repository<Pokemon>) {}
 
   async index(
     filters: PokemonFilter,

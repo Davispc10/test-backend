@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import CreateBattleService from "../service/CreateBattleService";
 import GetPokemonService from "../service/GetPokemonService";
 import AppError from "../errors/AppError";
+import IHandler from "./IHandler";
 
-class CreateBattleHandler {
+class CreateBattleHandler implements IHandler {
   constructor(
     private createBattle: CreateBattleService,
     private getPokemon: GetPokemonService
