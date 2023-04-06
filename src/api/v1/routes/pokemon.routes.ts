@@ -5,6 +5,8 @@ import ListPokemonService from "../service/ListPokemonService";
 import GetPokemonHandler from "../handlers/GetPokemonHandler";
 import GetPokemonService from "../service/GetPokemonService";
 import GetRandomPokemonHandler from "../handlers/GetRandomPokemonHandler";
+import CreateBattleService from "../service/CreateBattleService";
+import CreateBattleHandler from "../handlers/CreateBattleHandler";
 
 const pokemonRouter = Router();
 
@@ -21,6 +23,12 @@ const getRandomPokemonHandler = new GetRandomPokemonHandler(
   listPokemonService
 );
 
+const createBattleService = new CreateBattleService();
+const createBattleHandler = new CreateBattleHandler(
+  createBattleService,
+  getPokemonService
+);
+
 pokemonRouter.get("/", listPokemonHandler.handle.bind(listPokemonHandler));
 pokemonRouter.get(
   "/random",
@@ -29,6 +37,10 @@ pokemonRouter.get(
 pokemonRouter.get(
   "/:idOrName",
   getPokemonHandler.handle.bind(getPokemonHandler)
+);
+pokemonRouter.post(
+  "/battle",
+  createBattleHandler.handle.bind(createBattleHandler)
 );
 
 export default pokemonRouter;

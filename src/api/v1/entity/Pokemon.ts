@@ -91,6 +91,14 @@ class Pokemon {
 
   @Column()
   cp39: number;
+
+  toString(): string {
+    return `${this.name} [${this.type_one}${
+      this.type_two ? " / " + this.type_two : ""
+    } | ${this.evolved === "1" ? "Evolved" : "Not Evolved"} | ${
+      this.legendary === 1 ? "Legendary" : "Not Legendary"
+    }]`;
+  }
 }
 
 export default Pokemon;

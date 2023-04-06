@@ -1,3 +1,5 @@
+import Battle from "./Battle";
+
 interface PokemonFilter {
   generation?: number;
   type?: string;
@@ -6,3 +8,4 @@ interface PokemonFilter {
 }
 
 export type { PokemonFilter };
+export { Battle };
