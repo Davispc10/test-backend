@@ -1,8 +1,9 @@
-import { Battle } from "../domain";
-import Pokemon from "../entity/Pokemon";
-import IService from "./IService";
+import { injectable } from 'inversify';
+import { Battle } from '../domain';
+import Pokemon from '../entity/Pokemon';
 
-class CreateBattleService implements IService {
+@injectable()
+class CreateBattleService {
   constructor() {}
 
   execute(pokemon1: Pokemon, pokemon2: Pokemon): string {

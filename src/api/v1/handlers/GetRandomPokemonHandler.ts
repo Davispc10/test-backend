@@ -1,11 +1,16 @@
-import { Request, Response } from "express";
-import GetPokemonService from "../service/GetPokemonService";
-import ListPokemonService from "../service/ListPokemonService";
-import IHandler from "./IHandler";
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import GetPokemonService from '../service/GetPokemonService';
+import ListPokemonService from '../service/ListPokemonService';
+import { TYPES } from '../types';
 
-class GetRandomPokemonHandler implements IHandler {
+@injectable()
+class GetRandomPokemonHandler {
   constructor(
+    @inject(TYPES.GetPokemonService)
     private getPokemon: GetPokemonService,
+
+    @inject(TYPES.ListPokemonService)
     private listPokemon: ListPokemonService
   ) {}
 

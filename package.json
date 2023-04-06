@@ -10,7 +10,8 @@
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "npx typeorm-ts-node-commonjs migration:run --d ./src/database/data-source.ts",
-    "revert": "npx typeorm-ts-node-commonjs migration:revert --d ./src/database/data-source.ts"
+    "revert": "npx typeorm-ts-node-commonjs migration:revert --d ./src/database/data-source.ts",
+    "prettier": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "@types/node": "^18.15.11",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "inversify": "^6.0.1",
+    "inversify-express-utils": "^6.4.3",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.9.1",

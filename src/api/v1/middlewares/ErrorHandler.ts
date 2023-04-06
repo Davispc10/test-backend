@@ -1,16 +1,11 @@
-import AppError from "../errors/AppError";
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from 'express';
+import AppError from '../errors/AppError';
 
 class ErrorHandler {
-  async handle(
-    err: Error,
-    request: Request,
-    response: Response,
-    _: NextFunction
-  ): Promise<Response> {
+  async handle(err: Error, request: Request, response: Response, _: NextFunction): Promise<Response> {
     if (err instanceof AppError) {
       return response.status(err.statusCode).json({
-        status: "error",
+        status: 'error',
         message: err.message,
       });
     }
@@ -18,8 +13,8 @@ class ErrorHandler {
     console.error(err);
 
     return response.status(500).json({
-      status: "error",
-      message: "Internal server error",
+      status: 'error',
+      message: 'Internal server error',
     });
   }
 }

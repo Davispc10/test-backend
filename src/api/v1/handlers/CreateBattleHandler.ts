@@ -1,12 +1,17 @@
-import { Request, Response } from "express";
-import CreateBattleService from "../service/CreateBattleService";
-import GetPokemonService from "../service/GetPokemonService";
-import AppError from "../errors/AppError";
-import IHandler from "./IHandler";
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import AppError from '../errors/AppError';
+import CreateBattleService from '../service/CreateBattleService';
+import GetPokemonService from '../service/GetPokemonService';
+import { TYPES } from '../types';
 
-class CreateBattleHandler implements IHandler {
+@injectable()
+class CreateBattleHandler {
   constructor(
+    @inject(TYPES.CreateBattleService)
     private createBattle: CreateBattleService,
+
+    @inject(TYPES.GetPokemonService)
     private getPokemon: GetPokemonService
   ) {}
 
@@ -14,7 +19,7 @@ class CreateBattleHandler implements IHandler {
     const { pokemon1, pokemon2 } = req.body;
 
     if (!pokemon1 || !pokemon2) {
-      throw new AppError("Both Pokémon are required for battles.", 400);
+      throw new AppError('Both Pokémon are required for battles.', 400);
     }
 
     const pokemon1Data = await this.getPokemon.execute(pokemon1);

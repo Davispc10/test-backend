@@ -1,9 +1,11 @@
-import { Request, Response } from "express";
-import GetPokemonService from "../service/GetPokemonService";
-import IHandler from "./IHandler";
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import GetPokemonService from '../service/GetPokemonService';
+import { TYPES } from '../types';
 
-class GetPokemonHandler implements IHandler {
-  constructor(private getPokemon: GetPokemonService) {}
+@injectable()
+class GetPokemonHandler {
+  constructor(@inject(TYPES.GetPokemonService) private getPokemon: GetPokemonService) {}
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { idOrName } = req.params;

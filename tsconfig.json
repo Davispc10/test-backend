@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es5",
     "module": "commonjs",
-    "lib": ["es2017", "esnext.asynciterable"],
+    "lib": ["es6"],
     "sourceMap": true,
     "outDir": "./dist",
     "rootDir": "./src",
@@ -19,7 +19,8 @@
       "*": ["node_modules/*"]
     },
     "isolatedModules": true,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "types": ["reflect-metadata"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

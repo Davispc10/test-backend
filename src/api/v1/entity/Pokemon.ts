@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity("pokemon")
+@Entity('pokemon')
 class Pokemon {
   @PrimaryGeneratedColumn()
   id: number;
@@ -93,11 +93,9 @@ class Pokemon {
   cp39: number;
 
   toString(): string {
-    return `${this.name} [${this.type_one}${
-      this.type_two ? " / " + this.type_two : ""
-    } | ${this.evolved === "1" ? "Evolved" : "Not Evolved"} | ${
-      this.legendary === 1 ? "Legendary" : "Not Legendary"
-    }]`;
+    return `${this.name} [${this.type_one}${this.type_two ? ' / ' + this.type_two : ''} | ${
+      this.evolved === '1' ? 'Evolved' : 'Not Evolved'
+    } | ${this.legendary === 1 ? 'Legendary' : 'Not Legendary'}]`;
   }
 }
 

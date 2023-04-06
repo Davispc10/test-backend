@@ -1,44 +1,42 @@
-import { Repository } from "typeorm";
-import IPokemonRepository, { PokemonResult } from "../IPokemonRepository";
-import Pokemon from "../../entity/Pokemon";
-import { AppDataSource } from "../../../../database/data-source";
-import AppError from "../../errors/AppError";
-import { PokemonFilter } from "../../domain";
+import { injectable } from 'inversify';
+import { Repository } from 'typeorm';
+import { AppDataSource } from '../../../../database/data-source';
+import { PokemonFilter } from '../../domain';
+import Pokemon from '../../entity/Pokemon';
+import AppError from '../../errors/AppError';
+import IPokemonRepository, { PokemonResult } from '../IPokemonRepository';
 
+@injectable()
 class PokemonRepository implements IPokemonRepository {
-  constructor(private ormRepository: Repository<Pokemon>) {}
+  private ormRepository: Repository<Pokemon>;
 
-  async index(
-    filters: PokemonFilter,
-    page: number,
-    limit: number
-  ): Promise<PokemonResult> {
-    const queryBuilder = this.ormRepository.createQueryBuilder("pokemon");
+  constructor() {
+    this.ormRepository = AppDataSource.getRepository(Pokemon);
+  }
+
+  async index(filters: PokemonFilter, page: number, limit: number): Promise<PokemonResult> {
+    const queryBuilder = this.ormRepository.createQueryBuilder('pokemon');
 
     if (filters.generation) {
-      queryBuilder.andWhere("pokemon.generation = :generation", {
+      queryBuilder.andWhere('pokemon.generation = :generation', {
         generation: filters.generation,
       });
     }
 
     if (filters.type) {
-      queryBuilder.andWhere(
-        "pokemon.type_one = :type OR pokemon.type_two = :type",
-        {
-          type: filters.type,
-        }
-      );
+      queryBuilder.andWhere('pokemon.type_one = :type OR pokemon.type_two = :type', {
+        type: filters.type,
+      });
     }
 
     if (filters.weather) {
-      queryBuilder.andWhere(
-        "pokemon.weather1 = :weather_one OR pokemon.weather_two = :weather",
-        { weather: filters.weather }
-      );
+      queryBuilder.andWhere('pokemon.weather1 = :weather_one OR pokemon.weather_two = :weather', {
+        weather: filters.weather,
+      });
     }
 
     if (filters.legendary !== undefined) {
-      queryBuilder.andWhere("pokemon.legendary = :legendary", {
+      queryBuilder.andWhere('pokemon.legendary = :legendary', {
         legendary: filters.legendary,
       });
     }
@@ -52,10 +50,7 @@ class PokemonRepository implements IPokemonRepository {
     const rows = await queryBuilder.getMany();
 
     if (!rows) {
-      throw new AppError(
-        `Could not find pokemons with filters ${filters}`,
-        404
-      );
+      throw new AppError(`Could not find pokemons with filters ${filters}`, 404);
     }
 
     const count = await queryBuilder.getCount();

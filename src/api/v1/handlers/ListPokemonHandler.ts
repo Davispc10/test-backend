@@ -1,9 +1,10 @@
-import { Request, Response } from "express";
-import ListPokemonService, { PokemonData } from "../service/ListPokemonService";
-import { PokemonFilter } from "../domain";
-import Pokemon from "../entity/Pokemon";
-import AppError from "../errors/AppError";
-import IHandler from "./IHandler";
+import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import { PokemonFilter } from '../domain';
+import Pokemon from '../entity/Pokemon';
+import AppError from '../errors/AppError';
+import ListPokemonService, { PokemonData } from '../service/ListPokemonService';
+import { TYPES } from '../types';
 
 interface ListResponse {
   count: number;
@@ -15,8 +16,9 @@ interface ListResponse {
   data: Pokemon[];
 }
 
-class ListPokemonHandler implements IHandler {
-  constructor(private listPokemon: ListPokemonService) {}
+@injectable()
+class ListPokemonHandler {
+  constructor(@inject(TYPES.ListPokemonService) private listPokemon: ListPokemonService) {}
 
   public async handle(req: Request, res: Response): Promise<Response> {
     const { page, limit } = req.query;
@@ -24,21 +26,12 @@ class ListPokemonHandler implements IHandler {
     const pageNumber = page ? parseInt(page as string) : 1;
     const filters: PokemonFilter = this.getPokemonFilters(req.query);
 
-    const pokemonData = await this.listPokemon.execute(
-      filters,
-      pageNumber,
-      limitNumber
-    );
+    const pokemonData = await this.listPokemon.execute(filters, pageNumber, limitNumber);
 
-    const response = this.buildResponse(
-      pokemonData,
-      req,
-      pageNumber,
-      limitNumber
-    );
+    const response = this.buildResponse(pokemonData, req, pageNumber, limitNumber);
 
     if (response.data.length === 0) {
-      throw new AppError("No pokemon found with the given parameters", 404);
+      throw new AppError('No pokemon found with the given parameters', 404);
     }
 
     return res.json(response);
@@ -46,23 +39,14 @@ class ListPokemonHandler implements IHandler {
 
   private getPokemonFilters(query: any): PokemonFilter {
     return {
-      generation: query.generation
-        ? parseInt(query.generation as string)
-        : undefined,
+      generation: query.generation ? parseInt(query.generation as string) : undefined,
       type: query.type as string,
       weather: query.weather as string,
-      legendary: query.legendary
-        ? parseInt(query.legendary as string)
-        : undefined,
+      legendary: query.legendary ? parseInt(query.legendary as string) : undefined,
     };
   }
 
-  private buildResponse(
-    pokemonData: PokemonData,
-    req: Request,
-    pageNumber: number,
-    limitNumber: number
-  ): ListResponse {
+  private buildResponse(pokemonData: PokemonData, req: Request, pageNumber: number, limitNumber: number): ListResponse {
     return {
       count: pokemonData.count,
       next: this.getNextUrl(pokemonData, req, pageNumber, limitNumber),
@@ -76,39 +60,28 @@ class ListPokemonHandler implements IHandler {
 
   private getPreviousUrl(req: Request, pageNumber: number) {
     if (pageNumber > 1) {
-      return `${req.protocol}://${req.get("host")}${req.originalUrl.replace(
+      return `${req.protocol}://${req.get('host')}${req.originalUrl.replace(
         `page=${pageNumber}`,
         `page=${pageNumber - 1}`
       )}`;
     }
 
-    return "";
+    return '';
   }
 
-  private getNextUrl(
-    pokemonData: PokemonData,
-    req: Request,
-    pageNumber: number,
-    limitNumber: number
-  ): string {
-    if (
-      pageNumber === 1 &&
-      pokemonData.count > limitNumber &&
-      !req.query.page
-    ) {
-      return `${req.protocol}://${req.get("host")}${req.originalUrl}${
-        req.originalUrl.includes("?") ? "&" : "?"
-      }page=2`;
+  private getNextUrl(pokemonData: PokemonData, req: Request, pageNumber: number, limitNumber: number): string {
+    if (pageNumber === 1 && pokemonData.count > limitNumber && !req.query.page) {
+      return `${req.protocol}://${req.get('host')}${req.originalUrl}${req.originalUrl.includes('?') ? '&' : '?'}page=2`;
     }
 
     if (pokemonData.count > pageNumber * limitNumber) {
-      return `${req.protocol}://${req.get("host")}${req.originalUrl.replace(
+      return `${req.protocol}://${req.get('host')}${req.originalUrl.replace(
         `page=${pageNumber}`,
         `page=${pageNumber + 1}`
       )}`;
     }
 
-    return "";
+    return '';
   }
 }
 
