@@ -3,6 +3,7 @@ import IPokemonRepository from "../IPokemonRepository";
 import Pokemon from "../../entity/Pokemon";
 import { AppDataSource } from "../../../../database/data-source";
 import AppError from "../../errors/AppError";
+import { PokemonFilter } from "../../domain";
 
 class PokemonRepository implements IPokemonRepository {
   private ormRepository: Repository<Pokemon>;
@@ -11,11 +12,52 @@ class PokemonRepository implements IPokemonRepository {
     this.ormRepository = AppDataSource.getRepository(Pokemon);
   }
 
-  async index(page: number, limit: number): Promise<Pokemon[]> {
+  async index(
+    filters: PokemonFilter,
+    page: number,
+    limit: number
+  ): Promise<Pokemon[]> {
+    const queryBuilder = this.ormRepository.createQueryBuilder("pokemon");
+
+    if (filters.generation) {
+      queryBuilder.andWhere("pokemon.generation = :generation", {
+        generation: filters.generation,
+      });
+    }
+
+    if (filters.type) {
+      queryBuilder.andWhere(
+        "pokemon.type_one = :type OR pokemon.type_two = :type",
+        {
+          type: filters.type,
+        }
+      );
+    }
+
+    if (filters.weather) {
+      queryBuilder.andWhere(
+        "pokemon.weather1 = :weather_one OR pokemon.weather_two = :weather",
+        { weather: filters.weather }
+      );
+    }
+
+    if (filters.legendary !== undefined) {
+      queryBuilder.andWhere("pokemon.legendary = :legendary", {
+        legendary: filters.legendary,
+      });
+    }
+
     const skip = (page - 1) * limit;
     const take = limit;
 
-    const pokemons = await this.ormRepository.find({ skip, take });
+    queryBuilder.skip(skip);
+    queryBuilder.take(take);
+
+    const pokemons = await queryBuilder.getMany();
+
+    if (!pokemons) {
+      throw new AppError(`Could not find pokemons with filters ${filters}`);
+    }
 
     return pokemons;
   }

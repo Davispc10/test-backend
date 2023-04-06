@@ -1,3 +1,4 @@
+import { PokemonFilter } from "../domain";
 import Pokemon from "../entity/Pokemon";
 import AppError from "../errors/AppError";
 import IPokemonRepository from "../repository/IPokemonRepository";
@@ -9,8 +10,12 @@ class ListPokemonService {
     this.pokemonRepository = pokemonRepository;
   }
 
-  public async execute(page: number, limit: number): Promise<Pokemon[]> {
-    const pokemon = await this.pokemonRepository.index(page, limit);
+  public async execute(
+    filters: PokemonFilter,
+    page: number,
+    limit: number
+  ): Promise<Pokemon[]> {
+    const pokemon = await this.pokemonRepository.index(filters, page, limit);
     return pokemon;
   }
 }

@@ -1,100 +1,96 @@
-import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn
-  } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("pokemon")
- class Pokemon {
-    @PrimaryGeneratedColumn()
-    id: number;
+class Pokemon {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    pokedex_number: number;
+  @Column()
+  pokedex_number: number;
 
-    @Column()
-    img_name: number;
+  @Column()
+  img_name: string;
 
-    @Column()
-    generation: number;
+  @Column()
+  generation: number;
 
-    @Column()
-    evolution_stage: number;
+  @Column()
+  evolution_stage: string;
 
-    @Column()
-    evolved: boolean;
+  @Column()
+  evolved: string;
 
-    @Column()
-    familyId: number;
+  @Column()
+  familyId: number;
 
-    @Column()
-    cross_Gen: boolean;
+  @Column()
+  cross_Gen: boolean;
 
-    @Column()
-    type_one: string;
+  @Column()
+  type_one: string;
 
-    @Column()
-    type_two: string;
+  @Column()
+  type_two: string;
 
-    @Column()
-    weather_one: string;
+  @Column()
+  weather_one: string;
 
-    @Column()
-    weather_two: string;
+  @Column()
+  weather_two: string;
 
-    @Column()
-    stat_total: number;
+  @Column()
+  stat_total: number;
 
-    @Column()
-    atk: number;
+  @Column()
+  atk: number;
 
-    @Column()
-    def: number;
+  @Column()
+  def: number;
 
-    @Column()
-    sta: number;
+  @Column()
+  sta: number;
 
-    @Column()
-    legendary: boolean;
+  @Column()
+  legendary: number;
 
-    @Column()
-    aquireable: boolean;
+  @Column()
+  aquireable: number;
 
-    @Column()
-    spawns: boolean;
+  @Column()
+  spawns: boolean;
 
-    @Column()
-    regional: boolean;
+  @Column()
+  regional: number;
 
-    @Column()
-    raidable: boolean;
+  @Column()
+  raidable: number;
 
-    @Column()
-    hatchable: number;
+  @Column()
+  hatchable: number;
 
-    @Column()
-    shiny: boolean;
+  @Column()
+  shiny: boolean;
 
-    @Column()
-    nest: boolean;
+  @Column()
+  nest: boolean;
 
-    @Column()
-    new: boolean;
+  @Column()
+  new: boolean;
 
-    @Column()
-    not_gettable: boolean;
+  @Column()
+  not_gettable: boolean;
 
-    @Column()
-    future_evolve: boolean;
+  @Column()
+  future_evolve: boolean;
 
-    @Column()
-    cp40: number;
+  @Column()
+  cp40: number;
 
-    @Column()
-    cp39: number;
+  @Column()
+  cp39: number;
 }
 
 export default Pokemon;
