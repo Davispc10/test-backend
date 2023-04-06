@@ -13,8 +13,10 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": ["app/tsconfig.json"]
+    "project": ["tsconfig.json"]
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "error"
+  }
 }

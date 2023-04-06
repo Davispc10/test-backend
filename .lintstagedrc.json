@@ -1,0 +1,7 @@
+{
+  "*.ts": [
+    "npm run lint 'src/**' --fix",
+    "npm run prettier --check 'src/**'",
+    "npm run test:staged"
+  ]
+}
