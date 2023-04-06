@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import IPokemonRepository from "../IPokemonRepository";
+import IPokemonRepository, { PokemonResult } from "../IPokemonRepository";
 import Pokemon from "../../entity/Pokemon";
 import { AppDataSource } from "../../../../database/data-source";
 import AppError from "../../errors/AppError";
@@ -16,7 +16,7 @@ class PokemonRepository implements IPokemonRepository {
     filters: PokemonFilter,
     page: number,
     limit: number
-  ): Promise<Pokemon[]> {
+  ): Promise<PokemonResult> {
     const queryBuilder = this.ormRepository.createQueryBuilder("pokemon");
 
     if (filters.generation) {
@@ -53,20 +53,28 @@ class PokemonRepository implements IPokemonRepository {
     queryBuilder.skip(skip);
     queryBuilder.take(take);
 
-    const pokemons = await queryBuilder.getMany();
+    const rows = await queryBuilder.getMany();
 
-    if (!pokemons) {
-      throw new AppError(`Could not find pokemons with filters ${filters}`);
+    if (!rows) {
+      throw new AppError(
+        `Could not find pokemons with filters ${filters}`,
+        404
+      );
     }
 
-    return pokemons;
+    const count = await queryBuilder.getCount();
+
+    return {
+      count,
+      rows,
+    };
   }
 
   async findById(id: number): Promise<Pokemon> {
     const pokemon = await this.ormRepository.findOneBy({ id: id });
 
     if (!pokemon) {
-      throw new AppError(`Could not find pokemon with id ${id}`);
+      throw new AppError(`Could not find pokemon with id ${id}`, 404);
     }
 
     return pokemon;
@@ -76,7 +84,7 @@ class PokemonRepository implements IPokemonRepository {
     const pokemon = await this.ormRepository.findOneBy({ name });
 
     if (!pokemon) {
-      throw new AppError(`Could not find pokemon with name ${name}`);
+      throw new AppError(`Could not find pokemon with name ${name}`, 404);
     }
 
     return pokemon;

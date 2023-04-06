@@ -2,7 +2,7 @@ interface PokemonFilter {
   generation?: number;
   type?: string;
   weather?: string;
-  legendary?: boolean;
+  legendary?: number;
 }
 
 export type { PokemonFilter };

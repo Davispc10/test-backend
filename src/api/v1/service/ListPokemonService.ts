@@ -1,7 +1,11 @@
 import { PokemonFilter } from "../domain";
 import Pokemon from "../entity/Pokemon";
-import AppError from "../errors/AppError";
 import IPokemonRepository from "../repository/IPokemonRepository";
+
+export interface PokemonData {
+  count: number;
+  data: Pokemon[];
+}
 
 class ListPokemonService {
   private pokemonRepository: IPokemonRepository;
@@ -14,9 +18,12 @@ class ListPokemonService {
     filters: PokemonFilter,
     page: number,
     limit: number
-  ): Promise<Pokemon[]> {
+  ): Promise<PokemonData> {
     const pokemon = await this.pokemonRepository.index(filters, page, limit);
-    return pokemon;
+    return {
+      count: pokemon.count,
+      data: pokemon.rows,
+    };
   }
 }
 
