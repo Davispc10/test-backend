@@ -14,7 +14,7 @@
 
 # ⚙️ Instalação
 
-**É necessário ter Node.js, Docker e Docker Compose instalados na sua máquina.**
+**É necessário ter NPX, NPM, Node.js, Docker e Docker Compose instalados na sua máquina.**
 
 Clone o projeto para sua máquina:
 
