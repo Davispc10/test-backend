@@ -30,7 +30,7 @@ class PokemonRepository implements IPokemonRepository {
     }
 
     if (filters.weather) {
-      queryBuilder.andWhere('pokemon.weather1 = :weather_one OR pokemon.weather_two = :weather', {
+      queryBuilder.andWhere('pokemon.weather_one = :weather OR pokemon.weather_two = :weather', {
         weather: filters.weather,
       });
     }
