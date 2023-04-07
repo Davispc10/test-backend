@@ -1,0 +1,29 @@
+{
+  "name": "dinheirow-ch",
+  "version": "1.0.0",
+  "description": "Olá Dev! Tudo bem?",
+  "main": "index.js",
+  "scripts": {
+    "script:dev": "npx ts-node src/utils/script.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/augustosilas/test-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/augustosilas/test-backend/issues"
+  },
+  "homepage": "https://github.com/augustosilas/test-backend#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.3"
+  },
+  "dependencies": {
+    "pg": "^8.10.0",
+    "typeorm": "^0.3.13",
+    "xlsx": "^0.18.5"
+  }
+}
