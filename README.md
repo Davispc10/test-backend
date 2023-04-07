@@ -23,7 +23,13 @@ git clone https://github.com/lbcosta/test-backend
 cd test-backend
 ```
 
-Na raíz do projeto, suba o container do banco de dados:
+Na raíz do projeto, instale as dependências:
+
+```bash
+npm install
+```
+
+Suba o container do banco de dados:
 
 ```bash
 docker-compose up --build -d
