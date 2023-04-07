@@ -1,7 +1,15 @@
 #!/bin/bash
 
+# Get the container ID by container name
+container_name="test_backend_postgres_container"
+container_id=$(docker ps --format '{{.ID}} {{.Names}}' | grep "${container_name}" | awk '{print $1}')
+
+if [ -z "${container_id}" ]; then
+  echo "Container not found with name: ${container_name}"
+  exit 1
+fi
+
 # Set your PostgreSQL container details
-container_id="378e5970f8d9"
 postgres_user="dinheirow"
 postgres_password="t3st-back3nd"
 postgres_database="dinheirow"
