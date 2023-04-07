@@ -8,12 +8,12 @@ export class PgConnection {
   private constructor() {
     this.connection = new DataSource({
       type: 'postgres',
-      port: 5432,
-      username: 'user',
-      password: 'password',
-      database: 'db-dinheirow',
-      synchronize: true,
-      logging: true,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      synchronize: !!(process.env.DB_SYNCHRONIZE === 'true') ?? false,
+      logging: !!(process.env.DB_LOGGING === 'true') ?? false,
       entities: [PgPokemon]
     })
   }
