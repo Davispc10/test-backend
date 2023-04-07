@@ -9,7 +9,8 @@
   <a href="#%EF%B8%8F-instalação">Instalação</a> •
   <a href="#%EF%B8%8F-inicialização">Inicialização</a> •
   <a href="#-seeding">Seeding</a> •
-  <a href="#-documentação-da-api">Documentação da API</a>
+  <a href="#-documentação-da-api">Documentação da API</a> •
+  <a href="#-melhorias-na-api-e-código">Melhorias na API e Código</a>
 </p>
 
 # ⚙️ Instalação
@@ -275,3 +276,21 @@ Exemplos de possíveis **Erros**:
   "message": "Could not find pokemon with name Charizardo"
 }
 ```
+
+# 🌟 Melhorias na API e Código
+
+Embora a API e o código atual sejam funcionais, existem algumas áreas que podem ser melhoradas:
+
+1. **Containerização**: Containerizar a API usando Docker para facilitar o deploy e a execução em diferentes ambientes.
+
+2. **Variaveis de ambiente**: Adicionar suporte a variáveis de ambiente para permitir que os valores de configuração sejam definidos de forma dinâmica.
+
+3. **Autenticação e Autorização**: Adicionar suporte à autenticação e autorização (por exemplo, usando JWT) para permitir o controle de acesso aos recursos da API.
+
+4. **Testes automatizados**: Desenvolver testes automatizados para os principais componentes e funcionalidades da API, garantindo a qualidade do código e facilitando a manutenção futura.
+
+5. **Refatoração**: Analisar o código atual em busca de oportunidades de refatoração para melhorar a legibilidade, manutenibilidade e desempenho.
+
+6. **Documentação do código**: Garantir que o código esteja bem documentado, incluindo comentários explicativos, para facilitar o entendimento e a colaboração por parte de outros desenvolvedores.
+
+7. **Logs e monitoramento**: Integrar soluções de log e monitoramento para rastrear problemas, medir o desempenho e melhorar a confiabilidade da API.
