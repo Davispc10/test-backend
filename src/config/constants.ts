@@ -1,0 +1,36 @@
+export class Constants {
+    static readonly FILE_PATH: string = '././Pokemon Go.xlsx';
+    static readonly SHEET_NAME: string = 'Sheet1';
+    static readonly CUSTOM_HEADER: string[] = [
+        "Row",
+        "Name",
+        "PokedexNumber",
+        "ImgName",
+        "Generation",
+        "EvolutionStage",
+        "Evolved",
+        "FamilyID",
+        "CrossGen",
+        "Type1",
+        "Type2",
+        "Weather1",
+        "Weather2",
+        "STAT_TOTAL",
+        "ATK",
+        "DEF",
+        "STA",
+        "Legendary",
+        "Aquireable",
+        "Spawns",
+        "Regional",
+        "Raidable",
+        "Hatchable",
+        "Shiny",
+        "Nest",
+        "New",
+        "NotGettable",
+        "FutureEvolve",
+        "CP40",
+        "CP39",
+    ];
+}
