@@ -18,28 +18,28 @@ model Pokemon {
   img_name Int
   generation Int
   evolution_stage Int
-  envolved Int
-  family_id Int
+  evolved Int?
+  family_id Int?
   cross_gen Int
   type_1 String
-  type_2 String
+  type_2 String?
   weather_1 String
-  weather_2 String
+  weather_2 String?
   stat_total Int
   atk Int
   def Int
   sta Int
   legendary Int
   aquireable Int
-  spaws Int
+  spawns Int?
   regional Int
   raidable Int
   hatchable Int
   shiny Int
   nest Int
   new Int
-  not_gettable Int
-  future_envolve Int
+  not_gettable Int 
+  future_evolve Int
   cp_40 Int
   cp_39 Int
 }
