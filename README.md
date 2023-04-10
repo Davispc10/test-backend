@@ -31,3 +31,11 @@ Após terminar o desafio, você pode solicitar um pull request para a branch mas
 Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário e conceitos de segurança e padrões SOLID para execução do projeto.
 
 Boa sorte! :)
+
+
+## End-points
+ - /findAll: recebe por query a paginação e alguns filtros sendo todos eles opcionais. Retorna os pokemons filtrados e limitados (limit default = 15).
+    - filtros permitidos: type1, type2, generation, hatchable, spawns, legendary, evolve, shiny e new
+ - /find/search?name={{name}}&id={{id}}: busca um pokemon por nome ou por id.
+
+Para rodar, execute: ```docker-compose up --build```
