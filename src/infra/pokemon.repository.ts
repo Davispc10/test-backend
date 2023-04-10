@@ -21,13 +21,14 @@ export class PokemonRepository implements FindAllPokemonsRepository {
       take: page.getLimit(),
       order: {
         pokedexNumber: 'ASC'
-      }
+      },
+      where: params.filters
     })
 
     return {
       data: pokemons,
       page: page.getPage(),
-      totalPage: page.getMaxPage(),
+      totalPages: page.getMaxPage(),
       limit: page.getLimit(),
       total: total,
     }
