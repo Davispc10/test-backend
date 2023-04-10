@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon",
-    "script:dev": "npx ts-node src/utils/script.ts"
+    "script:dev": "npx ts-node src/utils/script.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
