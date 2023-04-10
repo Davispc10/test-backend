@@ -9,13 +9,21 @@ export namespace FindAllPokemonsService {
   }
 
   type Filters = {
-    name: string
+    type1?: string
+    type2?: string
+    generation?: number
+    hatchable?: number
+    legendary?: boolean
+    evolve?: boolean
+    spawns?: boolean
+    shiny?: boolean
+    new?: boolean
   }
 
   export type Result = {
     data: Pokemon[]
     page: number
-    totalPage: number
+    totalPages: number
     limit: number
     total: number
   }
@@ -41,8 +49,8 @@ export namespace FindAllPokemonsService {
     aquireable: number
     spawns: boolean
     regional: boolean
-    raidable: boolean
-    hatchable: boolean
+    raidable: number
+    hatchable: number
     shiny: boolean
     nest: boolean
     new: boolean

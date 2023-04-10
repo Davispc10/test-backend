@@ -5,17 +5,13 @@ export interface FindAllPokemonsRepository {
 export namespace FindAllPokemonsRepository {
   export type Params = {
     page: number
-    filters: Filters
-  }
-
-  type Filters = {
-    name: string
+    filters: { [key: string]: string | boolean | number }
   }
 
   export type Result = {
     data: Pokemon[]
     page: number
-    totalPage: number
+    totalPages: number
     limit: number
     total: number
   }
@@ -41,8 +37,8 @@ export namespace FindAllPokemonsRepository {
     aquireable: number
     spawns: boolean
     regional: boolean
-    raidable: boolean
-    hatchable: boolean
+    raidable: number
+    hatchable: number
     shiny: boolean
     nest: boolean
     new: boolean
