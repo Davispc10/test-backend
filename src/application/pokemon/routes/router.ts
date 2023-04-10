@@ -11,11 +11,12 @@ const worksheet = file.Sheets[sheetName];
 const data: Pokemon[] = xlsx.utils.sheet_to_json(worksheet);
 const mappedData = pokemonMapper(data);
 
-router.get('/pokemon', (req: Request, res: Response) => {
+router.get('/pokemons', (req: Request, res: Response) => {
   try {
     res.status(200).send(mappedData);
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    res.status(500).send(`An ${error} occurred.`);
   }
 });
 
@@ -28,7 +29,7 @@ router.get('/pokemon/search', (req: Request, res: Response) => {
 
     res.status(200).send(results);
   } catch (error) {
-    console.error(error);
+    res.status(500).send(`An ${error} occurred.`);
   }
 });
 
@@ -42,7 +43,7 @@ router.get('/pokemon/page/:pageNumber', (req: Request, res: Response) => {
 
     res.status(200).send(results);
   } catch (error) {
-    console.error(error);
+    res.status(500).send(`An ${error} occurred.`);
   }
 });
 
@@ -56,7 +57,7 @@ router.get('/pokemon/filter/:field/:value', (req: Request, res: Response) => {
 
     res.status(200).send(filteredData);
   } catch (error) {
-    console.error(error);
+    res.status(500).send(`An ${error} occurred.`);
   }
 });
 
