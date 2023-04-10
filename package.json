@@ -4,8 +4,10 @@
   "description": "Olá Dev! Tudo bem?",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/utils/script.js && node dist/index.js",
     "dev": "npx nodemon",
-    "script:dev": "npx ts-node src/utils/script.ts",
+    "script": "node dist/utils/script.js",
+    "script:dev": "npx ts-node dist/utils/script.s",
     "build": "tsc"
   },
   "repository": {
