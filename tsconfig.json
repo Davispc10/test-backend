@@ -7,9 +7,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDirs": [
-      "src"
-    ],
     "allowJs": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
