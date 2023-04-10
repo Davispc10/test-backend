@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import path from 'path'
 import XLSX from 'xlsx'
 import { DataSource } from 'typeorm'
@@ -55,9 +56,10 @@ async function savePokemons(pokemons: Pokemon[]): Promise<void> {
   const dataSource = new DataSource({
     type: 'postgres',
     port: 5432,
-    username: 'user',
-    password: 'password',
-    database: 'db-dinheirow',
+    host: process.env.DB_HOST,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
     synchronize: true,
     logging: true,
     entities: [PgPokemon]
