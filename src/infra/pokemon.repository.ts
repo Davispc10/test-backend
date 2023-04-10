@@ -3,12 +3,29 @@ import { FindAllPokemonsRepository } from "../domain/repositories/find-all-pokem
 import { PgPokemon } from "./pokemon.entity";
 import { PgConnection } from "./db";
 import { Page } from "../domain/entities/page";
+import { FindPokemonByNameRepository } from "../domain/repositories/find-pokemon-by-name.repository";
+import { FindPokemonByIdRepository } from "../domain/repositories/find-pokemon-by-id.repository";
 
-export class PokemonRepository implements FindAllPokemonsRepository {
+export class PokemonRepository implements FindAllPokemonsRepository, FindPokemonByNameRepository, FindPokemonByIdRepository {
   private pokemonRepository: Repository<PgPokemon>
 
   constructor() {
     this.pokemonRepository = PgConnection.getInstance().getRepository(PgPokemon)
+  }
+
+  async findById({ id }: FindPokemonByIdRepository.Param): Promise<FindPokemonByIdRepository.Result> {
+    const pokemon = await this.pokemonRepository.findOne({
+      where: { id }
+    })
+    return pokemon ?? undefined
+  }
+
+  async findByName({ name }: FindPokemonByNameRepository.Param): Promise<FindPokemonByNameRepository.Result> {
+    const pokemon = await this.pokemonRepository.findOne({
+      where: [{ name }]
+    })
+
+    return pokemon ?? undefined
   }
 
   async findAll(params: FindAllPokemonsRepository.Params): Promise<FindAllPokemonsRepository.Result> {
