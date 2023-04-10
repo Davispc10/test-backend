@@ -66,10 +66,10 @@ export class PgPokemon {
   regional!: boolean
 
   @Column()
-  raidable!: boolean
+  raidable!: number
 
   @Column()
-  hatchable!: boolean
+  hatchable!: number
 
   @Column()
   shiny!: boolean

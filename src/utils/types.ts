@@ -19,8 +19,8 @@ export type Pokemon = {
   aquireable: number
   spawns: boolean
   regional: boolean
-  raidable: boolean
-  hatchable: boolean
+  raidable: number
+  hatchable: number
   shiny: boolean
   nest: boolean
   new: boolean
@@ -29,35 +29,3 @@ export type Pokemon = {
   cp40: number
   cp39: number
 }
-
-/*
-Name	
-Pokedex Number	
-Img name	
-Generation	
-Evolution Stage	
-Evolved	
-FamilyID	
-Cross Gen	
-Type 1	
-Type 2	
-Weather 1	
-Weather 2	
-STAT TOTAL	
-ATK	
-DEF	
-STA	
-Legendary	
-Aquireable	
-Spawns	
-Regional	
-Raidable	
-Hatchable	
-Shiny	
-Nest	
-New	
-Not-Gettable	
-Future Evolve	
-100% CP @ 40	
-100% CP @ 39
-*/
