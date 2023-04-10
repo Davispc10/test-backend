@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { FindAllPokemonsService } from '../../domain/services/find-all-pokemons.service'
+import { InvalidDataException } from '../../domain/errors/invalid-data-exception'
 
 export class FindAllPokemonsController {
   constructor(
@@ -19,7 +20,11 @@ export class FindAllPokemonsController {
       return response.status(200).json(pokemons)
     } catch (error) {
       console.log(error)
-      return response.status(500).json({ error })
+
+      if (error instanceof InvalidDataException)
+        return response.status(400).json({ error: error.message })
+
+      return response.status(500).json({ error: 'Internal server error' })
     }
   }
 }
