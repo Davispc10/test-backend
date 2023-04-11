@@ -37,6 +37,12 @@ docker-compose up -d
 npm run typeorm migration:run -- -d ./src/data-source.ts
 ```
 
+3. Executando a API:
+
+```
+npm run dev:start
+```
+
 ## Acessando a API
 
 Acesse a API em http://localhost:3000/
