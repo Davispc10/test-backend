@@ -1,11 +1,24 @@
 import { Router } from "express";
-import { SheetController } from "../controllers/sheet.controller";
+import { SheetService } from "../services/sheet.service";
+import { PokemonController } from "../controllers/pokemon.controller";
+import { PokemonService } from "../services/pokemon.service";
 
-const sheetController: SheetController = new SheetController();
+
+const sheetService : SheetService = new SheetService();
+const pokemonService : PokemonService = new PokemonService();
+const pokemonController: PokemonController = new PokemonController(sheetService, pokemonService);
 const router: Router = Router();
 
+// Rota base da api, contem apenas informações básicas
+router.get('/', pokemonController.home);
 
-router.get('/', sheetController.home);
-router.post('/sheet/read', sheetController.readSheet);
+// Rota para listagem de todos os registros
+router.get('/pokemon', pokemonController.list.bind(pokemonController));
+
+// Rota para listagem com filtros dos registros
+router.get('/pokemon/filter', pokemonController.list.bind(pokemonController));
+
+// Rota para leitura da planilha e ingestão para o banco de dados
+router.post('/pokemon/read', pokemonController.readSheet.bind(pokemonController));
 
 export { router };
