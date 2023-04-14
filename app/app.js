@@ -1,7 +1,15 @@
 const express = require('express');
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const router = require('./routes/router');
+
 const app = express();
+app.use(router);
 
-app.get('/', (req, res) => 
-    res.status(200).send('API Pokemon GO - Ana Laura S. Mendes'));
 
-app.listen(2510, () => console.log('Server running'));
+const PORT = process.env.SERVER_PORT || 2510;
+app.listen(PORT, () => console.log('Server running'));
+
+module.exports = app;
