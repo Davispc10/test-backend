@@ -7,5 +7,8 @@ router.get('/pokemons', pokemonController.getAll);
 
 router.get('/pokemons/filters/pokedex_number', pokemonController.getByPokedexNumber);
 router.get('/pokemons/filters/generation', pokemonController.getByGeneration);
+router.get('/pokemons/filters/type', pokemonController.getByType);
+
+router.get('/pokemons/finders/biggest_stat', pokemonController.getBiggestStatTotal);
 
 module.exports = router;
