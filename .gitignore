@@ -3,3 +3,4 @@ app/node_modules/
 Pokemon Go.csv
 Pokemon Go.xlsx
 app/.env
+test/node_modules/
