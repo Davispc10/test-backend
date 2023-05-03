@@ -15,16 +15,13 @@ class PokemonRepository implements IPokemonRepository {
   // create
   async create (data: IPokemonDTO[]): Promise<HttpResponse> {
 
-    console.log (...data)
-    const result = await this.repository
-    .createQueryBuilder()
-    .insert()
-    .into(Pokemon)
-    .values(
-      data
-    )
-    .execute()
+    const pokemon = this.repository.create(data)
+
+    const result = await this.repository.save(pokemon)
+   
     .then(pessoaResult => {
+      console.log(pessoaResult)
+
       return ok(pessoaResult)
     })
     .catch(error => {
