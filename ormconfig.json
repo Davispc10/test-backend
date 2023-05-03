@@ -3,15 +3,14 @@
   "port": 5432,
   "host": "localhost",
   "username": "velez_user",
+  "synchronize": true,
+  "logging": true,
   "password": "123456",
-  "database": "velez_db", 
-  "migrations": [
-    "./src/shared/infra/typeorm/migrations/*.ts"
-  ],
+  "database": "velez_db",
   "entities": [
     "./src/modules/**/infra/typeorm/entities/*.ts"
   ],
   "cli": {
-    "migrationsDir": "./src/shared/infra/typeorm/migrations"
+    "entitesDir": "./src/modules/**/infra/typeorm/entities"
   }
 }

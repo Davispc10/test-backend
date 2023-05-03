@@ -1,14 +1,18 @@
 import { Router } from 'express'
-import { CreatePessoaController } from '@modules/operation/use-cases/pessoa/create-pessoa/create-pessoa-controller'
-import { ListPessoaController } from '@modules/operation/use-cases/pessoa/list-pessoa/list-pessoa-controller'
+import { CreatePokemonController } from '@modules/operation/use-cases/pokemon/create-pokemon/create-pokemon-controller'
+import { ListPokemonController } from '@modules/operation/use-cases/pokemon/list-pokemon/list-pokemon-controller'
 import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensure-authenticated'
+import multer from 'multer'
+import uploadConfig from '@config/upload'
 
 const pessoaRoutes = Router()
 
-const createPessoaController = new CreatePessoaController()
-const listPessoaController = new ListPessoaController()
+const uploadXlsx = multer(uploadConfig)
 
-pessoaRoutes.post('/', ensureAuthenticated, createPessoaController.handle )
-pessoaRoutes.post('/list', ensureAuthenticated, listPessoaController.handle)
+const createPokemonController = new CreatePokemonController()
+const listPokemonController = new ListPokemonController()
+
+pessoaRoutes.post('/', ensureAuthenticated, uploadXlsx.single('file'), createPokemonController.handle )
+pessoaRoutes.post('/list', ensureAuthenticated, listPokemonController.handle)
 
 export { pessoaRoutes }

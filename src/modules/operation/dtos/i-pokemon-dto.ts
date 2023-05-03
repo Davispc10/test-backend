@@ -1,11 +1,11 @@
 interface IPokemonDTO {
-  id?: number
+  id?: string
   name?: string 
   pokedexId?: number
   imageName?: string
   generation?: number
-  evolutionStage?: number
-  evolved?: boolean
+  evolutionStage?: string
+  evolved?: number
   familyID?: number
   crossGen?: boolean
   type1?: string

@@ -3,7 +3,7 @@ import { HttpResponse } from '@shared/helpers'
 
 interface IPokemonRepository {
   // create
-  create (data: IPokemonDTO): Promise<HttpResponse> 
+  create (data: IPokemonDTO[]): Promise<HttpResponse> 
 
 
   // list

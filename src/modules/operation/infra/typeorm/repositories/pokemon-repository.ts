@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm'
 import { IPokemonDTO } from '@modules/operation/dtos/i-pokemon-dto'
-import { IPokemonRepository } from '@modules/operation/repositories/i-pessoa-repository'
+import { IPokemonRepository } from '@modules/operation/repositories/i-pokemon-repository'
 import { Pokemon } from '@modules/operation/infra/typeorm/entities/pokemon'
 import { serverError, ok, HttpResponse } from '@shared/helpers'
 
@@ -13,82 +13,26 @@ class PokemonRepository implements IPokemonRepository {
 
 
   // create
-  async create ({
-    id,
-    name,
-    pokedexId,
-    imageName,
-    generation,
-    evolutionStage,
-    evolved,
-    familyID,
-    crossGen,
-    type1,
-    type2,
-    weather1,
-    weather2,
-    statTotal,
-    atk,
-    def,
-    sta,
-    legendary,
-    aquireable,
-    spawns,
-    regional,
-    raidable,
-    hatchable,
-    shiny,
-    nest,
-    new,
-    notGettable,
-    futureEvolve,
-    cp40,
-    cp39
-  }: IPokemonDTO): Promise<HttpResponse> {
-    const pessoa = this.repository.create(
-      { 
-          id,
-          name,
-          pokedexId,
-          imageName,
-          generation,
-          evolutionStage,
-          evolved,
-          familyID,
-          crossGen,
-          type1,
-          type2,
-          weather1,
-          weather2,
-          statTotal,
-          atk,
-          def,
-          sta,
-          legendary,
-          aquireable,
-          spawns,
-          regional,
-          raidable,
-          hatchable,
-          shiny,
-          nest,
-          new,
-          notGettable,
-          futureEvolve,
-          cp40,
-          cp39
-      }
-    )
+  async create (data: IPokemonDTO[]): Promise<HttpResponse> {
 
-    const result = await this.repository.save(pessoa)
-      .then(pessoaResult => {
-        return ok(pessoaResult)
-      })
-      .catch(error => {
-        return serverError(error.message)
-      })
+    console.log (...data)
+    const result = await this.repository
+    .createQueryBuilder()
+    .insert()
+    .into(Pokemon)
+    .values(
+      data
+    )
+    .execute()
+    .then(pessoaResult => {
+      return ok(pessoaResult)
+    })
+    .catch(error => {
+      return serverError(error.message)
+    })
 
     return result
+
   }
 
 

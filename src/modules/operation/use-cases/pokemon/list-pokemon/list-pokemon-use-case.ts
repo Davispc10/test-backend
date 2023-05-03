@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe'
-import { IPessoaRepository } from '@modules/operation/repositories/i-pessoa-repository'
+import { IPokemonRepository } from '@modules/operation/repositories/i-pokemon-repository'
 import { HttpResponse } from '@shared/helpers'
 
 interface IRequest {
@@ -10,10 +10,10 @@ interface IRequest {
 }
 
 @injectable()
-class ListPessoaUseCase {
+class ListPokemonUseCase {
   constructor(
-    @inject('PessoaRepository')
-    private pessoaRepository: IPessoaRepository
+    @inject('PokemonRepository')
+    private pessoaRepository: IPokemonRepository
   ) {}
 
   async execute({
@@ -33,4 +33,4 @@ class ListPessoaUseCase {
   }
 }
 
-export { ListPessoaUseCase }
+export { ListPokemonUseCase }

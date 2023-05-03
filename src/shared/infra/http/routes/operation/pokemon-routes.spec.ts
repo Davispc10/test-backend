@@ -7,7 +7,7 @@ let connection: Connection;
 let token;
 let pessoaId;
 
-describe("Create Pessoa Controller Integration Test", () => {
+describe("Pokemon Controller Integration Test", () => {
   beforeAll(async () => {
     connection = await createConnection();
     
@@ -67,39 +67,6 @@ describe("Create Pessoa Controller Integration Test", () => {
 
     pessoaId = response.body.data[response.body.data.length - 1].id;
     
-    expect(response.status).toBe(200);
-  });
-  
-  it("should be able to select pessoa by id", async () => {
-    
-    const response = await request(app).get(`/pessoas/${pessoaId}`)
-      .set({ Authorization: `Bearer ${token}` })
-
-    expect(response.status).toBe(200);
-  });
-  
-  it("should be able to update pessoa by id", async () => {
-    
-    const response = await request(app).put('/pessoas/')
-      .set({ Authorization: `Bearer ${token}` })
-      .send({
-        nome: "Gabriel Velezmoro (editado)",
-        nomeMae: "Nome mae",
-        nomePai: "Nome pai",
-        cep: "88790000",
-        dataNascimento: "02-07-1997"
-      });
-
-
-      console.log(response.body)
-    expect(response.status).toBe(200);
-  });
-  
-  it("should be able to delete pessoa by id", async () => {
-    
-    const response = await request(app).delete(`/pessoas/${pessoaId}`)
-      .set({ Authorization: `Bearer ${token}` })
-
     expect(response.status).toBe(200);
   });
 
