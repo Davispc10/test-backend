@@ -49,9 +49,10 @@ class PokemonRepository implements IPokemonRepository {
     const offset = rowsPerPage * page
 
     try {
-      let persons = await this.repository.createQueryBuilder('per')
+      let persons = await this.repository.createQueryBuilder('poke')
         .select()
-        .where('CAST(nome AS VARCHAR) ilike :search', { search: `%${search}%` })
+        .where('CAST(name AS VARCHAR) ilike :search', { search: `%${search}%` })
+        .orWhere('CAST(type_1 AS VARCHAR) ilike :search', { search: `%${search}%` })
         .take(rowsPerPage)
         .skip(offset)
         .getMany()
