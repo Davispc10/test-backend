@@ -5,7 +5,9 @@ import createConnection from '@shared/infra/typeorm';
 
 let connection: Connection;
 let token;
-let pessoaId;
+
+
+const testfile = `${__dirname}/../../../../../../Pokemon Go.xlsx`
 
 describe("Pokemon Controller Integration Test", () => {
   beforeAll(async () => {
@@ -40,23 +42,22 @@ describe("Pokemon Controller Integration Test", () => {
     expect(response.body).toHaveProperty("token");
   });
   
-  it("should be able to create pessoa", async () => {
+  it("should be able to create pokemon", async () => {
     
-    const response = await request(app).post("/pessoas/")
+    jest.setTimeout(30000)
+    
+    const response = await request(app).post("/pokemons/")
       .set({ Authorization: `Bearer ${token}` })
-      .send({
-        nome: "Gabriel Velezmoro",
-        nomeMae: "Nome mae",
-        nomePai: "Nome pai",
-        cep: "88790000",
-        dataNascimento: "02-07-1997"
-      });
-    expect(response.status).toBe(200);
-  });
-  
-  it("should be able to list all pessoas", async () => {
+      .field('Content-Type', 'multipart/form-data')
+      .attach('file', testfile, { contentType: 'application/octet-stream' });
     
-    const response = await request(app).post("/pessoas/list")
+      expect(response.status).toBe(200);
+  
+    });
+  
+  it("should be able to list all pokemons", async () => {
+    
+    const response = await request(app).post("/pokemons/list")
       .set({ Authorization: `Bearer ${token}` })
       .send({
         search: "",
@@ -64,8 +65,6 @@ describe("Pokemon Controller Integration Test", () => {
         page: 0,
         columnOrder: ["ASC", "ASC"]
       });
-
-    pessoaId = response.body.data[response.body.data.length - 1].id;
     
     expect(response.status).toBe(200);
   });
