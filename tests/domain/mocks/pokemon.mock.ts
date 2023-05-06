@@ -28,7 +28,7 @@ export const mockedPokemonEntity: PokemonEntity = {
   pokedex: { id: faker.datatype.number(), name: faker.name.firstName(), createdAt: new Date(), updatedAt: new Date() },
   type: [],
   weather: [],
-  family: [],
+  family: { id: faker.datatype.number(), name: faker.name.firstName(), createdAt: new Date(), updatedAt: new Date() },
   createdAt: new Date(),
   updatedAt: new Date()
 }

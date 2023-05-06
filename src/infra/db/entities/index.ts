@@ -1,0 +1,5 @@
+export * from './pokedex.entity'
+export * from './pokemon-family.entity'
+export * from './pokemon-type.entity'
+export * from './pokemon-weather.entity'
+export * from './pokemon.entity'

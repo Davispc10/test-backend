@@ -32,7 +32,7 @@ export class PokemonEntity implements PokemonProperties {
   pokedex: PokedexEntity
   type: PokemonTypeEntity[]
   weather: PokemonWeatherEntity[]
-  family: PokemonFamilyEntity[]
+  family: PokemonFamilyEntity
   createdAt: Date
   updatedAt: Date
 

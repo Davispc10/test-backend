@@ -31,7 +31,7 @@ export type PokemonProperties = {
   pokedex: PokedexProperties
   type: PokemonTypeProperties[]
   weather: PokemonWeatherProperties[]
-  family: PokemonFamilyProperties[]
+  family: PokemonFamilyProperties
   createdAt: Date
   updatedAt: Date
 }
