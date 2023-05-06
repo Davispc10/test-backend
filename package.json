@@ -6,12 +6,15 @@
   "scripts": {
     "lint": "eslint .",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "npm t -- --watch",
+    "test:coverage": "npm t -- --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.16.3",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
@@ -21,7 +24,9 @@
     "git-commit-msg-linter": "^4.7.3",
     "husky": "^8.0.3",
     "jest": "^29.5.0",
+    "jest-mock-extended": "^3.0.4",
     "lint-staged": "^13.2.2",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   }
 }
