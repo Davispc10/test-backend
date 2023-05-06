@@ -1,11 +1,5 @@
 import { PgPokedex,PgPokemonFamily,PgPokemonType,PgPokemonWeather } from '@/infra/db/entities'
-import {
-  type PokedexEntity,
-  type PokemonFamilyEntity,
-  type PokemonTypeEntity,
-  type PokemonWeatherEntity,
-  type PokemonEntity
-} from '@/domain/entities'
+import { type PokemonEntity } from '@/domain/entities'
 
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 
@@ -78,16 +72,16 @@ export class PgPokemon implements PokemonEntity {
     cp39: number
 
   @ManyToOne(() => PgPokedex, pokedex => pokedex.id)
-    pokedex: PokedexEntity
+    pokedex: PgPokedex
 
   @OneToMany(() => PgPokemonType, pokemonType => pokemonType.id)
-    type: PokemonTypeEntity[]
+    type: PgPokemonType[]
 
   @OneToMany(() => PgPokemonWeather, pokemonWeather => pokemonWeather.id)
-    weather: PokemonWeatherEntity[]
+    weather: PgPokemonWeather[]
 
   @ManyToOne(() => PgPokemonFamily, pokemonFamily => pokemonFamily.id)
-    family: PokemonFamilyEntity
+    family: PgPokemonFamily
 
   @CreateDateColumn({ name: 'created_at' })
     createdAt: Date

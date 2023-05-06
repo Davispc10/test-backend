@@ -2,7 +2,7 @@ import { type PokemonEntity } from '@/domain/entities'
 
 import { faker } from '@faker-js/faker'
 
-export const mockedPokemonEntity: PokemonEntity = {
+export const mockedPokemonEntity = (): PokemonEntity => ({
   id: faker.datatype.number(),
   name: faker.name.firstName(),
   imgName: faker.internet.url(),
@@ -31,4 +31,4 @@ export const mockedPokemonEntity: PokemonEntity = {
   family: { id: faker.datatype.number(), name: faker.name.firstName(), createdAt: new Date(), updatedAt: new Date() },
   createdAt: new Date(),
   updatedAt: new Date()
-}
+})

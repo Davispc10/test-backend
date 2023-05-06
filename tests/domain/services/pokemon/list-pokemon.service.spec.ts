@@ -10,7 +10,7 @@ describe('ListPokemonService', () => {
 
   beforeAll(() => {
     loadPokemonRepositoyry = mock()
-    loadPokemonRepositoyry.list.mockResolvedValue([mockedPokemonEntity])
+    loadPokemonRepositoyry.list.mockResolvedValue([mockedPokemonEntity()])
   })
 
   beforeEach(() => {
