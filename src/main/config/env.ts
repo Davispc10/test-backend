@@ -9,15 +9,6 @@ export const env = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    synchronize: process.env.TYPEORM_SYNCHRONIZE,
-    entities: [
-   `${__dirname}/dist/infra/db/entities/**/*.js`
-    ],
-    migrations: [
-    `${__dirname}/dist/infra/db/migrations/**/*.js`
-    ],
-    cli: {
-      migrationsDir: `${__dirname}/src/infra/db/migrations`
-    }
+    synchronize: process.env.TYPEORM_SYNCHRONIZE ?? false
   }
 }
