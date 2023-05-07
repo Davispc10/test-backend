@@ -8,5 +8,7 @@ import { postgresDataSource } from '@/infra/db/helpers'
 
 postgresDataSource
   .initialize()
-  .then(() => app.listen(env.port, () => { console.log(`Server running at http://localhost:${env.port}`) }))
+  .then(async () => {
+    app.listen(env.port, () => { console.log(`Server running at http://localhost:${env.port}`) })
+  })
   .catch(console.error)

@@ -10,6 +10,6 @@ export const postgresDataSource = new DataSource(
     username: env.database.username,
     password: env.database.password,
     database: env.database.database,
-    entities: [__dirname + '/../**/*.entity.js'],
+    entities: [__dirname + '/../**/*.entity.{js,ts}'],
     synchronize: env.database.synchronize as boolean
   })

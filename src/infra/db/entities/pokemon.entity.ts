@@ -1,7 +1,7 @@
 import { PgPokedex,PgPokemonFamily,PgPokemonType,PgPokemonWeather } from '@/infra/db/entities'
 import { type PokemonEntity } from '@/domain/entities'
 
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity({ name: 'pokemon' })
 export class PgPokemon implements PokemonEntity {
@@ -18,7 +18,7 @@ export class PgPokemon implements PokemonEntity {
     generation: number
 
   @Column({ name: 'evolution_stage' })
-    evolutionStage: number
+    evolutionStage: string
 
   @Column()
     evolved: boolean
@@ -71,16 +71,18 @@ export class PgPokemon implements PokemonEntity {
   @Column({ name: 'cp_39' })
     cp39: number
 
-  @ManyToOne(() => PgPokedex, pokedex => pokedex.id)
+  @ManyToOne(() => PgPokedex, pokedex => pokedex.id, { eager: true })
     pokedex: PgPokedex
 
-  @OneToMany(() => PgPokemonType, pokemonType => pokemonType.id)
-    type: PgPokemonType[]
+  @ManyToMany(() => PgPokemonType, pokemonType => pokemonType.id, { eager: true })
+  @JoinTable()
+    types: PgPokemonType[]
 
-  @OneToMany(() => PgPokemonWeather, pokemonWeather => pokemonWeather.id)
-    weather: PgPokemonWeather[]
+  @ManyToMany(() => PgPokemonWeather, pokemonWeather => pokemonWeather.id, { eager: true })
+  @JoinTable()
+    weathers: PgPokemonWeather[]
 
-  @ManyToOne(() => PgPokemonFamily, pokemonFamily => pokemonFamily.id)
+  @ManyToOne(() => PgPokemonFamily, pokemonFamily => pokemonFamily.id, { eager: true })
     family: PgPokemonFamily
 
   @CreateDateColumn({ name: 'created_at' })

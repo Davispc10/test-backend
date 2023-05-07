@@ -11,7 +11,7 @@ export class PokemonEntity implements PokemonProperties {
   name: string
   imgName: string
   generation: number
-  evolutionStage: number
+  evolutionStage: string
   evolved: boolean
   crossGen: boolean
   atk: number
@@ -30,8 +30,8 @@ export class PokemonEntity implements PokemonProperties {
   cp40: number
   cp39: number
   pokedex: PokedexEntity
-  type: PokemonTypeEntity[]
-  weather: PokemonWeatherEntity[]
+  types: PokemonTypeEntity[]
+  weathers: PokemonWeatherEntity[]
   family: PokemonFamilyEntity
   createdAt: Date
   updatedAt: Date

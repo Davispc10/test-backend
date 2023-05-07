@@ -1,6 +1,7 @@
 import { type PokemonWeatherEntity } from '@/domain/entities'
 
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import { PgPokemon } from './pokemon.entity'
 
 @Entity({ name: 'pokemon_weather' })
 export class PgPokemonWeather implements PokemonWeatherEntity {
@@ -9,6 +10,9 @@ export class PgPokemonWeather implements PokemonWeatherEntity {
 
   @Column()
     name: string
+
+  @ManyToMany(() => PgPokemon, pokemon => pokemon.weathers)
+    pokemons: PgPokemon[]
 
   @CreateDateColumn({ name: 'created_at' })
     createdAt: Date

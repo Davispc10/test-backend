@@ -10,7 +10,7 @@ export type PokemonProperties = {
   name: string
   imgName: string
   generation: number
-  evolutionStage: number
+  evolutionStage: string
   evolved: boolean
   crossGen: boolean
   atk: number
@@ -29,8 +29,8 @@ export type PokemonProperties = {
   cp40: number
   cp39: number
   pokedex: PokedexProperties
-  type: PokemonTypeProperties[]
-  weather: PokemonWeatherProperties[]
+  types: PokemonTypeProperties[]
+  weathers: PokemonWeatherProperties[]
   family: PokemonFamilyProperties
   createdAt: Date
   updatedAt: Date
