@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    container_name: pokemons-api
+    image: node:18
+    working_dir: /usr/src/app
+    command: bash -c "npm install && npm run seed && npm run build && npm start"
+    restart: always
+    volumes:
+      - ./package.json:/usr/src/app/package.json:z
+      - .:/usr/src/app
+    ports:
+      - "$PORT:$PORT"
+    env_file:
+      - .env
+    depends_on:
+      - db
+  db:
+    container_name: pokemons-postgres
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data     
+
+volumes:
+  db:
+    driver: local
