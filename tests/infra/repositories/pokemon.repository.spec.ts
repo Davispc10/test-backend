@@ -1,5 +1,6 @@
 import { makeFakeDb } from '@/tests/infra/mocks'
 import { mockedPokemonEntity } from '@/tests/domain/mocks'
+import { type PokemonEntity } from '@/domain/entities'
 import { PokemonRepository } from '@/infra/db/repositories'
 import { PgPokedex, PgPokemon, PgPokemonFamily, PgPokemonType, PgPokemonWeather } from '@/infra/db/entities'
 
@@ -8,14 +9,16 @@ import { type Repository } from 'typeorm'
 
 describe('PokemonRepository', () => {
   let sut: PokemonRepository
+  let emptyBackup: IBackup
   let backup: IBackup
   let pokemonPgRepository: Repository<PgPokemon>
+  let mockedPokemon: PokemonEntity
 
   beforeAll(async () => {
     const { db, dataSource } = await makeFakeDb()
-    backup = db.backup()
+    emptyBackup = db.backup()
     pokemonPgRepository = dataSource.manager.getRepository(PgPokemon)
-    const mockedPokemon = mockedPokemonEntity()
+    mockedPokemon = mockedPokemonEntity()
     const pokedexRepository = dataSource.manager.getRepository(PgPokedex)
     const pokemonFamilyRepository = dataSource.manager.getRepository(PgPokemonFamily)
     const pokemonTypeRepository = dataSource.manager.getRepository(PgPokemonType)
@@ -25,6 +28,7 @@ describe('PokemonRepository', () => {
     await pokemonTypeRepository.save(mockedPokemon.types)
     await pokemonWeatherRepository.save(mockedPokemon.weathers)
     await pokemonPgRepository.save(mockedPokemon)
+    backup = db.backup()
   })
 
   beforeEach(() => {
@@ -39,11 +43,29 @@ describe('PokemonRepository', () => {
     })
 
     it('should return an empty array if there is no pokemons on database', async () => {
+      emptyBackup.restore()
+
+      const pokemons = await sut.list()
+
+      expect(pokemons.length).toBe(0)
+    })
+  })
+
+  describe('find(id: string)', () => {
+    it('should return a pokemon on success', async () => {
       backup.restore()
 
-      const tags = await sut.list()
+      const pokemon = await sut.find(mockedPokemon.id)
 
-      expect(tags.length).toBe(0)
+      expect(pokemon).toBeTruthy()
+    })
+
+    it('should return undefined if no pokemon was found', async () => {
+      emptyBackup.restore()
+
+      const pokemon = await sut.find(mockedPokemon.id)
+
+      expect(pokemon).toBeFalsy()
     })
   })
 })
