@@ -1,3 +1,5 @@
+import { type NotFoundError } from '@/domain/errors'
+
 export type HttpRequest = {
   body?: any
   query?: any
@@ -21,13 +23,25 @@ export type ErrorResponse = {
   }
 }
 
-export const ok = <T=any> (data: T, headers?: any): HttpResponse<T> => ({
+export const ok = <T=any> (data: T): HttpResponse<T> => ({
   statusCode: 200,
   data: {
     code: 200,
     data
-  },
-  headers
+  }
+})
+
+export const notFound = (error: NotFoundError): HttpResponse<ErrorResponse> => ({
+  statusCode: 404,
+  data: {
+    code: 404,
+    data: {
+      error: {
+        type: error.name,
+        message: error.message
+      }
+    }
+  }
 })
 
 export const serverError = (error: Error): HttpResponse<ErrorResponse> => ({
