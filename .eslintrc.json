@@ -21,6 +21,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-types": "off",
-    "n/no-path-concat": "off"
+    "n/no-path-concat": "off",
+    "@typescript-eslint/no-useless-constructor": "off"
   }
 }
