@@ -6,27 +6,27 @@ import { mock, type MockProxy } from 'jest-mock-extended'
 
 describe('ListPokemonService', () => {
   let sut: ListPokemonService
-  let loadPokemonRepositoyry: MockProxy<ListPokemonRepository>
+  let listPokemonRepository: MockProxy<ListPokemonRepository>
 
   beforeAll(() => {
-    loadPokemonRepositoyry = mock()
-    loadPokemonRepositoyry.list.mockResolvedValue([mockedPokemonEntity()])
+    listPokemonRepository = mock()
+    listPokemonRepository.list.mockResolvedValue([mockedPokemonEntity()])
   })
 
   beforeEach(() => {
-    sut = new ListPokemonService(loadPokemonRepositoyry)
+    sut = new ListPokemonService(listPokemonRepository)
   })
 
   it('should call ListPokemonReposity correctly', async () => {
     await sut.execute()
 
-    expect(loadPokemonRepositoyry.list).toHaveBeenCalled()
-    expect(loadPokemonRepositoyry.list).toHaveBeenCalledTimes(1)
+    expect(listPokemonRepository.list).toHaveBeenCalled()
+    expect(listPokemonRepository.list).toHaveBeenCalledTimes(1)
   })
 
   it('should throw if ListPokemonRepository throws', async () => {
     const expectedError = new Error('list-pokemon-repository-error')
-    loadPokemonRepositoyry.list.mockRejectedValueOnce(expectedError)
+    listPokemonRepository.list.mockRejectedValueOnce(expectedError)
 
     await sut.execute().catch(error => {
       expect(error).toBe(expectedError)
