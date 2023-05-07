@@ -51,7 +51,7 @@ describe('PokemonRepository', () => {
     })
   })
 
-  describe('find(id: string)', () => {
+  describe('find(id: number)', () => {
     it('should return a pokemon on success', async () => {
       backup.restore()
 
@@ -61,6 +61,24 @@ describe('PokemonRepository', () => {
     })
 
     it('should return undefined if no pokemon was found', async () => {
+      emptyBackup.restore()
+
+      const pokemon = await sut.find(mockedPokemon.id)
+
+      expect(pokemon).toBeFalsy()
+    })
+  })
+
+  describe('findByType(type: string)', () => {
+    it('should return a list of pokemons on success', async () => {
+      backup.restore()
+
+      const pokemons = await sut.findByType(mockedPokemon.types[0].name)
+
+      expect(pokemons).toBeTruthy()
+    })
+
+    it('should return an empty array if no pokemon was found', async () => {
       emptyBackup.restore()
 
       const pokemon = await sut.find(mockedPokemon.id)
