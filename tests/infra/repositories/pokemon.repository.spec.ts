@@ -22,8 +22,8 @@ describe('PokemonRepository', () => {
     const pokemonWeatherRepository = dataSource.manager.getRepository(PgPokemonWeather)
     await pokedexRepository.save(mockedPokemon.pokedex)
     await pokemonFamilyRepository.save(mockedPokemon.family)
-    await pokemonTypeRepository.save(mockedPokemon.type)
-    await pokemonWeatherRepository.save(mockedPokemon.weather)
+    await pokemonTypeRepository.save(mockedPokemon.types)
+    await pokemonWeatherRepository.save(mockedPokemon.weathers)
     await pokemonPgRepository.save(mockedPokemon)
   })
 
