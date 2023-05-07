@@ -1,9 +1,9 @@
 import { mockedPokemonEntity } from '@/tests/domain/mocks/pokemon.mock'
+import { type PokemonEntity } from '@/domain/entities'
 import { FindPokemonByTypeService } from '@/domain/services/pokemon'
 import { type FindPokemonByTypeRepository } from '@/domain/contracts/repositories/pokemon'
 
 import { mock, type MockProxy } from 'jest-mock-extended'
-import { type PokemonEntity } from '@/domain/entities'
 
 describe('FindPokemonByTypeService', () => {
   let sut: FindPokemonByTypeService
@@ -20,7 +20,7 @@ describe('FindPokemonByTypeService', () => {
     sut = new FindPokemonByTypeService(findPokemonByTypeRepository)
   })
 
-  it('should call FindPokemonByTypeRepository with correct typez', async () => {
+  it('should call FindPokemonByTypeRepository with correct type', async () => {
     const command = { type: mockedPokemon.types[0].name }
     await sut.execute(command)
 
