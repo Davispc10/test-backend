@@ -1,33 +1,50 @@
-# Teste Dinheirow - Engenheiro de Software
+# Pokemongo
 
-Olá Dev! Tudo bem?
+Este é um projeto Node.js criado com Express, ele carrega os dados de uma planilha XLSX para uma base mongo e disponibiliza rotas para a consulta.
 
-Nós estamos sempre em busca de profissionais interessantes e interessados, com boa capacidade de aprendizado, adaptação e principalmente bom senso!
+## Como rodar este projeto
 
-Este teste tem como objetivo avaliar e desafiar você. Não é obrigatório realizá-lo completamente, queremos apenas reconhecer seu esforço e potencial para aprender, se adaptar e tomar decisões.
+1. Tenha o node instalado, essa aplicação foi construída na versão v18.16.0
+2. Tenha o docker intalado, essa aplicação usa um banco de dados Mongo em container [install Docker](https://www.docker.com/products/docker-desktop/)
+3. Clone este repositório para sua máquina local
+```
+ git clone https://github.com/aloiziobsc/PokemonGo.git
+```
+4. Navegue até o diretório do projeto e instale as dependências:
+ ```
+ cd PokemonGo
+ npm install
+```
+5. Inicie o container para criar o banco e o Mongo Express com o comando:
+ ```
+docker-compose up -d
+```
+6. Inicie o servidor de desenvolvimento com o comando:
+ ```
+npm run dev
+```
+7. Agora o projeto já estará rodando e pronto para uso.
+8. Abra seu navegador em http://localhost:8081/ para utilizar a interface do mongo Express.
+9. Abra seu navegador em http://localhost:3000/api-docs/ para ver as rotas disponiveis no swagger.
+10. Para encerrar o container use o comando:
+ ```
+docker-compose down
+```
 
-Vamos ao teste!
 
-## Desafio Pokémon Go!
+## Tecnologias utilizadas
 
-Sua missão é importar os dados do Pokemon Go, que estão no excel, e criar uma API usando NodeJS para que possamos consumir estes dados de maneira prática, rápida e automatizada.
+- [Express](https://expressjs.com/pt-br/)
+- [Docker](https://www.docker.com/)
+- [Mongoose](https://mongoosejs.com/)
+- [Swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)
 
-Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca, paginação e filtros. Fique à vontade para decidir quais filtros são mais interessantes.
+## Comandos disponíveis
 
-## Tecnologias
+- `npm run dev`: inicia o servidor de desenvolvimento
+- `docker-compose up -d`: inicia o container docker
+- `docker-compose down`: encerra o container docker
 
-- Conceitos de API RESTful
-- Modelagem de dados
-- NodeJS
-- Algum banco de dados, por exemplo, MySQL, SQL Server, MongoDB, etc...
-- Git
+## Licença
 
-## Por onde começo?
-Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
-
-Após terminar o desafio, você pode solicitar um pull request para a branch master do nosso repositório. Vamos receber e fazer a avaliação de todos.
-
-## Só isso?
-Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário e conceitos de segurança e padrões SOLID para execução do projeto.
-
-Boa sorte! :)
+Este projeto está licenciado sob a licença MIT.
