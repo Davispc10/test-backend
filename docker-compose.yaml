@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  mongo:
+    image: mongo
+    container_name: mongo-pokemongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      # MONGO_INITDB_ROOT_USERNAME: <%= ENV['MONGO_INITDB_ROOT_USERNAME'] %>
+      # MONGO_INITDB_ROOT_PASSWORD: <%= ENV['MONGO_INITDB_ROOT_PASSWORD'] %>
+    command: mongod --auth
+    
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express-pokemongo
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADIMINUSER: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/

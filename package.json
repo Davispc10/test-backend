@@ -1,0 +1,30 @@
+{
+  "name": "pokemongo",
+  "version": "1.0.0",
+  "description": "Olá Dev! Tudo bem?",
+  "main": "server.ts",
+  "scripts": {
+    "start": "tes-node src/server.ts",
+    "dev": "nodemon --exec ts-node src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@types/swagger-ui": "^3.52.0",
+    "body-parser": "^1.20.2",
+    "connect-timeout": "^1.9.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.1.0",
+    "swagger-ui-express": "^4.6.3",
+    "xlsx": "^0.18.5"
+  }
+}

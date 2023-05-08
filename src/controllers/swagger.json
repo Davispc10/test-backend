@@ -1,0 +1,340 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+			"title": "Pokemongo API",
+			"description": "É uma API parar realizar consultas de pokemons",
+			"termsOfService": "https://storagefest.s3-us-west-2.amazonaws.com/files/em-construcao_krHMS.png",
+			"contact": {
+				"email": "pokemons@mail.com"
+			},
+			"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000/v1",
+			"description": "API DEV"
+		}
+	],
+	"paths": {
+		"/pokemons": {
+			"get": {
+				"summary": "Retorna pokemons",
+				"description": "Retorna todos os pokemons cadastrados",
+				"tags": ["Pokemons"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"aplication/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"pokemons": {
+											"type": "array",
+											"items": {
+												"$ref": "#/components/schemas/Pokemon"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Nenhum pokemon cadastrado"
+					}
+				}
+			}
+		},
+		"/{name}": {
+			"get": {
+				"summary": "Busca pokemon",
+				"description": "Busca pokemon pelo nome",
+				"tags": ["Pokemons"],
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"description": "Nome do pokemon",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+								"aplication/json": {
+									"schema": {
+										"type": "object",
+										"properties": {
+											"pokemon": {
+											"type": "object",
+											"$ref": "#/components/schemas/PokemonRaw"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Nenhum pokemon encontrado"
+					}
+				}
+			}
+		},
+		"/page": {
+			"post": {
+				"summary": "Busca paginada",
+				"description": "Busca de pokemon paginada",
+				"tags": ["Pokemons"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"page": {
+										"type": "number"
+									},
+									"pageSize": {
+										"type": "number"
+									}
+								}
+							},
+							"example": {
+								"page": 1,
+								"pageSize": 2
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+							"description": "OK",
+							"content": {
+								"aplication/json": {
+									"schema": {
+										"type": "object",
+										"properties": {
+											"pokemons": {
+												"type": "array",
+												"items": {
+													"$ref": "#/components/schemas/PokemonRaw"
+												}
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Nenhum pokemon encontrado"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Pokemon": {
+				"type": "object",
+				"properties": {
+					"row": {
+						"type": "number"
+					},
+					"name": {
+						"type": "string"
+					},
+					"pokedexNumber": {
+						"type": "number"
+					},
+					"imgName": {
+						"type": "string"
+					},
+					"generation": {
+						"type": "number"
+					},
+					"evolutionStage": {
+						"type": "string"
+					},
+					"evolved": {
+						"type": "boolean"
+					},
+					"familyId": {
+						"type": "number"
+					},
+					"crossGen": {
+						"type": "boolean"
+					},
+					"type1": {
+						"type": "string"
+					},
+					"type2": {
+						"type": "string"
+					},
+					"weather1": {
+						"type": "string"
+					},
+					"weather2": {
+						"type": "string"
+					},
+					"statTotal": {
+						"type": "number"
+					},
+					"atk": {
+						"type": "number"
+					},
+					"def": {
+						"type": "number"
+					},
+					"sta": {
+						"type": "number"
+					},
+					"legendary": {
+						"type": "number"
+					},
+					"aquireable": {
+						"type": "number"
+					},
+					"spawns": {
+						"type": "boolean"
+					},
+					"regional": {
+						"type": "boolean"
+					},
+					"raidable": {
+						"type": "number"
+					},
+					"hatchable": {
+						"type": "number"
+					},
+					"shiny": {
+						"type": "boolean"
+					},
+					"nest": {
+						"type": "boolean"
+					},
+					"new": {
+						"type": "boolean"
+					},
+					"notGettable": {
+						"type": "boolean"
+					},
+					"futureEvolve":  {
+						"type": "boolean"
+					},
+					"cp40": {
+						"type": "number"
+					},
+					"cp39": {
+						"type": "number"
+					}
+			}
+		},
+		"PokemonRaw" : {
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"row": {
+						"type": "number"
+					},
+					"name": {
+						"type": "string"
+					},
+					"pokedexNumber": {
+						"type": "number"
+					},
+					"imgName": {
+						"type": "string"
+					},
+					"generation": {
+						"type": "number"
+					},
+					"evolutionStage": {
+						"type": "string"
+					},
+					"evolved": {
+						"type": "boolean"
+					},
+					"familyId": {
+						"type": "number"
+					},
+					"crossGen": {
+						"type": "boolean"
+					},
+					"type1": {
+						"type": "string"
+					},
+					"type2": {
+						"type": "string"
+					},
+					"weather1": {
+						"type": "string"
+					},
+					"weather2": {
+						"type": "string"
+					},
+					"statTotal": {
+						"type": "number"
+					},
+					"atk": {
+						"type": "number"
+					},
+					"def": {
+						"type": "number"
+					},
+					"sta": {
+						"type": "number"
+					},
+					"legendary": {
+						"type": "number"
+					},
+					"aquireable": {
+						"type": "number"
+					},
+					"spawns": {
+						"type": "boolean"
+					},
+					"regional": {
+						"type": "boolean"
+					},
+					"raidable": {
+						"type": "number"
+					},
+					"hatchable": {
+						"type": "number"
+					},
+					"shiny": {
+						"type": "boolean"
+					},
+					"nest": {
+						"type": "boolean"
+					},
+					"new": {
+						"type": "boolean"
+					},
+					"notGettable": {
+						"type": "boolean"
+					},
+					"futureEvolve":  {
+						"type": "boolean"
+					},
+					"cp40": {
+						"type": "number"
+					},
+					"cp39": {
+						"type": "number"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"updatedAt": {
+						"type": "string"
+					} 
+				}
+			}
+		}
+	}
+}
