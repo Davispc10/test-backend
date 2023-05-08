@@ -1,7 +1,7 @@
+import { PgPokemon } from '@/infra/db/entities'
 import { type PokemonWeatherEntity } from '@/domain/entities'
 
 import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
-import { PgPokemon } from './pokemon.entity'
 
 @Entity({ name: 'pokemon_weather' })
 export class PgPokemonWeather implements PokemonWeatherEntity {

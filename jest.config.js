@@ -2,9 +2,11 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/main/**',
+    '!<rootDir>/src/domain/entities/**',
     '!<rootDir>/src/application/errors/**',
     '!<rootDir>/src/**/index.ts',
-    '!<rootDir>/src/infra/db/migrations/**'
+    '!<rootDir>/src/infra/db/helpers/**',
+    '!<rootDir>/src/infra/db/seeds/**'
   ],
   coverageDirectory: 'coverage',
   coverageProvider: 'babel',

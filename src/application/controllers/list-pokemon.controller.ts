@@ -1,6 +1,6 @@
 import { type Controller } from '@/application/contracts'
-import { ok, type HttpRequest, type HttpResponse, serverError } from '@/application/helpers'
 import { type FindPokemonByTypeService, type ListPokemonService } from '@/domain/services/pokemon'
+import { ok, type HttpRequest, type HttpResponse, serverError } from '@/application/helpers'
 
 export class ListPokemonController implements Controller {
   constructor (

@@ -1,7 +1,7 @@
-import { type Controller } from '@/application/contracts'
 import { ok, type HttpRequest, type HttpResponse, serverError, notFound } from '@/application/helpers'
-import { NotFoundError } from '@/domain/errors'
 import { type FindPokemonByIdService } from '@/domain/services/pokemon'
+import { type Controller } from '@/application/contracts'
+import { NotFoundError } from '@/domain/errors'
 
 export class FindPokemonByIdController implements Controller {
   constructor (

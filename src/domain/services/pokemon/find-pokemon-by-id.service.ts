@@ -1,6 +1,6 @@
 import { type PokemonEntity } from '@/domain/entities'
-import { type FindPokemonByIdRepository } from '@/domain/contracts/repositories'
 import { NotFoundError } from '@/domain/errors'
+import { type FindPokemonByIdRepository } from '@/domain/contracts/repositories'
 
 export class FindPokemonByIdService {
   constructor (

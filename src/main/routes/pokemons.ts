@@ -1,5 +1,5 @@
-import { makeFindPokemonByIdController, makeListPokemonController } from '@/main/factories/controllers'
 import { adaptExpressRoute as adapt } from '@/main/adapters'
+import { makeFindPokemonByIdController, makeListPokemonController } from '@/main/factories/controllers'
 
 import { type Router } from 'express'
 
