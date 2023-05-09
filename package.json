@@ -1,0 +1,23 @@
+{
+	"name": "dinheirow-challange",
+	"version": "1.0.0",
+	"main": "src/index.js",
+	"scripts": {
+		"start": "node src/index.js",
+		"dev": "nodemon src/index.js",
+		"test": "jest ./test"
+	},
+	"repository": "git@github.com:felipe0liveira/dinheirow-challange.git",
+	"author": "Felipe Oliveira <felpd3v@gmail.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"jest": "^29.5.0",
+		"nodemon": "^2.0.22",
+		"prettier": "^2.8.8"
+	},
+	"dependencies": {
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
+		"mongoose": "^7.1.0"
+	}
+}
