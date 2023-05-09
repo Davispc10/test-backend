@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 			query: params,
 		})
 
-		res.json({
+		res.status(200).json({
 			totalItems: count,
 			page,
 			limit,
