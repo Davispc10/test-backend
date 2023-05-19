@@ -19,8 +19,9 @@ Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca
 - Conceitos de API RESTful
 - Modelagem de dados
 - NodeJS
-- Algum banco de dados, por exemplo, MySQL, SQL Server, MongoDB, etc...
+- Algum banco de dados, por exemplo, MySQL, Postgres, etc...
 - Git
+- Express
 
 ## Por onde começo?
 Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
@@ -28,6 +29,6 @@ Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta 
 Após terminar o desafio, você pode solicitar um pull request para a branch master do nosso repositório. Vamos receber e fazer a avaliação de todos.
 
 ## Só isso?
-Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário e conceitos de segurança e padrões SOLID para execução do projeto.
+Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário, conceitos de segurança, padrões de pojeto e SOLID para execução do projeto.
 
 Boa sorte! :)
