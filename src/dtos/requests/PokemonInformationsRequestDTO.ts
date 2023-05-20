@@ -1,5 +1,4 @@
-export class PokemonResponseDTO {
-  id: number;
+export class PokemonInformationsRequestDTO {
   name: string;
   pokedexNumber: string;
   imgName: string;

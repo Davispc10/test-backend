@@ -1,4 +1,4 @@
-import { PokemonEntity } from "../entities/PokemonEntity";
+import { PokemonEntity } from "../entities/PokemonInformationsEntity";
 
 export {};
 

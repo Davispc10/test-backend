@@ -1,17 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import { AppDataSource } from "./database-config/data-source";
 import { pokemonRoutes } from "./routes/PokemonRoutes";
 import { uploadFileRoutes } from "./routes/UploadFileRoutes";
 
 const app = express();
-AppDataSource.initialize()
-  .then(() => {
-    console.log("db initialized");
-  })
-  .catch((err) => {
-    console.error(err);
-  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

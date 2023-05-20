@@ -1,7 +1,7 @@
 import "dotenv/config";
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { PokemonEntity } from "../entities/PokemonEntity";
+import { PokemonInformationsEntity } from "../entities/PokemonInformationsEntity";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -12,5 +12,13 @@ export const AppDataSource = new DataSource({
   database: "test",
   synchronize: true,
   logging: false,
-  entities: [PokemonEntity],
+  entities: [PokemonInformationsEntity],
 });
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("db initialized");
+  })
+  .catch((err) => {
+    console.error(err);
+  });

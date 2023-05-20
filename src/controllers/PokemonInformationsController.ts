@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { PokemonFacade } from "../facades/PokemonFacade";
+import { PokemonInformationsFacade } from "../facades/PokemonInformationsFacade";
 
-export class PokemonController {
-  constructor(private readonly pokemonFacade: PokemonFacade) {
+export class PokemonInformationsController {
+  constructor(private readonly pokemonFacade: PokemonInformationsFacade) {
     this.pokemonFacade = pokemonFacade;
   }
 
