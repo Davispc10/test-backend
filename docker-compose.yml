@@ -1,0 +1,30 @@
+version: "3.6"
+
+services:
+  api:
+    container_name: server
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: development
+    environment:
+      - POSTGRES_URL=postgres-db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PW=postgres
+      - SERVER_PORT=3333
+    volumes:
+      - .:/usr/src/app
+    command: npm run dev
+    ports:
+      - 3333:3333
+
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=test
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 5432:5432

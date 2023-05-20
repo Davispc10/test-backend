@@ -1,0 +1,31 @@
+export class PokemonRequestDTO {
+  name: string;
+  pokedexNumber: string;
+  imgName: string;
+  generation: string;
+  evolutionStage: string;
+  evolved: string;
+  familyId: string;
+  crossGen: string;
+  type1: string;
+  type2: string;
+  Weather1: string;
+  Weather2: string;
+  statTotal: string;
+  atk: string;
+  def: string;
+  sta: string;
+  legendary: string;
+  aquireable: string;
+  spawns: string;
+  regional: string;
+  raidable: string;
+  hatchable: string;
+  shiny: string;
+  nest: string;
+  new: string;
+  notGettable: string;
+  futureEvolve: string;
+  oneHundredPercent40: string;
+  oneHundredPercent39: string;
+}
