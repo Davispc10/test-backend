@@ -14,7 +14,8 @@ export class UploadFileServiceImpl {
     const worksheet = content.worksheets[0];
 
     worksheet.eachRow((row, index) => {
-      if (index > 0) {
+      console.log("AQUII", index);
+      if (index > 1) {
         const pokemonInformationsEntity = new PokemonInformationsEntity();
         pokemonInformationsEntity.name = row.getCell(2)?.value!?.toLocaleString().toLowerCase();
         pokemonInformationsEntity.pokedexNumber = row.getCell(3)?.value!?.toLocaleString().toLowerCase();

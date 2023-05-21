@@ -24,11 +24,29 @@ Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca
 - Express
 
 ## Por onde começo?
+
 Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
 
 Após terminar o desafio, você pode solicitar um pull request para a branch master do nosso repositório. Vamos receber e fazer a avaliação de todos.
 
 ## Só isso?
+
 Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário, conceitos de segurança, padrões de pojeto e SOLID para execução do projeto.
 
 Boa sorte! :)
+
+# Segue algumas informações do projeto:
+
+## Tecnologias necessárias para rodar o projeto localmente:
+
+- Docker compose
+- Docker
+- Nodejs
+
+## Para rodar o projeto na sua máquina, siga os passos:
+
+- cd test-backend
+
+- rode o seguinte código:
+
+  `sh docker-compose-dev.sh`

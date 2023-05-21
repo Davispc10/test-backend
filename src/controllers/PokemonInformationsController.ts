@@ -26,14 +26,26 @@ export class PokemonInformationsController {
   }
 
   public async save(request: Request, response: Response): Promise<Response> {
+    if (!request.body || Object.keys(request.body).length === 0) {
+      return response.status(400).send({ error: "Invalid request" });
+    }
+
     return response.status(201).send(await this.pokemonFacade.save(request.body));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    return response.status(200).send(await this.pokemonFacade.update(Number.parseInt(request.params.id), request.body));
+    try {
+      return response.status(200).send(await this.pokemonFacade.update(Number.parseInt(request.params.id), request.body));
+    } catch (error) {
+      return response.status(400).send({ error: "Invalid request" });
+    }
   }
 
   public async deleteById(request: Request, response: Response): Promise<Response> {
-    return response.status(204).send(await this.pokemonFacade.deleteById(Number.parseInt(request.params.id)));
+    try {
+      return response.status(204).send(await this.pokemonFacade.deleteById(Number.parseInt(request.params.id)));
+    } catch (error) {
+      return response.status(404);
+    }
   }
 }
