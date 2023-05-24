@@ -7,6 +7,7 @@ export class PokemonRepositoryDatabase implements PokemonRepository {
   async saveAll(input: PokemonDataInput[]): Promise<void> {
     try {
       await this.databaseConnection.query('BEGIN')
+      await this.databaseConnection.query('delete from pokemons;')
       input.map(async (pokemon) => {
         const preparedStatement = {
           name: 'save-all-pokemons',

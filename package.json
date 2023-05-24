@@ -16,7 +16,7 @@
     "start": "node -r dotenv/config dist/app.js",
     "format": "prettier --write \"{src,test}/**/*.ts\"",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
-    "xlsx-to-json": "node tests/xlsx-to-json.js",
+    "xlsx-to-json": "ts-node tests/xlsx-to-json.ts",
     "prisma:studio": "prisma studio",
     "prisma:migrate": "prisma migrate"
   },

@@ -1,4 +1,5 @@
 import xlsx from 'xlsx'
+import { FixerDuplicatedUniqueKey } from '../../shared/helpers/fix-duplicated-unique-key'
 import { PokemonDataInput, PokemonRepository } from '../repositories/pokemon-repository'
 
 export class UploadFile {
@@ -8,7 +9,7 @@ export class UploadFile {
     const workbook = xlsx.read(buffer, { type: 'buffer' })
     const worksheet = workbook.Sheets[workbook.SheetNames[0]]
     const pokemons = xlsx.utils.sheet_to_json(worksheet) as PokemonDataInput[]
-    await this.pokemonRepository.deleteAll()
-    await this.pokemonRepository.saveAll(pokemons)
+    const pokemonsUniqueNonDuplicatedKey = FixerDuplicatedUniqueKey.fix(pokemons)
+    await this.pokemonRepository.saveAll(pokemonsUniqueNonDuplicatedKey)
   }
 }

@@ -6,10 +6,12 @@ import { prismaClient } from '../prisma-client'
 export class PrismaPokemonRepositoryDatabase implements PokemonRepository {
   async saveAll(pokemons: PokemonDataInput[]): Promise<void> {
     const pokemonsDataInputPrisma: Prisma.PokemonsCreateInput[] = pokemons.map(PrismaPokemonMapper.toPrisma)
-    await prismaClient.pokemons.createMany({
-      data: pokemonsDataInputPrisma,
-      skipDuplicates: true,
-    })
+    await prismaClient.$transaction([
+      prismaClient.pokemons.deleteMany({}),
+      prismaClient.pokemons.createMany({
+        data: pokemonsDataInputPrisma,
+      }),
+    ])
   }
 
   async findAll(input: FindAllPokemonsInput): Promise<PokemonDataStorage[]> {
@@ -25,10 +27,6 @@ export class PrismaPokemonRepositoryDatabase implements PokemonRepository {
       },
     })
     return pokemon
-  }
-
-  async deleteAll(): Promise<void> {
-    await prismaClient.pokemons.deleteMany()
   }
 
   async findAllByPokedexRef(ref: number): Promise<PokemonDataStorage[]> {

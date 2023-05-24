@@ -2,7 +2,6 @@ export interface PokemonRepository {
   saveAll(pokemons: PokemonDataInput[]): Promise<void>
   findAll(input: FindAllPokemonsInput): Promise<any[]>
   findOneById(id: number): Promise<PokemonDataStorage | null>
-  deleteAll(): Promise<void>
   findAllByPokedexRef(ref: number): Promise<PokemonDataStorage[]>
 }
 

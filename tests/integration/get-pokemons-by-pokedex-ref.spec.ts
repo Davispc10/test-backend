@@ -26,7 +26,6 @@ describe('[testes de integração] verificando caso de uso de buscar um pokemon 
 
   it('deve buscar apenas um pokemon pelo sua referência da pokedex (teste com stub)', async () => {
     const pokemonRepositoryStub: PokemonRepository = {
-      deleteAll: vi.fn(),
       findAll: vi.fn(),
       findAllByPokedexRef: vi.fn().mockResolvedValue(
         Promise.resolve([

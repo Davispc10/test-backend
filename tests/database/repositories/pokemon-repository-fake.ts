@@ -8,6 +8,7 @@ export class PokemonRepositoryFake implements PokemonRepository {
   }
 
   async saveAll(pokemons: PokemonDataInput[]): Promise<void> {
+    this.pokemonsInMemoryDatabase = []
     pokemons.map((pokemon) => {
       this.pokemonsInMemoryDatabase.push({
         id: pokemon['Row'],
@@ -35,18 +36,20 @@ export class PokemonRepositoryFake implements PokemonRepository {
    * não implementado por causa da complexidade, porém é possível testar se foi chamado com os parâmetros esperados com um spy e dar um retorno falso com um stub
    */
   async findAll(input: FindAllPokemonsInput): Promise<any[]> {
-    return this.pokemonsInMemoryDatabase
+    const {
+      paginationParams: { limit, offset },
+    } = input
+    const pokemons = this.pokemonsInMemoryDatabase.slice(offset, limit)
+    return pokemons
   }
 
   async findOneById(id: number): Promise<PokemonDataStorage | null> {
-    return this.pokemonsInMemoryDatabase.find((pokemon) => pokemon.id === id) || null
-  }
-
-  async deleteAll(): Promise<void> {
-    this.pokemonsInMemoryDatabase = []
+    const pokemon = this.pokemonsInMemoryDatabase.find((pokemon) => pokemon.id === id) || null
+    return pokemon
   }
 
   async findAllByPokedexRef(ref: number): Promise<PokemonDataStorage[]> {
-    return this.pokemonsInMemoryDatabase.filter((pokemon) => pokemon.pokedex_ref === ref)
+    const pokemons = this.pokemonsInMemoryDatabase.filter((pokemon) => pokemon.pokedex_ref === ref)
+    return pokemons
   }
 }
