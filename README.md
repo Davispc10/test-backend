@@ -91,7 +91,7 @@ URL base: `http://localhost:3000`
   <h4>query string params</h4>
 
   * `?limit=`: *integer* - quantidade de Pokemons por busca (valor padrão = 100)
-  * `?offset=`: *integer* - quantidade de Pokemons que quer dar pular na busca (valor padrão = 0)
+  * `?offset=`: *integer* - quantidade de Pokemons que quer pular na busca (valor padrão = 0)
   * `?generation=`: *integer* - geração do Pokemon
   * `?evolution_stage=`: *string* | *integer* - estágio evolutivo do Pokemon
   * `?name=`: *string* - buscar pelo nome do Pokemon (considera letras e nomes incompletos)
