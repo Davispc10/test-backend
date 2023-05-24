@@ -23,6 +23,7 @@
 
 ## O que eu gostaria de ter feito a mais?
 
+* Melhorar o retorno de recursos que são paginados. A rota que retorna todos os Pokemons permite que seja feita paginação por meio das query strings `offset` e `limit`, mas, apesar de o retorno ser paginado, ele não está informando nada sobre a paginação, e isso não traz uma boa experiência com o uso da API.
 * Documentação da API com Swagger
 * Seeds para popular o banco de dados com o arquivo "pokemons.json"
 * Testes para mais cenários (ex.: testes para casos de erros `400` lançados após a validação com o Zod)
