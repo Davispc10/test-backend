@@ -1,34 +1,261 @@
-# Teste Dinheirow - Engenheiro de Software
+<h1 id="header" align="center">Pokemon Go API</h1>
+<p align="center">Projeto simples de API Rest para consumo de "recursos Pokemons"</p>
 
-Olá Dev! Tudo bem?
+## Sumário
 
-Nós estamos sempre em busca de profissionais interessantes e interessados, com boa capacidade de aprendizado, adaptação e principalmente bom senso!
+1. [O que consegui fazer?](#o-que-consegui-fazer)
+2. [O que eu gostaria de ter feito a mais?](#o-que-eu-gostaria-de-ter-feito-a-mais)
+3. [Comandos úteis](#comandos-úteis)
+4. [Como testar?](#como-testar)
+5. [Observações finais](#observações-finais)
 
-Este teste tem como objetivo avaliar e desafiar você. Não é obrigatório realizá-lo completamente, queremos apenas reconhecer seu esforço e potencial para aprender, se adaptar e tomar decisões.
+## O que consegui fazer?
 
-Vamos ao teste!
+* [x] Testes end-to-end (teste da API feitos com TDD)
+* [x] Testes de integração (teste dos casos de uso)
+* [x] Validação de inputs nas rotas (com Zod)
+* [x] Tratamento de erros personalizado com middleware de formatação e modulo "express-async-errors"
+* [x] Servir o banco de dados com o Docker
+* [x] Implementar repositórios com ORM (Prisma)
+* [x] Implementar repositórios com o driver do Postgres sem ORM
+* [x] Lidar com SQL Injection usando instruções preparadas no driver Postgres e Prisma ORM
 
-## Desafio Pokémon Go!
+## O que eu gostaria de ter feito a mais?
 
-Sua missão é importar os dados do Pokemon Go, que estão no excel, e criar uma API usando NodeJS para que possamos consumir estes dados de maneira prática, rápida e automatizada.
+* Documentação da API com Swagger
+* Seeds para popular o banco de dados com o arquivo "pokemons.json"
+* Testes para mais cenários (ex.: testes para casos de erros `400` lançados após a validação com o Zod)
+* Remover responsabilidades dos arquivos de rota, levar para controllers (rotas > controllers > casos de uso)
+* Criar entidade de domínio "Pokemon". Acabei não criando por pensar que ficaria anêmico (sem comportamento) e que seria praticamente um DTO
 
-Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca, paginação e filtros. Fique à vontade para decidir quais filtros são mais interessantes.
+## Comandos úteis
 
-## Tecnologias
+* `docker compose up` - baixa uma imagem mínima do postgresql, cria um container e inicializa o serviço de banco de dados
+* `npm run test:ui` - executa todos os testes e abre uma interface gráfica  no navegador para mostra os resultados
+* `npm run test:integration` - executa apenas os testes de integração
+* `npm run test:e2e` - executa apenas os testes end-to-end
+* `npm run dev` - inicializa o servidor de desenvolvimento com ts-node
+* `npm run build` - compila todo código typescript e gera o diretório `dist` com o código javascript de produção
+* `npm run start` - inicializa o servidor de produção
+* `npm run xlsx-to-json ` - executa uma cli com node para adicionar o caminho para um arquivo .xlsx e gerar um arquivo .json
+* `npm run prisma:studio` - abre uma interface gráfica no navegador para manipular o banco de dados
+* `npm run prisma:migrate dev --name start` - cria a tabela pokemons no banco de dados
 
-- Conceitos de API RESTful
-- Modelagem de dados
-- NodeJS
-- Algum banco de dados, por exemplo, MySQL, Postgres, etc...
-- Git
-- Express
+## Como testar?
 
-## Por onde começo?
-Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
+1. `npm install` - instale as dependências do projeto
+2. `docker compose up`
+3. `npm run prisma:migrate dev --name start`
+5. `npm run dev`
+6. `npm run test:ui` - verifique se os testes estão passando
+7. `npm run prisma:studio` - verifique o banco de dados
 
-Após terminar o desafio, você pode solicitar um pull request para a branch master do nosso repositório. Vamos receber e fazer a avaliação de todos.
+## Documentação da API
 
-## Só isso?
-Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário, conceitos de segurança, padrões de pojeto e SOLID para execução do projeto.
+### Rotas e respostas as solicitações
 
-Boa sorte! :)
+Uma pequena documentação dos recursos disponíveis com exemplos de filtros, respontas, status code e corpo de solicitações.
+
+**clique nas rotas para ver os detalhes**
+
+<details>
+  <summary><code>POST /api/uploads</code></summary>
+  </br>
+  <p>Insere os registros de Pokemons na base de dados a partir de um arquivo .xlsx.</p>
+  <h4>content-type: multipart/form-data</h4>
+  <p>A partir de um cliente HTTP use o tipo de Multipart Form com o método POST. Selecione o arquivo .xslx e envie a solicitação.</p>
+
+  ~~~json
+  // 201 Created
+  {}
+  ~~~
+</details>
+<details>
+  <summary><code>GET /api/pokemons</code></summary>
+  </br>
+  <p>Retorna todos os Pokemons com paginação e filtros.</p>
+  <h4>query params</h4>
+
+  * `limit`: *integer* - quantidade de Pokemons por busca
+  * `offset`: *integer* - quantidade de Pokemons que quer dar pular na busca
+  * `generation`: *integer* - geração do Pokemon
+  * `evolution_stage`: *string* | *integer* - estágio evolutivo do Pokemon
+  * `name`: *string* - buscar pelo nome do Pokemon (considera letras e nomes incompletos)
+  * `type_1`: *string* - busca pelo tipo principal do Pokemon
+  * `type_2`: *string* - busca pelo tipo secundário do Pokemon
+
+  ~~~json
+  // 200 OK
+  [
+    {
+      "id": 25,
+      "name": "Pikachu",
+      "pokedex_ref": 25,
+      "image_name": "25",
+      "generation": 1,
+      "evolution_stage": "1",
+      "evolved": 0,
+      "family_id": 10,
+      "type_1": "electric",
+      "type_2": null,
+      "weather_1": "Rainy",
+      "weather_2": null,
+      "stat_total": 283,
+      "attack": 112,
+      "defense": 101,
+      "stamina": 70,
+      "legendary": 0
+    }
+  ]
+  ~~~
+</details>
+<details>
+  <summary><code>GET /api/pokemons/{id}</code></summary>
+  </br>
+  <p>Retorna um Pokemon da base de dados, selecionado pelo seu identificador único.</p>
+  <h4>url params</h4>
+
+  * `id`: integer - identificador único do Pokemon
+
+  ~~~json
+  // 200 OK
+  {
+    "id": 25,
+    "name": "Pikachu",
+    "pokedex_ref": 25,
+    "image_name": "25",
+    "generation": 1,
+    "evolution_stage": "1",
+    "evolved": 0,
+    "family_id": 10,
+    "type_1": "electric",
+    "type_2": null,
+    "weather_1": "Rainy",
+    "weather_2": null,
+    "stat_total": 283,
+    "attack": 112,
+    "defense": 101,
+    "stamina": 70,
+    "legendary": 0
+  }
+  ~~~
+
+  <h4>Não encontrou o Pokemon</h4>
+
+  ~~~json
+  // 404 Not Found
+  {
+    "statusCode": 404,
+    "error": "pokemon not found 🔎"
+  }
+  ~~~
+</details>
+<details>
+  <summary><code>GET /api/pokemons/pokedex/{pokedex_ref}</code></summary>
+  </br>
+  <p>Retorna um ou mais variantes de um mesmo Pokemon da base de dados, selecionado pela sua referência ou código da pokedex.</p>
+  <h4>url params</h4>
+
+  * `ref`: integer - referência ou código do Pokemon na pokedex
+
+  ~~~json
+  // 200 OK
+  [
+    {
+      "id": 386,
+      "name": "Deoxys Defense",
+      "pokedex_ref": 386,
+      "image_name": "386-defense",
+      "generation": 3,
+      "evolution_stage": "1",
+      "evolved": 0,
+      "family_id": null,
+      "type_1": "psychic",
+      "type_2": null,
+      "weather_1": "Windy",
+      "weather_2": null,
+      "stat_total": 574,
+      "attack": 144,
+      "defense": 330,
+      "stamina": 100,
+      "legendary": 2
+    },
+    {
+      "id": 387,
+      "name": "Deoxys Normal",
+      "pokedex_ref": 386,
+      "image_name": "386",
+      "generation": 3,
+      "evolution_stage": "1",
+      "evolved": 0,
+      "family_id": null,
+      "type_1": "psychic",
+      "type_2": null,
+      "weather_1": "Windy",
+      "weather_2": null,
+      "stat_total": 560,
+      "attack": 345,
+      "defense": 115,
+      "stamina": 100,
+      "legendary": 2
+    },
+    {
+      "id": 388,
+      "name": "Deoxys Attack",
+      "pokedex_ref": 386,
+      "image_name": "386-attack",
+      "generation": 3,
+      "evolution_stage": "1",
+      "evolved": 0,
+      "family_id": null,
+      "type_1": "psychic",
+      "type_2": null,
+      "weather_1": "Windy",
+      "weather_2": null,
+      "stat_total": 560,
+      "attack": 414,
+      "defense": 46,
+      "stamina": 100,
+      "legendary": 2
+    },
+    {
+      "id": 389,
+      "name": "Deoxys Speed",
+      "pokedex_ref": 386,
+      "image_name": "386-speed",
+      "generation": 3,
+      "evolution_stage": "1",
+      "evolved": 0,
+      "family_id": null,
+      "type_1": "psychic",
+      "type_2": null,
+      "weather_1": "Windy",
+      "weather_2": null,
+      "stat_total": 548,
+      "attack": 230,
+      "defense": 218,
+      "stamina": 100,
+      "legendary": 2
+    }
+  ]
+  ~~~
+</details>
+
+## Observações finais
+
+É possível variar a implementação do repositório à partir do arquivos de rotas
+
+Exemplo do arquivo [src/infra/http/routes/uploads/index.ts](./src/infra/http/routes/uploads/index.ts)
+
+~~~ts
+  // trocando o repositório do prisma pelo repositório do driver do postgresql
+  // const pokemonRepository = new PrismaPokemonRepositoryDatabase()
+  const databaseConnection = new PgAdapter()
+  const pokemonRepository = new PokemonRepositoryDatabase(databaseConnection)
+  const uploadFile = new UploadFile(pokemonRepository)
+  const { buffer } = req.file
+  await uploadFile.execute(buffer)
+  res.status(201).json({})
+~~~
+
+[⬆️ topo](#header)
