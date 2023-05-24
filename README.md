@@ -7,7 +7,8 @@
 2. [O que eu gostaria de ter feito a mais?](#o-que-eu-gostaria-de-ter-feito-a-mais)
 3. [Comandos úteis](#comandos-úteis)
 4. [Como testar?](#como-testar)
-5. [Observações finais](#observações-finais)
+5. [Documentação da API](#documentação-da-api)
+6. [Observações finais](#observações-finais)
 
 ## O que consegui fazer?
 
@@ -56,6 +57,8 @@
 
 Uma pequena documentação dos recursos disponíveis com exemplos de filtros, respontas, status code e corpo de solicitações.
 
+URL base: `http://localhost:3000`
+
 **clique nas rotas para ver os detalhes**
 
 <details>
@@ -64,6 +67,17 @@ Uma pequena documentação dos recursos disponíveis com exemplos de filtros, re
   <p>Insere os registros de Pokemons na base de dados a partir de um arquivo .xlsx.</p>
   <h4>content-type: multipart/form-data</h4>
   <p>A partir de um cliente HTTP use o tipo de Multipart Form com o método POST. Selecione o arquivo .xslx e envie a solicitação.</p>
+
+  **exemplo de solicitação com cURL**
+
+  ~~~sh
+  curl --request POST \
+  --url http://localhost:3000/api/uploads \
+  --header 'content-type: multipart/form-data' \
+  --form file=path/to/file.xlsx
+  ~~~
+
+  **exemplo de resposta da solicitação**
 
   ~~~json
   // 201 Created
@@ -74,15 +88,24 @@ Uma pequena documentação dos recursos disponíveis com exemplos de filtros, re
   <summary><code>GET /api/pokemons</code></summary>
   </br>
   <p>Retorna todos os Pokemons com paginação e filtros.</p>
-  <h4>query params</h4>
+  <h4>query string params</h4>
 
-  * `limit`: *integer* - quantidade de Pokemons por busca
-  * `offset`: *integer* - quantidade de Pokemons que quer dar pular na busca
-  * `generation`: *integer* - geração do Pokemon
-  * `evolution_stage`: *string* | *integer* - estágio evolutivo do Pokemon
-  * `name`: *string* - buscar pelo nome do Pokemon (considera letras e nomes incompletos)
-  * `type_1`: *string* - busca pelo tipo principal do Pokemon
-  * `type_2`: *string* - busca pelo tipo secundário do Pokemon
+  * `?limit=`: *integer* - quantidade de Pokemons por busca (valor padrão = 100)
+  * `?offset=`: *integer* - quantidade de Pokemons que quer dar pular na busca (valor padrão = 0)
+  * `?generation=`: *integer* - geração do Pokemon
+  * `?evolution_stage=`: *string* | *integer* - estágio evolutivo do Pokemon
+  * `?name=`: *string* - buscar pelo nome do Pokemon (considera letras e nomes incompletos)
+  * `?type_1=`: *string* - busca pelo tipo principal do Pokemon
+  * `?type_2=`: *string* - busca pelo tipo secundário do Pokemon
+
+  **exemplo de solicitação com cURL**
+
+  ~~~sh
+  curl --request GET \
+  --url 'http://localhost:3000/api/pokemons?name=pikachu&generation=1'
+  ~~~
+
+  **exemplo de resposta da solicitação**
 
   ~~~json
   // 200 OK
@@ -113,9 +136,18 @@ Uma pequena documentação dos recursos disponíveis com exemplos de filtros, re
   <summary><code>GET /api/pokemons/{id}</code></summary>
   </br>
   <p>Retorna um Pokemon da base de dados, selecionado pelo seu identificador único.</p>
-  <h4>url params</h4>
+  <h4>url path params</h4>
 
-  * `id`: integer - identificador único do Pokemon
+  * `id`: *integer* - identificador único do Pokemon
+
+  **exemplo de solicitação com cURL**
+
+  ~~~sh
+  curl --request GET \
+  --url http://localhost:3000/api/pokemons/25
+  ~~~
+
+  **exemplo de resposta da solicitação**
 
   ~~~json
   // 200 OK
@@ -142,6 +174,15 @@ Uma pequena documentação dos recursos disponíveis com exemplos de filtros, re
 
   <h4>Não encontrou o Pokemon</h4>
 
+  **exemplo de solicitação com cURL**
+
+  ~~~sh
+  curl --request GET \
+  --url http://localhost:3000/api/pokemons/1000
+  ~~~
+
+  **exemplo de resposta da solicitação**
+
   ~~~json
   // 404 Not Found
   {
@@ -154,9 +195,18 @@ Uma pequena documentação dos recursos disponíveis com exemplos de filtros, re
   <summary><code>GET /api/pokemons/pokedex/{pokedex_ref}</code></summary>
   </br>
   <p>Retorna um ou mais variantes de um mesmo Pokemon da base de dados, selecionado pela sua referência ou código da pokedex.</p>
-  <h4>url params</h4>
+  <h4>url path params</h4>
 
-  * `ref`: integer - referência ou código do Pokemon na pokedex
+  * `pokedex_ref`: *integer* - referência ou código do Pokemon na pokedex
+
+  **exemplo de solicitação com cURL**
+
+  ~~~sh
+  curl --request GET \
+  --url http://localhost:3000/api/pokemons/pokedex/386
+  ~~~
+
+  **exemplo de resposta da solicitação**
 
   ~~~json
   // 200 OK
@@ -243,7 +293,9 @@ Uma pequena documentação dos recursos disponíveis com exemplos de filtros, re
 
 ## Observações finais
 
-É possível variar a implementação do repositório à partir do arquivos de rotas
+1. Não adicionei todas as colunas da planilha de Pokemons ao banco de dados. Fiz isso porque pensei que para validar o desafio uma abordagem com menos colunas já seria o suficiente, dado que a única diferença seria mapear mais colunas.
+
+2. É possível variar a implementação do repositório à partir do arquivos de rotas
 
 Exemplo do arquivo [src/infra/http/routes/uploads/index.ts](./src/infra/http/routes/uploads/index.ts)
 
