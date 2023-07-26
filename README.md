@@ -14,14 +14,25 @@ Sua missão é importar os dados do Pokemon Go, que estão no excel, e criar uma
 
 Esta API deverá seguir o mínimo de práticas RESTful e conter listagens, busca, paginação e filtros. Fique à vontade para decidir quais filtros são mais interessantes.
 
-## Tecnologias
-
-- Conceitos de API RESTful
-- Modelagem de dados
+## Tecnologias Obrigatórias:
 - NodeJS
 - Algum banco de dados, por exemplo, MySQL, Postgres, etc...
 - Git
 - Express
+- ORM
+
+## Requisitos:
+- Modelagem de dados
+- Testes (Ex: Jest, etc.)
+- Conceitos de API RESTful
+- Alguma Arquitetura de Software (Ex: Arquitetura Limpa)
+- Conceitos SOLID
+
+## Diferencial
+- Padrões de Projeto (Design Patterns)
+- Docker
+- Autenticação
+- Alguma estratégia de cache
 
 ## Por onde começo?
 Primeiramente, você pode fazer um fork desse repositório aqui, para sua conta do Github, depois disso crie uma branch nova com o seu nome (ex: nome_sobrenome), para podermos indentificá-lo.
