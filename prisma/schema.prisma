@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,4 +5,39 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Trainer {
+  id       String @id @default(uuid())
+  nickname String @unique
+  password String
+
+  PokemonTrainer PokemonTrainer[]
+
+  @@map("trainers")
+}
+
+model Pokemon {
+  id         String @id @default(uuid())
+  name       String
+  generation Int
+  type_1     String
+  type_2     String @default("")
+  legendary  Int
+  shiny      Int
+
+  PokemonTrainer PokemonTrainer[]
+
+  @@map("pokemons")
+}
+
+model PokemonTrainer {
+  id String @id @default(uuid())
+
+  trainer    Trainer @relation(fields: [trainer_id], references: [id])
+  pokemon    Pokemon @relation(fields: [pokemon_id], references: [id])
+  trainer_id String
+  pokemon_id String
+
+  @@map("pokemons_trainers")
 }
