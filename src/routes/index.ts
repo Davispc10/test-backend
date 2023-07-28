@@ -11,13 +11,20 @@ routes.get('/pokemons', async (request, response) => {
 
       return Number(p);
     }),
+    generation: z.string().transform((gen) => {
+      const genNumber = Number(gen);
+      return isNaN(genNumber) || genNumber <= 0 ? undefined : genNumber;
+    }),
   });
 
-  const { page } = requestQuerySchema.parse(request.query);
+  const { page, generation } = requestQuerySchema.parse(request.query);
 
   const pokemons = await prisma.pokemon.findMany({
     orderBy: {
       pokedex_number: 'asc',
+    },
+    where: {
+      generation,
     },
     take: 20,
     skip: (page - 1) * 20,
