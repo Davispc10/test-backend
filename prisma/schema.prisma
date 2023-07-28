@@ -18,16 +18,18 @@ model Trainer {
 }
 
 model Pokemon {
-  id         String @id @default(uuid())
-  name       String
-  generation Int
-  type_1     String
-  type_2     String @default("")
-  legendary  Int
-  shiny      Int
+  id             String @id @default(uuid())
+  name           String
+  generation     Int
+  pokedex_number Int
+  type_1         String
+  type_2         String @default("")
+  legendary      Int
+  shiny          Int
 
   PokemonTrainer PokemonTrainer[]
 
+  @@index([pokedex_number])
   @@map("pokemons")
 }
 

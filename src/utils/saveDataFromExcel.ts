@@ -6,6 +6,7 @@ import { parse } from 'csv-parse'
 interface PokemonDataChunk {
   name: string;
   generation: number;
+  pokedexNumber: number;
   type1: string;
   type2: string;
   legendary: number;
@@ -66,6 +67,7 @@ export async function saveDataFromExcel() {
   parser.on('data', async ({
     name,
     generation,
+    pokedexNumber,
     type1,
     type2,
     legendary,
@@ -75,6 +77,7 @@ export async function saveDataFromExcel() {
       data: {
         name,
         generation: Number(generation),
+        pokedex_number: Number(pokedexNumber),
         type_1: type1,
         type_2: type2,
         legendary: Number(legendary),
