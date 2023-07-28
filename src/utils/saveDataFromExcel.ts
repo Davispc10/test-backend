@@ -71,7 +71,6 @@ export async function saveDataFromExcel() {
     type1,
     type2,
     legendary,
-    shiny,
   }: PokemonDataChunk) => {
     await prisma.pokemon.create({
       data: {
@@ -81,7 +80,6 @@ export async function saveDataFromExcel() {
         type_1: type1,
         type_2: type2,
         legendary: Number(legendary),
-        shiny: Number(shiny),
       }
     });
   });

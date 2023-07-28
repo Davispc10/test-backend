@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 export const routes = Router();
 
-routes.get('/pokemons', async (request, response) => {
+routes.get('/pokemon', async (request, response) => {
   const requestQuerySchema = z.object({
     page: z.string().transform((p) => {
       if (Number(p) <= 0) return 1;
@@ -32,5 +32,52 @@ routes.get('/pokemons', async (request, response) => {
 
   return response.json({
     pokemons,
+  })
+});
+
+routes.post('/pokemon', async (request, response) => {
+  const requestBodySchema = z.object({
+    name: z.string(),
+    generation: z.number(),
+    pokedexNumber: z.number(),
+    type1: z.string(),
+    type2: z.string(),
+    legendary: z.number(),
+  });
+
+  const {
+    name,
+    generation,
+    pokedexNumber,
+    type1,
+    type2,
+    legendary,
+  } = requestBodySchema.parse(request.body);
+
+  const pokedexSlotTaken = await prisma.pokemon.findFirst({
+    where: {
+      pokedex_number: pokedexNumber,
+    }
+  });
+
+  if (pokedexSlotTaken) {
+    return response.status(400).json({
+      message: 'Pokedex slot already taken',
+    });
+  }
+
+  const pokemon = await prisma.pokemon.create({
+    data: {
+      name,
+      generation,
+      type_1: type1,
+      type_2: type2,
+      pokedex_number: pokedexNumber,
+      legendary,
+    }
+  });
+
+  return response.status(201).json({
+    pokemon,
   })
 });
