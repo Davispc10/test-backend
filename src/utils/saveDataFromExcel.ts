@@ -83,5 +83,7 @@ export async function saveDataFromExcel() {
     });
   });
 
-  return 'saving';
+  parser.on('end', () => {
+    return 'saved';
+  });
 }
