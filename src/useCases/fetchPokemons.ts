@@ -1,5 +1,5 @@
 import { Pokemon } from "@prisma/client";
-import { PokemonsRepository } from "../repositories/pokemonsRepository";
+import { FiltersData, PokemonsRepository } from "../repositories/pokemonsRepository";
 
 export class FetchPokemonsUseCase {
   constructor(private pokemonsRepository: PokemonsRepository) {}
@@ -8,7 +8,7 @@ export class FetchPokemonsUseCase {
     name,
     generation,
     page
-  }): Promise<Pokemon[]> {
+  }: FiltersData): Promise<Pokemon[]> {
     const pokemons = await this.pokemonsRepository.fetchPokemonByFilters(
       {
         name,

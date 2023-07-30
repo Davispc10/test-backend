@@ -18,6 +18,8 @@ export class InMemoryPokemonsRepository implements PokemonsRepository{
         if (item.name.includes(filters.name)) {
           return item;
         }
+      } else {
+        return item;
       }
     });
 
