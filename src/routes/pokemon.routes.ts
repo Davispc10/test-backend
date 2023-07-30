@@ -15,9 +15,12 @@ pokemonRoutes.get('/', async (request, response) => {
       const genNumber = Number(gen);
       return isNaN(genNumber) || genNumber <= 0 ? undefined : genNumber;
     }),
+    name: z.string().transform((text) => {
+      return text.length === 0 ? undefined : text;
+    }),
   });
 
-  const { page, generation } = requestQuerySchema.parse(request.query);
+  const { page, generation, name } = requestQuerySchema.parse(request.query);
 
   const pokemons = await prisma.pokemon.findMany({
     orderBy: {
@@ -25,6 +28,9 @@ pokemonRoutes.get('/', async (request, response) => {
     },
     where: {
       generation,
+      name: {
+        contains: name,
+      }
     },
     take: 20,
     skip: (page - 1) * 20,
