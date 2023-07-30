@@ -4,7 +4,14 @@
   "description": "Dinheirow backend test.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --config ./jest.config.js",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js",
+    "db:migrate:up": "npx sequelize-cli db:migrate",
+    "db:migrate:down": "npx sequelize-cli db:migrate:undo",
+    "db:seed:up": "npx sequelize-cli db:seed:all",
+    "db:seed:down": "npx sequelize-cli db:seed:undo:all",
+    "prettier:beautify": "prettier ./src --write"
   },
   "repository": {
     "type": "git",
