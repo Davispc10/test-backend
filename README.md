@@ -43,3 +43,23 @@ Após terminar o desafio, você pode solicitar um pull request para a branch mas
 Só! Mas se quiser fazer a diferença, tente implementar um pouco de testes, utilizar docker, algum ORM, autenticação de usuário, conceitos de segurança, padrões de pojeto e SOLID para execução do projeto.
 
 Boa sorte! :)
+
+## Para rodar a solução
+
+Olá! Para conseguir rodar a solução que implementei é necessários seguir essas etapas. Primeiro deve-se criar o banco de dados que com o docker-compose, é só rodar o comando:
+```
+docker-compose up -d
+```
+Com o banco rodando é só iniciar o servidor em desenvolvimento com o comando:
+```
+npm run dev
+```
+Ele vai inicializar o servidor, salvando os dados do .csv caso não estejam salvos ainda e então as rotas estarão disponíveis!
+
+As rotas são:
+* Get pokemons ("GET/pokemon") - Rota para listar os pokemons cadastrados no banco. Aceita a página, trazendo 20 itens por página, e filtro por nome e geração do pokemon.
+* Post pokemon ("POST/pokemon") - Informados os dados necessários cria um novo pokemon na pokedex.
+* Post trainer ("POST/trainer") - Informados os dados necessário cria um novo treinador no banco de dados.
+* Delete trainer ("DELETE/trainer/:id") - Deleta o treinador do banco de dados.
+* Capture pokemon ("POST/trainer/capture") - Dado o id do treinador e do pokemon captura aquele pokemon para o treinador, com uma chance de ser shiny.
+* Get trainer pokemons ("GET/trainer/:id/pokemons") - Lista os pokemons capturados de um treinador.
