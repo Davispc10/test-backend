@@ -13,6 +13,7 @@ COPY ./src ${workdir}
 COPY ./.sequelizerc ${workdir}
 COPY ${seedFile} ${workdir}
 COPY ./scripts/docker-entrypoint.sh ${workdir}
+COPY .env ${workdir}
 
 RUN ["chmod", "+x", "/app/docker-entrypoint.sh"]
 
