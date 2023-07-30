@@ -1,14 +1,14 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('postgres://user:pass@postgres:5432/pokemon');
+const sequelize = new Sequelize(process.env.DATABASE_URI);
 
 async function testDatabaseConnection() {
   try {
     await sequelize.authenticate();
-    console.log('Conexão com o banco de dados estabelecida com sucesso!');
+    console.log('Database connection was stablished!');
   } catch (error) {
-    console.error('Erro ao conectar-se ao banco de dados:', error);
+    console.error('Error to connect on database', error);
   }
 }
 
