@@ -97,4 +97,65 @@ describe('Fetch Pokemons Use Case', () => {
       expect.objectContaining({ name: 'Charicode' }),
     ]);
   });
+
+  it("should be able to fetch pokemons with both name and generation filter", async () => {
+    await inMemoryPokemonRepository.create({
+      generation: 1,
+      legendary: 0,
+      name: 'Devmander',
+      type_1: 'Code',
+      type_2: 'Bug',
+      pokedex_number: 1,
+    });
+
+    await inMemoryPokemonRepository.create({
+      generation: 2,
+      legendary: 0,
+      name: 'Charicode',
+      type_1: 'Code',
+      type_2: 'Fire',
+      pokedex_number: 2,
+    });
+
+    await inMemoryPokemonRepository.create({
+      generation: 2,
+      legendary: 0,
+      name: 'Charmint',
+      type_1: 'Code',
+      type_2: 'Fire',
+      pokedex_number: 3,
+    });
+
+    const pokemons = await fetchPokemonsUseCase.execute({
+      page: 1,
+      generation: 2,
+      name: 'code'
+    });
+
+    expect(pokemons).toEqual([
+      expect.objectContaining({ name: 'Charicode' }),
+    ]);
+  });
+
+  it("should be able to fetch 20 items per page", async () => {
+    for (let i = 1; i <= 22; i++) {
+      await inMemoryPokemonRepository.create({
+        generation: 1,
+        legendary: 0,
+        name: 'Devmander',
+        type_1: 'Code',
+        type_2: 'Bug',
+        pokedex_number: i,
+      });
+    }
+
+    const pokemons = await fetchPokemonsUseCase.execute({
+      page: 2,
+    });
+
+    expect(pokemons).toEqual([
+      expect.objectContaining({ pokedex_number: 21 }),
+      expect.objectContaining({ pokedex_number: 22 }),
+    ]);
+  });
 });
