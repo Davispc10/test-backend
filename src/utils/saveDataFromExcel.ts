@@ -27,7 +27,7 @@ export async function saveDataFromExcel() {
   const steam = createReadStream(path);
   const parser = parse({
     delimiter: ';',
-    from_line: 1,
+    from_line: 2,
     columns: [
       'row', 
       'name',
