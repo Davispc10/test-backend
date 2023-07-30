@@ -132,3 +132,30 @@ trainerRoutes.post('/capture', async (request, response) => {
     });
   }
 });
+
+trainerRoutes.get('/:id/pokemons', async (request, response) => {
+  const requestParamsSchema = z.object({
+    id: z.string().uuid(),
+  });
+
+  try {
+    const { id } = requestParamsSchema.parse(request.params);
+
+    const trainerPokemons = await prisma.pokemonTrainer.findMany({
+      where: {
+        trainer_id: id,
+      },
+      include: {
+        pokemon: true,
+      }
+    });
+
+    return response.json({
+      trainerPokemons,
+    });
+  } catch (err) {
+    return response.status(500).json({
+      error: err.message,
+    });
+  }
+});
