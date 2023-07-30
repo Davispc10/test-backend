@@ -1,0 +1,6 @@
+{
+  "development": {
+    "url": "postgres://user:pass@postgres:5432/pokemon",
+    "dialect": "postgres"
+  }
+}
