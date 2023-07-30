@@ -75,3 +75,60 @@ trainerRoutes.delete('/:id', async (request, response) => {
     });
   }
 });
+
+trainerRoutes.post('/capture', async (request, response) => {
+  const requestBodySchema = z.object({
+    trainerId: z.string().uuid(),
+    pokemonId: z.string().uuid(),
+  });
+
+  try {
+    const { trainerId, pokemonId } = requestBodySchema.parse(request.body);
+
+    const trainer = await prisma.trainer.findUnique({
+      where: {
+        id: trainerId,
+      }
+    });
+
+    if (!trainer) {
+      return response.status(404).json({
+        message: 'Trainer not registred',
+      });
+    }
+
+    const pokemon = await prisma.pokemon.findUnique({
+      where: {
+        id: pokemonId,
+      }
+    });
+
+    if (!pokemon) {
+      return response.status(404).json({
+        message: 'Pokemon not registred',
+      });
+    }
+
+    const shinyProbability = Math.floor(Math.random() * 5000);
+
+    const capture = await prisma.pokemonTrainer.create({
+      data: {
+        pokemon_id: pokemonId,
+        trainer_id: trainerId,
+        is_shiny: shinyProbability === 1 ? 1 : 0,
+      }
+    });
+
+    return response.status(201).json({
+      captured: {
+        trainer: trainer.nickname,
+        pokemon: pokemon.name,
+        ...capture
+      },
+    });
+  } catch (err) {
+    return response.status(500).json({
+      err: err.message,
+    });
+  }
+});
