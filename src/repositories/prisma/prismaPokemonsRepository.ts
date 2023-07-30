@@ -1,6 +1,5 @@
-import { GetResult } from "@prisma/client/runtime/library";
 import { FiltersData, PokemonsRepository } from "../pokemonsRepository";
-import { Pokemon } from "@prisma/client";
+import { Pokemon, Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 
 export class PrismaPokemonsRepository implements PokemonsRepository {
@@ -24,5 +23,13 @@ export class PrismaPokemonsRepository implements PokemonsRepository {
     });
 
     return pokemons;
+  }
+
+  async create(data: Prisma.PokemonCreateInput): Promise<Pokemon> {
+    const pokemon = await prisma.pokemon.create({
+      data,
+    });
+
+    return pokemon;
   }
 }
