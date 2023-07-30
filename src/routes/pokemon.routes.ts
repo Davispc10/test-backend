@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { prisma } from '../lib/prisma';
 import { z } from 'zod';
+import { FetchPokemonsUseCase } from '../useCases/fetchPokemons';
+import { PrismaPokemonsRepository } from '../repositories/prisma/prismaPokemonsRepository';
 
 export const pokemonRoutes = Router();
 
@@ -22,19 +24,10 @@ pokemonRoutes.get('/', async (request, response) => {
 
   const { page, generation, name } = requestQuerySchema.parse(request.query);
 
-  const pokemons = await prisma.pokemon.findMany({
-    orderBy: {
-      pokedex_number: 'asc',
-    },
-    where: {
-      generation,
-      name: {
-        contains: name,
-      }
-    },
-    take: 20,
-    skip: (page - 1) * 20,
-  });
+  const prismaPokemonsRepository = new PrismaPokemonsRepository();
+  const fetchPokemonsUseCase = new FetchPokemonsUseCase(prismaPokemonsRepository);
+
+  const pokemons = await fetchPokemonsUseCase.execute({ name, generation, page });
 
   return response.json({
     pokemons,
