@@ -63,3 +63,9 @@ As rotas são:
 * Delete trainer ("DELETE/trainer/:id") - Deleta o treinador do banco de dados.
 * Capture pokemon ("POST/trainer/capture") - Dado o id do treinador e do pokemon captura aquele pokemon para o treinador, com uma chance de ser shiny.
 * Get trainer pokemons ("GET/trainer/:id/pokemons") - Lista os pokemons capturados de um treinador.
+
+
+Para rodar os testes do caso de uso implementado, rodar o comando:
+```
+npm run test
+```
