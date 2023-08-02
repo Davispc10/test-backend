@@ -1,0 +1,34 @@
+{
+  "name": "test-backend-dinheirow",
+  "version": "1.0.0",
+  "description": "Olá Dev! Tudo bem?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vvmaas/test-backend-dinheirow.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vvmaas/test-backend-dinheirow/issues"
+  },
+  "homepage": "https://github.com/vvmaas/test-backend-dinheirow#readme",
+  "dependencies": {
+    "@types/multer": "^1.4.7",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.1.0",
+    "@types/express": "^4.17.17",
+    "prisma": "^5.1.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  }
+}
