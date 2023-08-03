@@ -1,8 +1,10 @@
-import express from 'express';
-import { router } from './routes';
+import app, { init } from "@/app";
 
-const app = express();
+const port = +process.env.PORT || 3000;
 
-app.use(router);
-
-app.listen(3000, () => console.log("Server is Running"))
+init().then(() => {
+  app.listen(port, () => {
+    /* eslint-disable-next-line no-console */
+    console.log(`Server is listening on port ${port}.`);
+  });
+});

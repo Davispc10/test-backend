@@ -1,4 +1,12 @@
-import { client } from "../../database/client";
+import { prisma } from '../../database/client';
+
+async function findAll() {
+  return prisma.pokemon.findMany({
+    orderBy: {
+      pokedexNumber: 'asc'
+    }
+  });
+}
 
 export type parsedPokemon = {
     Row: number;
@@ -36,3 +44,9 @@ export type parsedPokemon = {
 export type parsedPokemonArray = {
     data: parsedPokemon[];
 }
+
+const pokemonRepository = {
+  findAll
+};
+
+export default pokemonRepository;

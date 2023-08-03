@@ -1,18 +1,32 @@
 {
   "name": "test-backend-dinheirow",
   "version": "1.0.0",
-  "description": "Olá Dev! Tudo bem?",
+  "description": "Aplicação Victor Vermaas",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev src/server.ts"
+    "build": "tsc -p tsconfig.build.json",
+    "start": "npm run dev:migration:generate && npm run dev:migration:run && npm run dev",
+    "migration:run": "prisma migrate deploy",
+    "migration:generate": "npm run dev:load-envs prisma migrate dev",
+    "lint": "eslint .",
+    "test": "NODE_ENV=test jest --passWithNoTests --runInBand --detectOpenHandles",
+    "test:migration:run": "npm run test:load-envs prisma migrate deploy",
+    "test:migration:generate": "npm run test:load-envs prisma migrate dev",
+    "test:watch": "jest --watch --passWithNoTests --runInBand",
+    "test:load-envs": "dotenv -e .env.test",
+    "test:seed": "npm run test:load-envs prisma db seed",
+    "dev:load-envs": "dotenv -e .env.development",
+    "dev:migration:run": "npm run dev:load-envs prisma migrate deploy",
+    "dev:migration:generate": "npm run dev:load-envs prisma migrate dev",
+    "dev:seed": "npm run dev:load-envs prisma db seed",
+    "dev": "NODE_ENV=development nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vvmaas/test-backend-dinheirow.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Victor Vermaas",
   "license": "ISC",
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -22,16 +36,26 @@
   },
   "homepage": "https://github.com/vvmaas/test-backend-dinheirow#readme",
   "dependencies": {
-    "@types/multer": "^1.4.7",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "multer": "^1.4.5-lts.1",
+    "http-status": "^1.6.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@prisma/client": "^5.1.0",
     "@types/express": "^4.17.17",
+    "@types/node": "^20.4.6",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "dotenv-cli": "^7.2.1",
+    "eslint": "^8.46.0",
+    "eslint-plugin-boundaries": "^3.2.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.1",
     "prisma": "^5.1.0",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.1.6"
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "ttypescript": "^1.5.15",
+    "typescript": "^5.1.6",
+    "typescript-transform-paths": "^3.4.6"
   }
 }
