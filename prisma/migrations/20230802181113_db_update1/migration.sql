@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Pokemon" ALTER COLUMN "imgName" SET DATA TYPE VARCHAR(255);
