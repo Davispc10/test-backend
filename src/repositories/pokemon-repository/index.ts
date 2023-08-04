@@ -1,7 +1,17 @@
 import { prisma } from '../../database/client';
 
-async function findAll(direction: string, page: number = 0, pageSize: number = 30) {
+async function findAll(direction: string, type: string, page: number = 0, pageSize: number = 30) {
   return prisma.pokemon.findMany({
+    where: {
+      OR: [
+        {
+          type1: type == "-" ? { not: "" } : type
+        },
+        {
+          type2: type == "-" ? { not: "" } : type
+        }
+      ]
+    },
     orderBy: {
       pokedexNumber: direction == 'asc' ? 'asc' : 'desc'
     },
@@ -40,8 +50,18 @@ async function findByKeyword(keyword: string) {
   });
 }
 
-async function findAllSorted(sorter: string, direction: string, page: number = 0, pageSize: number = 30) {
+async function findAllSorted(sorter: string, direction: string, type: string, page: number = 0, pageSize: number = 30) {
   return prisma.pokemon.findMany({
+    where: {
+      OR: [
+        {
+          type1: type == "-" ? { not: "" } : type
+        },
+        {
+          type2: type == "-" ? { not: "" } : type
+        }
+      ]
+    },
     orderBy: {
       [sorter]: direction == 'desc' ? 'desc' : 'asc'
     },

@@ -4,12 +4,13 @@ import httpStatus from "http-status";
 
 export async function getPokemons(req: Request, res: Response) {
   const { page, pageSize } = req.query;
-  let { direction } = req.query;
+  let { type, direction } = req.query;
 
   if(direction == undefined) direction = "asc";
+  if(type == undefined) type = "-";
 
   try {
-    const pokemons = await pokemonService.getPokemons(Number(page), Number(pageSize), direction.toString());
+    const pokemons = await pokemonService.getPokemons(Number(page), Number(pageSize), direction.toString(), type.toString());
     return res.status(httpStatus.OK).send(pokemons);    
   } catch (error) {
     return res.sendStatus(httpStatus.NOT_FOUND);
@@ -52,12 +53,13 @@ export async function getPokemonById(req: Request, res: Response) {
 export async function getSortedPokemons(req: Request, res: Response) {
   const { sorter } = req.params;
   const { page, pageSize } = req.query;
-  let { direction } = req.query;
+  let { type, direction } = req.query;
 
   if(direction == undefined) direction = "desc";
+  if(type == undefined) type = "-";
 
   try {
-    const pokemons = await pokemonService.getSortedPokemons(Number(page), Number(pageSize), sorter, direction.toString());
+    const pokemons = await pokemonService.getSortedPokemons(Number(page), Number(pageSize), sorter, direction.toString(), type.toString());
     return res.status(httpStatus.OK).send(pokemons);    
   } catch (error) {
     return res.sendStatus(httpStatus.NOT_FOUND);

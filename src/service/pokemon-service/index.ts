@@ -1,27 +1,26 @@
 import pokemonRepository from "@/repositories/pokemon-repository";
 import { badRequestError, notFoundError } from "@/errors";
-
-async function getPokemons(page: number, pageSize: number, direction: string) {
+async function getPokemons(page: number, pageSize: number, direction: string, type: string) {
   verifyPageSize(page);
   
   let pokemons;
   if(!page && !pageSize) {
-    pokemons = await pokemonRepository.findAll(direction);
+    pokemons = await pokemonRepository.findAll(direction, type);
   } else {
-    pokemons = await pokemonRepository.findAll(direction, page, pageSize);
+    pokemons = await pokemonRepository.findAll(direction, type, page, pageSize);
   }
   return pokemons;
 } 
 
-async function getSortedPokemons(page: number, pageSize: number, sorter: string, direction: string) {
+async function getSortedPokemons(page: number, pageSize: number, sorter: string, direction: string, type: string) {
   verifyPageSize(page);
   verifySorter(sorter);
 
   let pokemons;
   if(!page && !pageSize) {
-    pokemons = await pokemonRepository.findAllSorted(sorter, direction);
+    pokemons = await pokemonRepository.findAllSorted(sorter, direction, type);
   } else {
-    pokemons = await pokemonRepository.findAllSorted(sorter, direction, page, pageSize);
+    pokemons = await pokemonRepository.findAllSorted(sorter, direction, type, page, pageSize);
   }
   return pokemons;
 } 
