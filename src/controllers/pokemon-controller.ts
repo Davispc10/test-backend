@@ -7,7 +7,7 @@ export async function getPokemons(req: Request, res: Response) {
   let { type, direction } = req.query;
 
   if(direction == undefined) direction = "asc";
-  if(type == undefined) type = "-";
+  if(type == undefined) type = "undefined";
 
   try {
     const pokemons = await pokemonService.getPokemons(Number(page), Number(pageSize), direction.toString(), type.toString());

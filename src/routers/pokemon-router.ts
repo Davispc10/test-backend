@@ -1,10 +1,11 @@
 import { getPokemons, getSortedPokemons, getPokemonById, getPokemonsByPokedex, getPokemonsByKeyword } from "@/controllers/index";
+import { authenticateToken } from "@/middlewares";
 import { Router } from "express";
 
 const pokemonRouter = Router();
 
 pokemonRouter
-  .all("/*", )
+  .all("/*", authenticateToken)
   .get("/", getPokemons)
   .get("/:id", getPokemonById)
   .get("/pokedex/:pokedexNumber", getPokemonsByPokedex)

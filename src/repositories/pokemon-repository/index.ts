@@ -1,14 +1,14 @@
 import { prisma } from '../../database/client';
 
-async function findAll(direction: string, type: string, page: number = 0, pageSize: number = 30) {
+async function findAll(direction: string, type: string, page: number = 0, pageSize: number = 20) {
   return prisma.pokemon.findMany({
     where: {
       OR: [
         {
-          type1: type == "-" ? { not: "" } : type
+          type1: type == "undefined" ? { not: "" } : type
         },
         {
-          type2: type == "-" ? { not: "" } : type
+          type2: type == "undefined" ? { not: "" } : type
         }
       ]
     },
