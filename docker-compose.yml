@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:15-bullseye
+    container_name: postgres
+    restart: always
+    ports:
+      - 5433:5432
+    env_file:
+      - .env.development
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+
+  node:
+    container_name: node
+    build: ./
+    restart: always
+    ports:
+      - 4000:4002
+    depends_on:
+      - postgres
+    env_file:
+      - .env.development
+
+volumes:
+  postgres-volume:

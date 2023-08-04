@@ -113,22 +113,22 @@ export type parsedPokemonArray = {
 }
 
 export const selector = {
-  id: true,
   name: true,
   pokedexNumber: true,
-  generation: true,
-  evolutionStage: true,
   type1: true,
   type2: true,
-  weather1: true,
-  weather2: true,
   statTotal: true,
   atk: true,
   def: true,
   sta: true,
-  legendary: true,
+  weather1: true,
+  weather2: true,
   hatchable: true,
-  shiny: true
+  generation: true,
+  evolutionStage: true,
+  legendary: true,
+  shiny: true,
+  id: true
 };
 
 const pokemonRepository = {
