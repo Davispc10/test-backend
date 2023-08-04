@@ -9,7 +9,7 @@ export function duplicatedEmailError(): ApplicationError {
 
 export function duplicatedUsernameError(): ApplicationError {
   return {
-    name: "duplicatedUsernameError",
+    name: "DuplicatedUsernameError",
     message: "This username is already in use",
   };
 }
