@@ -1,7 +1,9 @@
 import pokemonRepository from "@/repositories/pokemon-repository";
-import { badRequestError, notFoundError } from "@/errors";
+import { notFoundError } from "@/errors";
+import { pagingError, sorterError } from "./errors";
+
 async function getPokemons(page: number, pageSize: number, direction: string, type: string) {
-  verifyPageSize(page);
+  verifyPaging(page, pageSize);
   
   let pokemons;
   if(!page && !pageSize) {
@@ -13,7 +15,7 @@ async function getPokemons(page: number, pageSize: number, direction: string, ty
 } 
 
 async function getSortedPokemons(page: number, pageSize: number, sorter: string, direction: string, type: string) {
-  verifyPageSize(page);
+  verifyPaging(page, pageSize);
   verifySorter(sorter);
 
   let pokemons;
@@ -49,15 +51,18 @@ async function getPokemonById(id: number) {
   return pokemon;
 } 
 
-function verifyPageSize(page: number) {
-  if(page < 0) {
-    throw badRequestError();
+function verifyPaging(page: number, pageSize: number) {
+  if((page && !pageSize) || ((!page && page !== 0) && pageSize)) {
+    throw pagingError();
   }
-}
+  if(page < 0) {
+    throw pagingError();
+  }
+} 
 
 function verifySorter(sorter: string) {
   if(sorter !== 'atk' && sorter !== 'def' && sorter !== 'statTotal' && sorter !== 'sta' && sorter !== 'pokedexNumber') {
-    throw badRequestError();
+    throw sorterError();
   }
 }
 

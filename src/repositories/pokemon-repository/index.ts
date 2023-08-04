@@ -16,7 +16,8 @@ async function findAll(direction: string, type: string, page: number = 0, pageSi
       pokedexNumber: direction == 'asc' ? 'asc' : 'desc'
     },
     skip: page*pageSize,
-    take: pageSize
+    take: pageSize,
+    select: selector
   });
 }
 
@@ -24,7 +25,8 @@ async function findByPokedex(pokedexNumber: number) {
   return prisma.pokemon.findMany({
     where: {
       pokedexNumber
-    }
+    },
+    select: selector
   });
 }
 
@@ -32,7 +34,8 @@ async function findById(id: number) {
   return prisma.pokemon.findUnique({
     where: {
       id
-    }
+    },
+    select: selector
   });
 }
 
@@ -46,7 +49,8 @@ async function findByKeyword(keyword: string) {
     },
     orderBy: {
       pokedexNumber: 'asc'
-    }
+    },
+    select: selector
   });
 }
 
@@ -66,7 +70,8 @@ async function findAllSorted(sorter: string, direction: string, type: string, pa
       [sorter]: direction == 'desc' ? 'desc' : 'asc'
     },
     skip: page*pageSize,
-    take: pageSize
+    take: pageSize,
+    select: selector
   });
 }
 
@@ -106,6 +111,25 @@ export type parsedPokemon = {
 export type parsedPokemonArray = {
     data: parsedPokemon[];
 }
+
+const selector = {
+  id: true,
+  name: true,
+  pokedexNumber: true,
+  generation: true,
+  evolutionStage: true,
+  type1: true,
+  type2: true,
+  weather1: true,
+  weather2: true,
+  statTotal: true,
+  atk: true,
+  def: true,
+  sta: true,
+  legendary: true,
+  hatchable: true,
+  shiny: true
+};
 
 const pokemonRepository = {
   findAll,
