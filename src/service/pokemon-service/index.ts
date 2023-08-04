@@ -1,5 +1,5 @@
 import pokemonRepository from "@/repositories/pokemon-repository";
-import { notFoundError } from "@/errors";
+import { badRequestError, notFoundError } from "@/errors";
 import { pagingError, sorterError } from "./errors";
 
 async function getPokemons(page: number, pageSize: number, direction: string, type: string) {
@@ -28,10 +28,12 @@ async function getSortedPokemons(page: number, pageSize: number, sorter: string,
 } 
 
 async function getPokemonsByPokedex(pokedexNumber: number) {
+  if(pokedexNumber < 0 || isNaN(pokedexNumber)) throw badRequestError();
+
   const pokemons = await pokemonRepository.findByPokedex(pokedexNumber);
-  if(!pokemons) {
-    throw notFoundError();
-  }
+
+  if(!pokemons) throw notFoundError();
+
   return pokemons;
 } 
 
@@ -44,15 +46,17 @@ async function getPokemonsByKeyword(keyword: string) {
 }
 
 async function getPokemonById(id: number) {
+  if(id < 0 || isNaN(id)) throw badRequestError();
+
   const pokemon = await pokemonRepository.findById(id);
-  if(!pokemon) {
-    throw notFoundError();
-  }
+
+  if(!pokemon) throw notFoundError();
+
   return pokemon;
 } 
 
 function verifyPaging(page: number, pageSize: number) {
-  if((page && !pageSize) || ((!page && page !== 0) && pageSize)) {
+  if(((page || page == 0) && !pageSize) || ((!page && page !== 0) && pageSize)) {
     throw pagingError();
   }
   if(page < 0) {

@@ -13,7 +13,7 @@ export async function getPokemons(req: Request, res: Response) {
     const pokemons = await pokemonService.getPokemons(Number(page), Number(pageSize), direction.toString(), type.toString());
     return res.status(httpStatus.OK).send(pokemons);    
   } catch (error) {
-    if(error.name == "badRequestError") {
+    if(error.name == "pagingError" || error.name == "sorterError") {
       return res.status(httpStatus.BAD_REQUEST).send(error);
     }
     return res.status(httpStatus.NOT_FOUND).send(error);
@@ -27,6 +27,9 @@ export async function getPokemonsByPokedex(req: Request, res: Response) {
     const pokemons = await pokemonService.getPokemonsByPokedex(Number(pokedexNumber));
     return res.status(httpStatus.OK).send(pokemons);    
   } catch (error) {
+    if(error.name == "badRequestError") {
+      return res.status(httpStatus.BAD_REQUEST).send(error);
+    }
     return res.status(httpStatus.NOT_FOUND).send(error);
   }
 }
@@ -49,6 +52,9 @@ export async function getPokemonById(req: Request, res: Response) {
     const pokemons = await pokemonService.getPokemonById(Number(id));
     return res.status(httpStatus.OK).send(pokemons);    
   } catch (error) {
+    if(error.name == "badRequestError") {
+      return res.status(httpStatus.BAD_REQUEST).send(error);
+    }
     return res.status(httpStatus.NOT_FOUND).send(error);
   }
 }

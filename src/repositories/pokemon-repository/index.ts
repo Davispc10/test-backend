@@ -13,7 +13,7 @@ async function findAll(direction: string, type: string, page: number = 0, pageSi
       ]
     },
     orderBy: {
-      pokedexNumber: direction == 'asc' ? 'asc' : 'desc'
+      pokedexNumber: direction == 'desc' ? 'desc' : 'asc'
     },
     skip: page*pageSize,
     take: pageSize,
@@ -54,7 +54,7 @@ async function findByKeyword(keyword: string) {
   });
 }
 
-async function findAllSorted(sorter: string, direction: string, type: string, page: number = 0, pageSize: number = 30) {
+async function findAllSorted(sorter: string, direction: string, type: string, page: number = 0, pageSize: number = 20) {
   return prisma.pokemon.findMany({
     where: {
       OR: [
@@ -67,7 +67,7 @@ async function findAllSorted(sorter: string, direction: string, type: string, pa
       ]
     },
     orderBy: {
-      [sorter]: direction == 'desc' ? 'desc' : 'asc'
+      [sorter]: direction == 'asc' ? 'asc' : 'desc'
     },
     skip: page*pageSize,
     take: pageSize,
@@ -112,7 +112,7 @@ export type parsedPokemonArray = {
     data: parsedPokemon[];
 }
 
-const selector = {
+export const selector = {
   id: true,
   name: true,
   pokedexNumber: true,

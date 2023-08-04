@@ -12,6 +12,10 @@ beforeAll(async () => {
   await cleanDb();
 });
 
+beforeEach(async () => {
+  await cleanDb();
+});
+
 const server = supertest(app);
 
 export const generateValidBodyCreate = () => ({
