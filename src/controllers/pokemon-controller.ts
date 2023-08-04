@@ -3,8 +3,61 @@ import { Response, Request } from "express";
 import httpStatus from "http-status";
 
 export async function getPokemons(req: Request, res: Response) {
+  const { page, pageSize } = req.query;
+  let { direction } = req.query;
+
+  if(direction == undefined) direction = "asc";
+
   try {
-    const pokemons = await pokemonService.getPokemons();
+    const pokemons = await pokemonService.getPokemons(Number(page), Number(pageSize), direction.toString());
+    return res.status(httpStatus.OK).send(pokemons);    
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
+export async function getPokemonsByPokedex(req: Request, res: Response) {
+  const { pokedexNumber } = req.params;
+
+  try {
+    const pokemons = await pokemonService.getPokemonsByPokedex(Number(pokedexNumber));
+    return res.status(httpStatus.OK).send(pokemons);    
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
+export async function getPokemonsByKeyword(req: Request, res: Response) {
+  const { keyword } = req.params;
+
+  try {
+    const pokemons = await pokemonService.getPokemonsByKeyword(keyword);
+    return res.status(httpStatus.OK).send(pokemons);    
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
+export async function getPokemonById(req: Request, res: Response) {
+  const { id } = req.params;
+
+  try {
+    const pokemons = await pokemonService.getPokemonById(Number(id));
+    return res.status(httpStatus.OK).send(pokemons);    
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
+export async function getSortedPokemons(req: Request, res: Response) {
+  const { sorter } = req.params;
+  const { page, pageSize } = req.query;
+  let { direction } = req.query;
+
+  if(direction == undefined) direction = "desc";
+
+  try {
+    const pokemons = await pokemonService.getSortedPokemons(Number(page), Number(pageSize), sorter, direction.toString());
     return res.status(httpStatus.OK).send(pokemons);    
   } catch (error) {
     return res.sendStatus(httpStatus.NOT_FOUND);

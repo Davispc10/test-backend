@@ -1,10 +1,52 @@
 import { prisma } from '../../database/client';
 
-async function findAll() {
+async function findAll(direction: string, page: number = 0, pageSize: number = 30) {
   return prisma.pokemon.findMany({
+    orderBy: {
+      pokedexNumber: direction == 'asc' ? 'asc' : 'desc'
+    },
+    skip: page*pageSize,
+    take: pageSize
+  });
+}
+
+async function findByPokedex(pokedexNumber: number) {
+  return prisma.pokemon.findMany({
+    where: {
+      pokedexNumber
+    }
+  });
+}
+
+async function findById(id: number) {
+  return prisma.pokemon.findUnique({
+    where: {
+      id
+    }
+  });
+}
+
+async function findByKeyword(keyword: string) {
+  return prisma.pokemon.findMany({
+    where: {
+      name: {
+        contains: `${keyword}`,
+        mode: "insensitive",
+      },
+    },
     orderBy: {
       pokedexNumber: 'asc'
     }
+  });
+}
+
+async function findAllSorted(sorter: string, direction: string, page: number = 0, pageSize: number = 30) {
+  return prisma.pokemon.findMany({
+    orderBy: {
+      [sorter]: direction == 'desc' ? 'desc' : 'asc'
+    },
+    skip: page*pageSize,
+    take: pageSize
   });
 }
 
@@ -46,7 +88,11 @@ export type parsedPokemonArray = {
 }
 
 const pokemonRepository = {
-  findAll
+  findAll,
+  findAllSorted,
+  findByPokedex,
+  findById,
+  findByKeyword
 };
 
 export default pokemonRepository;

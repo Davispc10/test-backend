@@ -39,6 +39,6 @@ model Pokemon {
   new             Boolean
   notGettable     Boolean
   futureEvolve    Boolean
-  MaxCpAt40       Int
-  MaxCpAt39       Int
+  maxCpAt40       Int
+  maxCpAt39       Int
 }
