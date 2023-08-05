@@ -475,6 +475,10 @@ Os testes rodam localmente e precisam de um banco de dados, então certifique-se
 Para executar os testes, use o seguinte comando na raiz do projeto:
 
 ```bash
+npm i
+```
+Após isso, execute: 
+```bash
 npm run test:migration:generate
 ```
 E então:
