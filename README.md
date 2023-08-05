@@ -82,8 +82,8 @@ A rota retorna:
     "id": 1,                                          //int
     "email": "exemplo@exemplo.com",                  //string
     "username": "exempl0",                          //string
-    "createdAt": "2023-08-05T00:12:06.949Z",       //string
-    "updatedAt": "2023-08-05T00:12:06.949Z"       //string
+    "createdAt": "2023-08-05T00:12:06.949Z",       //Date
+    "updatedAt": "2023-08-05T00:12:06.949Z"       //Date
   },
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.       
   eyJ1c2VySWQiOjM1LCJpYXQiOjE2OTExOTQ1MjJ9.
@@ -95,7 +95,7 @@ A partir daqui, todas as rotas exigirão um cabeçalho (Header) Authorization, c
 
 Exemplo cabeçalho:
 
-```json
+```
 Authorization "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.       
                 eyJ1c2VySWQiOjM1LCJpYXQiOjE2OTExOTQ1MjJ9.
                 7crR4dF3E8mz9DAhjTnu69lNyUVmx7-FM7v5G-SE3go"
@@ -115,7 +115,7 @@ http://localhost:4000/auth/log-out
 
 O retorno será:
 
-```json
+```
 OK
 ```
 
@@ -123,7 +123,7 @@ OK
 
 A aplicação conta com cinco rotas autenticadas para consumo de dados, e elas são:
 
-```json
+```
 - /pokemon
 
 - /pokemon/:id
@@ -184,7 +184,7 @@ A busca é ordenada de acordo com o valor *pokedexNumber*, e em ordem crescente 
 
 Além disso, a rota aceita os seguintes parâmetros:
 
-```json
+```
 - ?page=1           //int default=0
 
 - ?pageSize=10       //int default=20
@@ -199,7 +199,7 @@ Exemplo de requisição usando todos parâmetros:
 ```url
 http://localhost:4000/pokemon?page=1&pageSize=5&direction=desc&type=fire
 ```
-Ou seja, pedir pela segunda página (page=1), contendo 5 itens (pageSize=5), em ordem decrescente do valor *pokedexNumber* (direction=desc), e selecionando pokemons de tipo fogo (type=fire).
+Ou seja, pedir pela segunda página (*page*=1), contendo 5 itens (*pageSize*=5), em ordem decrescente do valor *pokedexNumber* (*direction*=desc), e selecionando pokemons de tipo fogo (*type*=fire).
 
 Retorno: 
 ```json
@@ -270,7 +270,7 @@ O retorno será:
 
 Essa rota possui o parâmetro *sorter*, que define a referência para ordenação da busca. Esse parâmetro aceita os seguintes valores:
 
-```json
+```
 - pokedexNumber 
 
 - sta          //valor de stamina do pokemon
@@ -322,7 +322,7 @@ Nessa rota, a busca é ordenada em ordem decrescente por padrão (maior => menor
 
 A rota também aceita os parâmetros:
 
-```json
+```
 - ?page=1           //int default=0
 
 - ?pageSize=10       //int default=20
