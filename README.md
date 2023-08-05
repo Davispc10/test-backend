@@ -470,7 +470,14 @@ O retorno será:
 
 ## Testes
 
-Para executar os testes automatizados, execute o seguinte comando na raiz do projeto:
+Os testes rodam localmente e precisam de um banco de dados, então certifique-se de ter o PostgreSQL instalado, e atualizar o arquivo `.env.test` com seus dados. 
+
+Para executar os testes, use o seguinte comando na raiz do projeto:
+
+```bash
+npm run test:migration:generate
+```
+E então:
 
 ```bash
 npm run test
